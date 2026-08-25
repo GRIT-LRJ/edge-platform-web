@@ -5,12 +5,14 @@ import { RouterLink, RouterView, useRoute } from 'vue-router'
 import BrandMark from './components/BrandMark.vue'
 import SiteFooter from './components/SiteFooter.vue'
 import { siteConfig } from './config/site'
+import { useTheme } from './composables/useTheme'
 
 const route = useRoute()
 const isMenuOpen = ref(false)
 const menuButton = ref<HTMLButtonElement>()
 const navigation = ref<HTMLElement>()
 const mainContent = ref<HTMLElement>()
+const { isLightTheme, toggleTheme } = useTheme()
 
 function updatePageMetadata() {
   const routeTitle = typeof route.meta.title === 'string' ? route.meta.title : ''
@@ -117,6 +119,22 @@ watch(
             {{ item.label }}
           </RouterLink>
         </nav>
+
+        <button
+          class="theme-switch"
+          type="button"
+          role="switch"
+          :aria-checked="isLightTheme"
+          :aria-label="isLightTheme ? '切换为深色主题' : '切换为浅色主题'"
+          :title="isLightTheme ? '切换为深色主题' : '切换为浅色主题'"
+          @click="toggleTheme"
+        >
+          <span class="theme-switch__track" aria-hidden="true">
+            <span class="theme-switch__sun">☀</span>
+            <span class="theme-switch__moon">☾</span>
+            <span class="theme-switch__thumb"></span>
+          </span>
+        </button>
       </div>
     </header>
 

@@ -2,6 +2,18 @@
 <html lang="zh-CN">
   <head>
     <meta charset="UTF-8" />
+    <script>
+      ;(() => {
+        let theme
+        try {
+          const storedTheme = localStorage.getItem('edge-theme')
+          if (storedTheme === 'dark' || storedTheme === 'light') theme = storedTheme
+        } catch {}
+        if (!theme) theme = typeof matchMedia === 'function' && matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light'
+        document.documentElement.dataset.theme = theme
+        document.documentElement.style.colorScheme = theme
+      })()
+    </script>
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta name="theme-color" content="#07111f" />
     <meta
