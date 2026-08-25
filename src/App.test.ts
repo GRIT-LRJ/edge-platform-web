@@ -50,9 +50,9 @@ describe('Edge 官网壳层', () => {
         footer: {
           copyrightOwner: '',
           filingNumber: '',
-          email: '',
-          phone: '',
-          wechat: '',
+          email: '   ',
+          phone: '\t',
+          wechat: '\n',
         },
       },
     })
