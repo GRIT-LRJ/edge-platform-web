@@ -362,6 +362,145 @@ a {
   text-decoration: none;
 }
 
+.guide-page {
+  width: min(100% - 2rem, var(--content-width));
+  min-height: calc(100vh - var(--header-height));
+  margin-inline: auto;
+  padding-block: clamp(1.25rem, 3vw, 2.25rem) var(--space-6);
+}
+
+.guide-toolbar {
+  display: grid;
+  gap: var(--space-4);
+  padding: clamp(1rem, 3vw, 1.4rem);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-md) var(--radius-md) 0 0;
+  background: color-mix(in srgb, var(--color-surface) 92%, transparent);
+  box-shadow: var(--shadow-card);
+}
+
+.guide-toolbar__heading {
+  min-width: 0;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--space-4);
+}
+
+.guide-toolbar__eyebrow {
+  margin: 0 0 var(--space-1);
+  color: var(--color-accent);
+  font-size: 0.72rem;
+  font-weight: 700;
+  letter-spacing: 0.16em;
+}
+
+.guide-toolbar h1 {
+  margin: 0;
+  font-size: clamp(1.35rem, 4vw, 1.85rem);
+  line-height: 1.2;
+}
+
+.guide-status {
+  flex: 0 0 auto;
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-2);
+  margin: 0;
+  color: var(--color-text-muted);
+  font-size: 0.82rem;
+  white-space: nowrap;
+}
+
+.guide-status__dot {
+  width: 0.55rem;
+  height: 0.55rem;
+  border-radius: 50%;
+  background: var(--color-primary);
+  box-shadow: 0 0 0.8rem color-mix(in srgb, var(--color-primary) 55%, transparent);
+}
+
+.guide-status[data-status="loaded"] .guide-status__dot {
+  background: var(--color-accent);
+  box-shadow: 0 0 0.8rem color-mix(in srgb, var(--color-accent) 55%, transparent);
+}
+
+.guide-status[data-status="slow"] .guide-status__dot {
+  background: #f5a94f;
+  box-shadow: 0 0 0.8rem rgb(245 169 79 / 45%);
+}
+
+.guide-toolbar__actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-3);
+}
+
+.guide-action {
+  min-height: 2.75rem;
+  flex: 1 1 8rem;
+  display: inline-grid;
+  place-items: center;
+  padding: 0.65rem 1rem;
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-sm);
+  color: var(--color-text);
+  background: var(--color-surface-raised);
+  text-align: center;
+  text-decoration: none;
+  cursor: pointer;
+  transition:
+    border-color var(--duration-fast) ease,
+    background-color var(--duration-fast) ease;
+}
+
+.guide-action:hover {
+  border-color: color-mix(in srgb, var(--color-primary) 55%, var(--color-border));
+}
+
+.guide-action--primary {
+  border-color: color-mix(in srgb, var(--color-accent) 45%, var(--color-border));
+  background: linear-gradient(120deg, rgb(47 140 255 / 16%), rgb(32 227 194 / 12%));
+}
+
+.guide-intro,
+.guide-notice {
+  margin: 0;
+  padding: 0.8rem clamp(1rem, 3vw, 1.4rem);
+  border-inline: 1px solid var(--color-border);
+  color: var(--color-text-muted);
+  background: var(--color-surface);
+  font-size: 0.9rem;
+  line-height: 1.65;
+}
+
+.guide-notice {
+  border-top: 1px solid var(--color-border);
+  color: var(--color-text);
+  background: color-mix(in srgb, var(--color-primary) 8%, var(--color-surface));
+}
+
+.guide-notice--warning {
+  color: color-mix(in srgb, #f5a94f 72%, var(--color-text));
+  background: color-mix(in srgb, #f5a94f 8%, var(--color-surface));
+}
+
+.guide-frame-shell {
+  overflow: hidden;
+  border: 1px solid var(--color-border);
+  border-radius: 0 0 var(--radius-md) var(--radius-md);
+  background: var(--color-surface-raised);
+  box-shadow: var(--shadow-card);
+}
+
+.guide-frame {
+  width: 100%;
+  height: max(32rem, calc(100svh - var(--header-height) - 11rem));
+  display: block;
+  border: 0;
+  background: #fff;
+}
+
 .examples-page {
   width: min(100% - 2rem, var(--content-width));
   min-height: calc(100vh - var(--header-height));
@@ -782,8 +921,27 @@ a {
   }
 
   .shell-page,
+  .guide-page,
   .site-footer__inner {
     width: min(100% - 3rem, var(--content-width));
+  }
+
+  .guide-toolbar {
+    grid-template-columns: minmax(0, 1fr) auto;
+    align-items: center;
+  }
+
+  .guide-toolbar__heading {
+    justify-content: flex-start;
+  }
+
+  .guide-toolbar__actions {
+    flex-wrap: nowrap;
+  }
+
+  .guide-action {
+    min-width: 7.5rem;
+    flex: 0 0 auto;
   }
 }
 
@@ -821,6 +979,10 @@ a {
   .demo-dialog__media,
   .demo-dialog__placeholder {
     min-height: 13rem;
+  }
+
+  .guide-frame {
+    height: max(28rem, calc(100svh - var(--header-height) - 13rem));
   }
 }
 

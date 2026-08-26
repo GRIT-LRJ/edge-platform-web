@@ -16,13 +16,51 @@ export interface SiteFooterConfig {
   wechat?: string
 }
 
+export interface SiteGuideConfig {
+  url: string
+  publicMode: boolean
+  loadTimeoutMs: number
+}
+
+export interface GuideEnvironment {
+  VITE_GUIDE_URL?: string
+  VITE_GUIDE_PUBLIC?: string
+}
+
 export interface SiteConfig {
   brandName: string
   siteUrl: string
   navigation: readonly SiteNavItem[]
   seo: SiteSeoConfig
   footer: SiteFooterConfig
+  guide: SiteGuideConfig
 }
+
+export const DEFAULT_GUIDE_URL = 'https://edge.tmic.com.cn/docs/'
+
+export function resolveGuideConfig(environment: GuideEnvironment): SiteGuideConfig {
+  const configuredUrl = environment.VITE_GUIDE_URL?.trim()
+  let url = DEFAULT_GUIDE_URL
+
+  if (configuredUrl) {
+    try {
+      const parsedUrl = new URL(configuredUrl)
+      if (parsedUrl.protocol === 'http:' || parsedUrl.protocol === 'https:') {
+        url = parsedUrl.href
+      }
+    } catch {
+      // Keep the known-safe default when the build-time value is not a valid URL.
+    }
+  }
+
+  return {
+    url,
+    publicMode: environment.VITE_GUIDE_PUBLIC?.trim().toLowerCase() === 'true',
+    loadTimeoutMs: 8_000,
+  }
+}
+
+const guideConfig = resolveGuideConfig(import.meta.env)
 
 export const siteConfig = {
   brandName: 'Edge平台',
@@ -45,4 +83,5 @@ export const siteConfig = {
     phone: '',
     wechat: '',
   },
+  guide: guideConfig,
 } as const satisfies SiteConfig
