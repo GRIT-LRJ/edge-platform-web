@@ -25,6 +25,8 @@ describe('首页视觉媒体', () => {
           kind: 'image',
           src: '/images/home-hero.webp',
           alt: '脱敏后的平台组态界面',
+          avif: '/images/home-hero.avif',
+          webp: '/images/home-hero.webp',
           desktopPosition: '65% center',
           mobilePosition: '35% center',
         },
@@ -41,6 +43,14 @@ describe('首页视觉媒体', () => {
     expect(image).toHaveAttribute(
       'style',
       expect.stringContaining('--home-image-position-mobile: 35% center'),
+    )
+    expect(document.querySelector('source[type="image/avif"]')).toHaveAttribute(
+      'srcset',
+      '/images/home-hero.avif',
+    )
+    expect(document.querySelector('source[type="image/webp"]')).toHaveAttribute(
+      'srcset',
+      '/images/home-hero.webp',
     )
     expect(screen.getByText('产品演示界面')).toBeInTheDocument()
   })

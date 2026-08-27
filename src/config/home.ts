@@ -1,4 +1,5 @@
-import editorHeroImage from '../assets/media/home/edge-editor-hero.svg'
+import editorHeroImage from '../assets/media/home/edge-drillmind-hero.webp'
+import editorHeroImageAvif from '../assets/media/home/edge-drillmind-hero.avif'
 import editorConfigurationImage from '../assets/media/home/edge-editor-configuration.svg'
 import monitoringDashboardImage from '../assets/media/home/edge-monitoring-dashboard.svg'
 import openIntegrationImage from '../assets/media/home/edge-open-integration.svg'
@@ -10,6 +11,8 @@ export interface HomeImageMedia {
   kind: 'image'
   src: string
   alt: string
+  avif?: string
+  webp?: string
   desktopPosition?: string
   mobilePosition?: string
 }
@@ -44,7 +47,9 @@ export const homeHero: HomeHeroConfig = {
   media: {
     kind: 'image',
     src: editorHeroImage,
-    alt: 'Edge 平台可视化组态工作台，展示项目目录、组件库、设备画布和属性面板',
+    alt: 'Edge 平台 DrillMind 工程组态界面，展示钻孔设备运行仪表、参数面板和组件库',
+    avif: editorHeroImageAvif,
+    webp: editorHeroImage,
     desktopPosition: 'center',
     mobilePosition: '58% center',
   },

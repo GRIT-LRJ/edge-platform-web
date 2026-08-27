@@ -23,14 +23,18 @@ const imageStyle = computed<Record<string, string>>(() => {
 <template>
   <div class="home-visual" :class="{ 'home-visual--hero': hero }">
     <template v-if="media.kind === 'image'">
-      <img
-        class="home-visual__image"
-        :src="media.src"
-        :alt="media.alt"
-        :style="imageStyle"
-        :loading="hero ? 'eager' : 'lazy'"
-        decoding="async"
-      />
+      <picture class="home-visual__picture">
+        <source v-if="media.avif" :srcset="media.avif" type="image/avif" />
+        <source v-if="media.webp" :srcset="media.webp" type="image/webp" />
+        <img
+          class="home-visual__image"
+          :src="media.src"
+          :alt="media.alt"
+          :style="imageStyle"
+          :loading="hero ? 'eager' : 'lazy'"
+          decoding="async"
+        />
+      </picture>
       <span class="home-visual__image-badge" aria-hidden="true">产品演示界面</span>
     </template>
 
