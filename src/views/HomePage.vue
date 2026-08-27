@@ -1,6 +1,11 @@
 <script setup lang="ts">
+import { inject } from 'vue'
+import { RouterLink, routerKey } from 'vue-router'
+
 import HomeVisual from '../components/HomeVisual.vue'
 import { homeHero, homeSections } from '../config/home'
+
+const router = inject(routerKey, null)
 </script>
 
 <template>
@@ -40,7 +45,27 @@ import { homeHero, homeSections } from '../config/home'
           <div class="home-feature__line" aria-hidden="true"></div>
           <p class="home-feature__description">{{ section.description }}</p>
         </div>
-        <HomeVisual class="home-feature__visual" :media="section.media" />
+        <template v-if="section.showcase && router">
+          <RouterLink
+            class="home-feature__visual home-feature__visual--link"
+            :to="section.showcase.path"
+            :aria-label="section.showcase.label"
+          >
+            <HomeVisual :media="section.media" />
+            <span class="home-feature__visual-cta" aria-hidden="true">打开动态演示 ↗</span>
+          </RouterLink>
+        </template>
+        <template v-else-if="section.showcase">
+          <a
+            class="home-feature__visual home-feature__visual--link"
+            :href="section.showcase.path"
+            :aria-label="section.showcase.label"
+          >
+            <HomeVisual :media="section.media" />
+            <span class="home-feature__visual-cta" aria-hidden="true">打开动态演示 ↗</span>
+          </a>
+        </template>
+        <HomeVisual v-else class="home-feature__visual" :media="section.media" />
       </article>
     </div>
   </div>

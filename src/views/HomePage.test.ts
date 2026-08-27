@@ -31,4 +31,23 @@ describe('首页', () => {
     ).toBeInTheDocument()
     expect(screen.queryByRole('link', { name: '查看示例' })).not.toBeInTheDocument()
   })
+
+  it('仅平台介绍图片提供三个动态演示入口', () => {
+    render(HomePage)
+
+    expect(screen.getByRole('link', { name: '打开可视化组态动态演示' })).toHaveAttribute(
+      'href',
+      '/showcase/configuration',
+    )
+    expect(screen.getByRole('link', { name: '打开设备运行监控动态演示' })).toHaveAttribute(
+      'href',
+      '/showcase/monitoring',
+    )
+    expect(screen.getByRole('link', { name: '打开开放集成动态演示' })).toHaveAttribute(
+      'href',
+      '/showcase/integration',
+    )
+    expect(screen.getAllByText('打开动态演示 ↗')).toHaveLength(3)
+    expect(document.querySelector('.home-hero__visual')?.closest('a')).toBeNull()
+  })
 })

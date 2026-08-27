@@ -2,6 +2,7 @@ import editorHeroImage from '../assets/media/home/edge-editor-hero.svg'
 import editorConfigurationImage from '../assets/media/home/edge-editor-configuration.svg'
 import monitoringDashboardImage from '../assets/media/home/edge-monitoring-dashboard.svg'
 import openIntegrationImage from '../assets/media/home/edge-open-integration.svg'
+import type { ShowcasePath } from './showcases'
 
 export type HomeVisualVariant = 'configuration' | 'monitoring' | 'integration'
 
@@ -61,6 +62,10 @@ export const homeSections: readonly HomeSection[] = [
       alt: 'Edge 平台设备 HMI 组态画面，展示组件库、趋势图表和数据绑定',
     },
     textSide: 'left',
+    showcase: {
+      path: '/showcase/configuration',
+      label: '打开可视化组态动态演示',
+    },
   },
   {
     id: 'platform-introduction-02',
@@ -73,6 +78,10 @@ export const homeSections: readonly HomeSection[] = [
       alt: 'Edge 平台设备运行监控画面，展示合成设备数据、趋势、报警和实时视频',
     },
     textSide: 'right',
+    showcase: {
+      path: '/showcase/monitoring',
+      label: '打开设备运行监控动态演示',
+    },
   },
   {
     id: 'platform-introduction-03',
@@ -85,5 +94,9 @@ export const homeSections: readonly HomeSection[] = [
       alt: 'Edge 平台开放集成拓扑，展示设备驱动、模型点表、数据集、适配器和应用之间的连接',
     },
     textSide: 'left',
+    showcase: {
+      path: '/showcase/integration',
+      label: '打开开放集成动态演示',
+    },
   },
 ]
