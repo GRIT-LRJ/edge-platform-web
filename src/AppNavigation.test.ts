@@ -4,9 +4,14 @@ import { renderApp } from './test/renderApp'
 
 describe('Edge 官网导航', () => {
   it.each([
-    { label: '首页', path: '/', source: '/guide', heading: '让设备应用更快落地' },
+    {
+      label: '首页',
+      path: '/',
+      source: '/guide',
+      heading: /可视化组态.*让矿山装备应用更快落地/,
+    },
     { label: '示例', path: '/examples', source: '/', heading: '示例' },
-    { label: '试用', path: '/trial', source: '/', heading: '试用' },
+    { label: '试用', path: '/trial', source: '/', heading: '试用 Edge 平台' },
     { label: '用户指南', path: '/guide', source: '/', heading: '用户指南' },
   ])('可通过“$label”进入 $path 并标识当前路由', async ({ label, path, source, heading }) => {
     const { router } = await renderApp(source)
