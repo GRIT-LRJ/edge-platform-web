@@ -17,7 +17,7 @@ describe('首页视觉媒体', () => {
     },
   )
 
-  it('首页媒体使用急加载并支持桌面与移动端焦点配置', () => {
+  it('首页正式图片显示产品演示标签并支持桌面与移动端焦点配置', () => {
     render(HomeVisual, {
       props: {
         hero: true,
@@ -42,6 +42,7 @@ describe('首页视觉媒体', () => {
       'style',
       expect.stringContaining('--home-image-position-mobile: 35% center'),
     )
+    expect(screen.getByText('产品演示界面')).toBeInTheDocument()
   })
 
   it('非首屏图片使用懒加载', () => {

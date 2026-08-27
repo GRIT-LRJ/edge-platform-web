@@ -21,13 +21,27 @@ const placeholderStyle = computed<Record<string, string> | undefined>(() => {
 <template>
   <article class="trial-scene-row" :aria-labelledby="`${scene.id}-title`">
     <div class="trial-scene-row__media">
-      <img
-        v-if="scene.media.kind === 'image'"
-        :src="scene.media.src"
-        :alt="scene.media.alt"
-        loading="lazy"
-        decoding="async"
-      />
+      <picture v-if="scene.media.kind === 'image'">
+        <source
+          v-if="scene.media.avif"
+          :srcset="scene.media.avif"
+          sizes="(max-width: 44rem) calc(100vw - 2rem), 18rem"
+          type="image/avif"
+        />
+        <source
+          v-if="scene.media.webp"
+          :srcset="scene.media.webp"
+          sizes="(max-width: 44rem) calc(100vw - 2rem), 18rem"
+          type="image/webp"
+        />
+        <img
+          :src="scene.media.src"
+          :alt="scene.media.alt"
+          sizes="(max-width: 44rem) calc(100vw - 2rem), 18rem"
+          loading="lazy"
+          decoding="async"
+        />
+      </picture>
       <div
         v-else
         class="trial-scene-placeholder"
@@ -38,6 +52,19 @@ const placeholderStyle = computed<Record<string, string> | undefined>(() => {
         <span class="trial-scene-placeholder__orbit"></span>
         <span class="trial-scene-placeholder__signal"></span>
         <span class="trial-scene-placeholder__number">{{ sceneNumber }}</span>
+      </div>
+
+      <div
+        v-if="scene.media.kind === 'image' && scene.media.overlay"
+        class="trial-scene-visual-overlay"
+        aria-hidden="true"
+      >
+        <span class="trial-scene-visual-overlay__label">{{ scene.media.overlay.label }}</span>
+        <strong>{{ scene.media.overlay.value }}</strong>
+        <span class="trial-scene-visual-overlay__status">
+          <i></i>{{ scene.media.overlay.status }}
+        </span>
+        <span class="trial-scene-visual-overlay__caption">产品示意 · 合成数据</span>
       </div>
     </div>
 

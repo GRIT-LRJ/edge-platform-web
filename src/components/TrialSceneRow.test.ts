@@ -20,7 +20,7 @@ describe('试用场景图文行', () => {
     expect(screen.queryByRole('link')).not.toBeInTheDocument()
   })
 
-  it('正式图片完整提供地址、替代文本和懒加载属性', () => {
+  it('正式图片提供现代格式来源、替代文本、懒加载和信息叠层', () => {
     const scene: TrialScene = {
       id: 'published-scene',
       title: '设备运行监控',
@@ -28,15 +28,27 @@ describe('试用场景图文行', () => {
       media: {
         kind: 'image',
         src: '/images/trial/equipment-monitoring.webp',
+        webp: '/images/trial/equipment-monitoring.webp',
+        avif: '/images/trial/equipment-monitoring.avif',
         alt: 'Edge 平台设备运行监控界面',
+        overlay: { label: '在线设备', value: '24 / 24', status: '稳定运行' },
       },
     }
 
-    render(TrialSceneRow, { props: { scene, index: 0 } })
+    const { container } = render(TrialSceneRow, { props: { scene, index: 0 } })
 
     const image = screen.getByRole('img', { name: scene.media.kind === 'image' ? scene.media.alt : '' })
     expect(image).toHaveAttribute('src', '/images/trial/equipment-monitoring.webp')
     expect(image).toHaveAttribute('loading', 'lazy')
     expect(image).toHaveAttribute('decoding', 'async')
+    expect(container.querySelector('source[type="image/avif"]')).toHaveAttribute(
+      'srcset',
+      '/images/trial/equipment-monitoring.avif',
+    )
+    expect(container.querySelector('source[type="image/webp"]')).toHaveAttribute(
+      'srcset',
+      '/images/trial/equipment-monitoring.webp',
+    )
+    expect(container.querySelector('.trial-scene-visual-overlay')).toBeInTheDocument()
   })
 })

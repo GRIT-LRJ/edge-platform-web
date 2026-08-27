@@ -1,3 +1,8 @@
+import editorHeroImage from '../assets/media/home/edge-editor-hero.svg'
+import editorConfigurationImage from '../assets/media/home/edge-editor-configuration.svg'
+import monitoringDashboardImage from '../assets/media/home/edge-monitoring-dashboard.svg'
+import openIntegrationImage from '../assets/media/home/edge-open-integration.svg'
+
 export type HomeVisualVariant = 'configuration' | 'monitoring' | 'integration'
 
 export interface HomeImageMedia {
@@ -33,41 +38,51 @@ export interface HomeSection {
 export const homeHero: HomeHeroConfig = {
   eyebrow: '矿山装备数字化应用平台',
   titleLines: ['可视化组态', '让矿山装备应用更快落地'],
-  description: '从可视化组态到实时数据连接，以开放的平台能力承载设备应用。',
+  description:
+    '将设备模型、实时变量、控制流程与 HMI 画面纳入同一工程，让应用设计、数据绑定、预览运行与现场集成形成完整链路。',
   media: {
-    kind: 'placeholder',
-    visual: 'configuration',
+    kind: 'image',
+    src: editorHeroImage,
+    alt: 'Edge 平台可视化组态工作台，展示项目目录、组件库、设备画布和属性面板',
+    desktopPosition: 'center',
+    mobilePosition: '58% center',
   },
 }
 
 export const homeSections: readonly HomeSection[] = [
   {
     id: 'platform-introduction',
-    title: '平台介绍 01',
-    description: '内容待项目分析后补充',
+    title: '一套编辑器，完成设备画面组态',
+    description:
+      '通过组件库、画布、图层和属性面板搭建设备界面，支持 SVG、图片与 Vue 组件，并提供对齐、分组、复制粘贴和撤销重做等常用编辑能力。',
     media: {
-      kind: 'placeholder',
-      visual: 'configuration',
+      kind: 'image',
+      src: editorConfigurationImage,
+      alt: 'Edge 平台设备 HMI 组态画面，展示组件库、趋势图表和数据绑定',
     },
     textSide: 'left',
   },
   {
     id: 'platform-introduction-02',
-    title: '平台介绍 02',
-    description: '内容待项目分析后补充',
+    title: '连接设备数据，看见每一项运行状态',
+    description:
+      '将设备变量、业务数据集和视图状态绑定到画面组件，集中呈现参数、状态、报警、趋势与实时视频。',
     media: {
-      kind: 'placeholder',
-      visual: 'monitoring',
+      kind: 'image',
+      src: monitoringDashboardImage,
+      alt: 'Edge 平台设备运行监控画面，展示合成设备数据、趋势、报警和实时视频',
     },
     textSide: 'right',
   },
   {
     id: 'platform-introduction-03',
-    title: '平台介绍 03',
-    description: '内容待项目分析后补充',
+    title: '开放组件与接口，持续扩展设备应用',
+    description:
+      '通过 SDK、组件注册和适配器接入数据、资源、权限与导航能力，沉淀行业组件，并将设计结果交付到运行环境。',
     media: {
-      kind: 'placeholder',
-      visual: 'integration',
+      kind: 'image',
+      src: openIntegrationImage,
+      alt: 'Edge 平台开放集成拓扑，展示设备驱动、模型点表、数据集、适配器和应用之间的连接',
     },
     textSide: 'left',
   },

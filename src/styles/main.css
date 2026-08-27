@@ -789,6 +789,23 @@ a {
   transform: rotate(145deg);
 }
 
+.home-feature__visual .home-visual__editor,
+.home-feature__visual .home-visual__monitoring,
+.home-feature__visual .home-visual__integration {
+  inset: 5%;
+}
+
+.home-feature__visual .home-visual__editor {
+  transform: none;
+}
+
+.home-feature__visual .home-visual__integration {
+  overflow: hidden;
+  border: 1px solid rgb(112 223 235 / 36%);
+  border-radius: 0.9rem;
+  box-shadow: 0 1.5rem 4rem rgb(0 0 0 / 24%);
+}
+
 .home-hero__overlay {
   position: absolute;
   z-index: 0;
