@@ -30,19 +30,31 @@ export const demoCategories = [
   { id: 'shaft-drill', name: '竖井钻机', order: 5 },
 ] as const satisfies readonly DemoCategory[]
 
-export const demoItems: readonly DemoItem[] = demoCategories.flatMap((category) =>
-  Array.from({ length: 3 }, (_, index) => {
-    const number = String(index + 1).padStart(2, '0')
+export const demoItems: readonly DemoItem[] = demoCategories
+  .flatMap((category) =>
+    Array.from({ length: 3 }, (_, index) => {
+      const number = String(index + 1).padStart(2, '0')
 
-    return {
-      id: `${category.id}-${number}`,
-      categoryId: category.id,
-      title: `${category.name}示例 ${number}`,
-      description: `${category.name}设备应用演示内容正在准备中。`,
-      status: 'coming-soon',
-    }
-  }),
-)
+      return {
+        id: `${category.id}-${number}`,
+        categoryId: category.id,
+        title: `${category.name}示例 ${number}`,
+        description: `${category.name}设备应用演示内容正在准备中。`,
+        status: 'coming-soon',
+      }
+    }),
+  )
+  .map((item) =>
+    item.id === 'drill-jumbo-01'
+      ? {
+          ...item,
+          status: 'published',
+          videoUrl: '/media/demos/drill-jumbo-01.webm',
+          description:
+            'DrillMind 组态演示：从组件库拖入 3 组仪表与参数标签，拼接钻孔监测画面，保存工程后在运行态实时展示。',
+        }
+      : item,
+  )
 
 export function getDemoCategory(categoryId: DemoCategoryId) {
   return demoCategories.find((category) => category.id === categoryId)
