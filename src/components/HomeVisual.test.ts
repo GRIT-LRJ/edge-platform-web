@@ -68,4 +68,24 @@ describe('首页视觉媒体', () => {
 
     expect(screen.getByRole('img', { name: '平台能力画面' })).toHaveAttribute('loading', 'lazy')
   })
+
+  it('开放集成媒体渲染固定节点的 SVG 拓扑动画', () => {
+    const { container } = render(HomeVisual, {
+      props: {
+        media: {
+          kind: 'integration-topology',
+          alt: 'Edge 平台开放集成拓扑动画',
+        },
+      },
+    })
+
+    expect(screen.getByRole('img', { name: 'Edge 平台开放集成拓扑动画' })).toBeVisible()
+    expect(container.querySelectorAll('[data-topology-node="application"]')).toHaveLength(7)
+    expect(container.querySelectorAll('[data-topology-node="driver"]')).toHaveLength(6)
+    expect(container.querySelectorAll('[data-topology-node="module"]')).toHaveLength(1)
+    expect(container.querySelectorAll('[data-topology-extension="true"]')).toHaveLength(4)
+    expect(container.querySelector('[data-platform-region="main-menu"]')).toHaveTextContent(
+      'DrillMind',
+    )
+  })
 })

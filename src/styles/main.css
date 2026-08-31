@@ -1004,6 +1004,11 @@ a {
   transform: translateY(-3px);
 }
 
+.home-feature__visual--link.home-feature__visual--topology:hover,
+.home-feature__visual--link.home-feature__visual--topology:focus-visible {
+  transform: none;
+}
+
 .home-feature__visual--link:hover .home-visual__image,
 .home-feature__visual--link:focus-visible .home-visual__image {
   transform: scale(1.025);

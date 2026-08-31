@@ -17,7 +17,12 @@ describe('首页', () => {
     )
     expect(screen.getAllByRole('article')).toHaveLength(3)
     expect(screen.queryByText('内容待项目分析后补充')).not.toBeInTheDocument()
-    expect(screen.getAllByText('产品演示界面')).toHaveLength(4)
+    expect(screen.getAllByText('产品演示界面')).toHaveLength(3)
+    expect(
+      screen.getByRole('img', {
+        name: 'Edge 平台 DrillMind 工程开放集成拓扑，展示应用、边缘服务器、总线与设备驱动之间的连接',
+      }),
+    ).toBeVisible()
   })
 
   it('平台介绍在桌面端按左、右、左交替标记', () => {

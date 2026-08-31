@@ -48,6 +48,9 @@ const router = inject(routerKey, null)
         <template v-if="section.showcase && router">
           <RouterLink
             class="home-feature__visual home-feature__visual--link"
+            :class="{
+              'home-feature__visual--topology': section.media.kind === 'integration-topology',
+            }"
             :to="section.showcase.path"
             :aria-label="section.showcase.label"
           >
@@ -58,6 +61,9 @@ const router = inject(routerKey, null)
         <template v-else-if="section.showcase">
           <a
             class="home-feature__visual home-feature__visual--link"
+            :class="{
+              'home-feature__visual--topology': section.media.kind === 'integration-topology',
+            }"
             :href="section.showcase.path"
             :aria-label="section.showcase.label"
           >
