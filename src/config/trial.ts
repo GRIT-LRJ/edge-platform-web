@@ -70,13 +70,19 @@ export type TrialSceneMedia =
 
 export interface TrialScene {
   id: string
+  slug: string
   title: string
   description: string
+  features: readonly string[]
   media: TrialSceneMedia
 }
 
 function srcset(entries: readonly [string, number][]) {
   return entries.map(([source, width]) => `${source} ${width}w`).join(', ')
+}
+
+export function trialScenePath(slug: string): string {
+  return `/trial/${slug}`
 }
 
 const undergroundControlRoomWebp = srcset([
@@ -155,8 +161,14 @@ const integrationAvif = srcset([
 export const trialScenes: readonly TrialScene[] = [
   {
     id: 'trial-scene-01',
+    slug: 'underground-control-room',
     title: '地下矿山设备集中监控',
     description: '汇集设备状态、关键参数和在线情况，在统一画面掌握地下矿山设备的运行概况。',
+    features: [
+      '设备状态、关键参数与在线情况集中呈现',
+      '在统一画面掌握地下矿山设备的运行概况',
+      '在线设备与通讯状态一目了然',
+    ],
     media: {
       kind: 'image',
       src: undergroundControlRoom1600Webp,
@@ -168,8 +180,14 @@ export const trialScenes: readonly TrialScene[] = [
   },
   {
     id: 'trial-scene-02',
+    slug: 'extraction-visualization',
     title: '采掘过程可视化',
     description: '将作业流程、设备动作和关键数据组织为 HMI 画面，辅助现场操作与调度。',
+    features: [
+      '将作业流程与设备动作组织为 HMI 画面',
+      '关键数据与现场操作同屏呈现',
+      '辅助现场操作与调度决策',
+    ],
     media: {
       kind: 'image',
       src: extractionVisualization1600Webp,
@@ -181,8 +199,14 @@ export const trialScenes: readonly TrialScene[] = [
   },
   {
     id: 'trial-scene-03',
+    slug: 'drilling-plan-tracking',
     title: '钻孔计划与进度跟踪',
     description: '结合孔位、钻深、姿态和进度信息，辅助凿岩作业计划查看与过程跟踪。',
+    features: [
+      '结合孔位、钻深、姿态与进度信息',
+      '辅助凿岩作业计划查看与过程跟踪',
+      '计划与现场进度持续同步',
+    ],
     media: {
       kind: 'image',
       src: drillingPlan1600Webp,
@@ -194,8 +218,14 @@ export const trialScenes: readonly TrialScene[] = [
   },
   {
     id: 'trial-scene-04',
+    slug: 'alarm-response',
     title: '设备故障与报警处置',
     description: '配置报警规则，集中呈现报警等级、状态、确认和历史信息。',
+    features: [
+      '配置报警规则并按等级集中呈现',
+      '支持报警确认与历史查看',
+      '帮助现场快速定位设备故障',
+    ],
     media: {
       kind: 'image',
       src: alarmResponse1600Webp,
@@ -207,8 +237,14 @@ export const trialScenes: readonly TrialScene[] = [
   },
   {
     id: 'trial-scene-05',
+    slug: 'video-inspection',
     title: '井下实时视频巡检',
     description: '将 WebRTC、HLS 或 FLV 视频与设备状态同屏呈现，辅助远程查看现场。',
+    features: [
+      '接入 WebRTC、HLS 或 FLV 视频',
+      '视频与设备状态同屏展示',
+      '辅助远程查看井下现场',
+    ],
     media: {
       kind: 'image',
       src: videoInspection1600Webp,
@@ -220,8 +256,14 @@ export const trialScenes: readonly TrialScene[] = [
   },
   {
     id: 'trial-scene-06',
+    slug: 'system-integration',
     title: '多系统数据接入与集成',
     description: '通过设备驱动、模型点表、数据集、API 和适配器连接既有设备与应用。',
+    features: [
+      '通过设备驱动连接既有设备',
+      '以模型点表、数据集和 API 组织数据',
+      '用适配器接入应用并扩展系统能力',
+    ],
     media: {
       kind: 'image',
       src: integration1600Webp,

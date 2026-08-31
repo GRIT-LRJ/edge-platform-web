@@ -1,14 +1,21 @@
 <script setup lang="ts">
-import { computed } from 'vue'
+import { computed, inject } from 'vue'
+import { RouterLink, routerKey } from 'vue-router'
 
-import type { TrialScene } from '../config/trial'
+import { trialScenePath, type TrialScene } from '../config/trial'
 
 const props = defineProps<{
   scene: TrialScene
   index: number
 }>()
 
+const router = inject(routerKey, null)
+
 const sceneNumber = computed(() => String(props.index + 1).padStart(2, '0'))
+const detailPath = computed(() =>
+  props.scene.slug ? trialScenePath(props.scene.slug) : undefined,
+)
+const isLink = computed(() => Boolean(detailPath.value))
 const placeholderStyle = computed<Record<string, string> | undefined>(() => {
   if (props.scene.media.kind !== 'placeholder') {
     return undefined
@@ -19,7 +26,18 @@ const placeholderStyle = computed<Record<string, string> | undefined>(() => {
 </script>
 
 <template>
-  <article class="trial-scene-row" :aria-labelledby="`${scene.id}-title`">
+  <component
+    :is="isLink ? (router ? RouterLink : 'a') : 'article'"
+    :class="['trial-scene-row', isLink ? 'trial-scene-row--link' : '']"
+    v-bind="
+      isLink && router
+        ? { to: detailPath }
+        : isLink
+          ? { href: detailPath }
+          : {}
+    "
+    :aria-labelledby="`${scene.id}-title`"
+  >
     <div class="trial-scene-row__media">
       <picture v-if="scene.media.kind === 'image'">
         <source
@@ -73,6 +91,9 @@ const placeholderStyle = computed<Record<string, string> | undefined>(() => {
       <h3 :id="`${scene.id}-title`">{{ scene.title }}</h3>
       <div class="trial-scene-row__line" aria-hidden="true"></div>
       <p class="trial-scene-row__description">{{ scene.description }}</p>
+      <span v-if="isLink" class="trial-scene-row__cta" aria-hidden="true">
+        查看功能介绍 →
+      </span>
     </div>
-  </article>
+  </component>
 </template>

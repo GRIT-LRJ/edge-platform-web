@@ -1,4 +1,4 @@
-import { hasConfiguredTrialContact, trialScenes } from './trial'
+import { hasConfiguredTrialContact, trialScenePath, trialScenes } from './trial'
 
 describe('试用页配置', () => {
   it('提供六个有序且唯一的正式应用场景', () => {
@@ -26,6 +26,27 @@ describe('试用页配置', () => {
       '井下实时视频巡检',
       '多系统数据接入与集成',
     ])
+  })
+
+  it('每个应用场景都有独立的介绍页路径与功能介绍要点', () => {
+    expect(trialScenes.map((scene) => scene.slug)).toEqual([
+      'underground-control-room',
+      'extraction-visualization',
+      'drilling-plan-tracking',
+      'alarm-response',
+      'video-inspection',
+      'system-integration',
+    ])
+    expect(new Set(trialScenes.map((scene) => scene.slug))).toHaveLength(6)
+    expect(trialScenes.map((scene) => trialScenePath(scene.slug))).toEqual([
+      '/trial/underground-control-room',
+      '/trial/extraction-visualization',
+      '/trial/drilling-plan-tracking',
+      '/trial/alarm-response',
+      '/trial/video-inspection',
+      '/trial/system-integration',
+    ])
+    expect(trialScenes.every((scene) => scene.features.length >= 3)).toBe(true)
   })
 
   it('保留可选的联系方式判断逻辑', () => {

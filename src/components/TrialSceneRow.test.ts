@@ -7,8 +7,10 @@ describe('试用场景图文行', () => {
   it('没有正式图片时显示非交互式程序化占位视觉', () => {
     const scene: TrialScene = {
       id: 'placeholder-scene',
+      slug: '',
       title: '应用场景 01',
       description: '场景内容待补充',
+      features: [],
       media: { kind: 'placeholder', hue: 188 },
     }
 
@@ -20,11 +22,13 @@ describe('试用场景图文行', () => {
     expect(screen.queryByRole('link')).not.toBeInTheDocument()
   })
 
-  it('正式图片提供现代格式来源、替代文本、懒加载和信息叠层', () => {
+  it('正式图片提供可点击的介绍页入口、现代格式来源、替代文本、懒加载和信息叠层', () => {
     const scene: TrialScene = {
       id: 'published-scene',
+      slug: 'equipment-monitoring',
       title: '设备运行监控',
       description: '展示设备状态与运行参数。',
+      features: ['展示设备状态与运行参数。'],
       media: {
         kind: 'image',
         src: '/images/trial/equipment-monitoring.webp',
@@ -36,6 +40,10 @@ describe('试用场景图文行', () => {
     }
 
     const { container } = render(TrialSceneRow, { props: { scene, index: 0 } })
+
+    const link = screen.getByRole('link', { name: '设备运行监控' })
+    expect(link).toHaveAttribute('href', '/trial/equipment-monitoring')
+    expect(screen.getByText('查看功能介绍 →')).toBeInTheDocument()
 
     const image = screen.getByRole('img', { name: scene.media.kind === 'image' ? scene.media.alt : '' })
     expect(image).toHaveAttribute('src', '/images/trial/equipment-monitoring.webp')
