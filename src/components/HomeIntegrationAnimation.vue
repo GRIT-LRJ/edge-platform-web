@@ -88,22 +88,22 @@
       <text x="616" y="380" class="ia-server-sub">EDGE RUNTIME</text>
     </g>
 
-    <!-- ================= 阶段2：CAN 总线（紫色） ================= -->
+    <!-- ================= 阶段2：CAN 总线（紫色，CAN1/CAN2 各自独立、互不交叉） ================= -->
     <g class="ia-links" stroke="#a678f0" stroke-width="2.5">
       <path class="ia-lc" d="M515 400V475" />
       <path class="ia-lc" d="M617 400V475" />
-      <path class="ia-lc" d="M515 505V560H600" />
-      <path class="ia-lc" d="M617 505V530H600" />
-      <path class="ia-lc" d="M600 530V830" />
-      <path class="ia-lc" d="M600 568H627" />
-      <path class="ia-lc" d="M600 652H627" />
-      <path class="ia-lc" d="M600 736H627" />
+      <!-- CAN2 → 独立扩展加号框 -->
+      <path class="ia-lc" d="M515 505V552" />
+      <!-- CAN1 → 主线：DTP / DrillArm / Power 三卡 + 底部扩展加号框 -->
+      <path class="ia-lc" d="M617 505V830" />
+      <path class="ia-lc" d="M617 568H627" />
+      <path class="ia-lc" d="M617 652H627" />
+      <path class="ia-lc" d="M617 736H627" />
+      <path class="ia-lc" d="M617 830H660" />
     </g>
-    <path class="ia-static-stub" d="M600 568H448" />
-    <path class="ia-static-stub" d="M600 830H660" />
-    <circle class="ia-dot ia-dot-c1" cx="515" cy="400" r="5" fill="#c9a4ff" />
-    <circle class="ia-dot ia-dot-c2" cx="515" cy="400" r="5" fill="#c9a4ff" />
-    <circle class="ia-dot ia-dot-c3" cx="515" cy="400" r="5" fill="#c9a4ff" />
+    <circle class="ia-dot ia-dot-c1" cx="617" cy="400" r="5" fill="#c9a4ff" />
+    <circle class="ia-dot ia-dot-c2" cx="617" cy="400" r="5" fill="#c9a4ff" />
+    <circle class="ia-dot ia-dot-c3" cx="617" cy="400" r="5" fill="#c9a4ff" />
 
     <g class="ia-breathe">
       <rect x="475" y="475" width="80" height="30" rx="6" fill="#3a2f66" stroke="#a678f0" stroke-width="1.5" />
@@ -129,15 +129,13 @@
       <text x="637" y="752" class="ia-name">Power</text>
     </g>
 
-    <!-- ================= 阶段3：TCP 网关（橙黄总线） ================= -->
+    <!-- ================= 阶段3：TCP 网关（橙黄总线，连接 Empty / Sim / 扩展加号框） ================= -->
     <g class="ia-links" stroke="#e8a33d" stroke-width="2.5">
-      <path class="ia-lt" d="M754 345H806V615" />
+      <path class="ia-lt" d="M754 345H806V482" />
       <path class="ia-lt" d="M806 408H818" />
       <path class="ia-lt" d="M806 482H818" />
-      <path class="ia-lt" d="M806 548H818" />
-      <path class="ia-lt" d="M806 615H818" />
+      <path class="ia-lt" d="M922 465H962" />
     </g>
-    <path class="ia-static-stub" d="M922 465H962" />
     <circle class="ia-dot ia-dot-t1" cx="754" cy="345" r="5" fill="#ffd08a" />
     <circle class="ia-dot ia-dot-t2" cx="754" cy="345" r="5" fill="#ffd08a" />
     <circle cx="768" cy="330" r="4" fill="#e8a33d" />
@@ -175,28 +173,28 @@
         <path class="ia-plus-icon" d="M694 815v30M679 830h30" />
       </g>
       <g class="ia-slot-a-ghost">
-        <rect x="612" y="798" width="164" height="64" rx="8" fill="#222338" stroke="#a678f0" stroke-width="1.5" />
-        <text x="626" y="826" class="ia-prefix">DRV_CanOpen-</text>
-        <text x="626" y="850" class="ia-name">Pump</text>
+        <rect x="620" y="798" width="164" height="64" rx="8" fill="#222338" stroke="#a678f0" stroke-width="1.5" />
+        <text x="634" y="826" class="ia-prefix">DRV_CanOpen-</text>
+        <text x="634" y="850" class="ia-name">Pump</text>
       </g>
       <g class="ia-slot-a-flash">
-        <rect x="612" y="798" width="164" height="64" rx="8" fill="none" stroke="#f2e6ff" stroke-width="2.5" />
+        <rect x="620" y="798" width="164" height="64" rx="8" fill="none" stroke="#f2e6ff" stroke-width="2.5" />
       </g>
     </g>
 
-    <!-- ================= 扩展槽 B：左侧 CAN 加号 → 新驱动 Aux ================= -->
+    <!-- ================= 扩展槽 B：CAN2 正下方扩展加号 → 新驱动 Aux ================= -->
     <g>
       <g class="ia-slot-b-plus">
-        <rect x="361" y="526" width="81" height="89" rx="8" fill="none" stroke="#4a5a72" stroke-width="1.5" stroke-dasharray="7 7" />
-        <path class="ia-plus-icon" d="M401 552v37M383 570.5h36" />
+        <rect x="481" y="552" width="68" height="68" rx="8" fill="none" stroke="#4a5a72" stroke-width="1.5" stroke-dasharray="7 7" />
+        <path class="ia-plus-icon" d="M515 568v36M497 586h36" />
       </g>
       <g class="ia-slot-b-ghost">
-        <rect x="314" y="538" width="175" height="64" rx="8" fill="#222338" stroke="#a678f0" stroke-width="1.5" />
-        <text x="328" y="566" class="ia-prefix">DRV_CanOpen-</text>
-        <text x="328" y="590" class="ia-name">Aux</text>
+        <rect x="435" y="554" width="160" height="64" rx="8" fill="#222338" stroke="#a678f0" stroke-width="1.5" />
+        <text x="449" y="582" class="ia-prefix">DRV_CanOpen-</text>
+        <text x="449" y="606" class="ia-name">Aux</text>
       </g>
       <g class="ia-slot-b-flash">
-        <rect x="314" y="538" width="175" height="64" rx="8" fill="none" stroke="#f2e6ff" stroke-width="2.5" />
+        <rect x="435" y="554" width="160" height="64" rx="8" fill="none" stroke="#f2e6ff" stroke-width="2.5" />
       </g>
     </g>
 
@@ -368,13 +366,6 @@
   stroke-linecap: round;
   fill: none;
 }
-.ia-static-stub {
-  fill: none;
-  stroke: #4a5a72;
-  stroke-width: 1.5;
-  stroke-dasharray: 6 8;
-  opacity: 0.5;
-}
 
 /* ---------- 链路：窗口内点亮 + 微呼吸辉光 ---------- */
 .ia-la,
@@ -455,26 +446,23 @@
 }
 @keyframes ia-dot-move-c1 {
   0%, 32% { transform: translate(0, 0); }
-  48% { transform: translate(0, 160); }
-  56.5% { transform: translate(85, 160); }
-  57.3% { transform: translate(85, 168); }
-  60% { transform: translate(112, 168); }
+  48.5% { transform: translate(0, 105); }
+  58.4% { transform: translate(0, 168); }
+  60% { transform: translate(10, 168); }
   100% { transform: translate(0, 0); }
 }
 @keyframes ia-dot-move-c2 {
   0%, 32% { transform: translate(0, 0); }
-  44.3% { transform: translate(0, 160); }
-  50.8% { transform: translate(85, 160); }
-  57.9% { transform: translate(85, 252); }
-  60% { transform: translate(112, 252); }
+  43.2% { transform: translate(0, 105); }
+  58.9% { transform: translate(0, 252); }
+  60% { transform: translate(10, 252); }
   100% { transform: translate(0, 0); }
 }
 @keyframes ia-dot-move-c3 {
   0%, 32% { transform: translate(0, 0); }
-  42% { transform: translate(0, 160); }
-  47.3% { transform: translate(85, 160); }
-  58.3% { transform: translate(85, 336); }
-  60% { transform: translate(112, 336); }
+  40.5% { transform: translate(0, 105); }
+  59.2% { transform: translate(0, 336); }
+  60% { transform: translate(10, 336); }
   100% { transform: translate(0, 0); }
 }
 @keyframes ia-dot-move-t1 {
@@ -486,9 +474,9 @@
 }
 @keyframes ia-dot-move-t2 {
   0%, 62% { transform: translate(0, 0); }
-  64.8% { transform: translate(52, 0); }
-  79.35% { transform: translate(52, 270); }
-  80% { transform: translate(64, 270); }
+  69.4% { transform: translate(52, 0); }
+  78.3% { transform: translate(52, 63); }
+  80% { transform: translate(64, 63); }
   100% { transform: translate(0, 0); }
 }
 
