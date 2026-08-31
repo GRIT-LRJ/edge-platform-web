@@ -96,7 +96,7 @@ export const homeSections: readonly HomeSection[] = [
     media: {
       kind: 'image',
       src: openIntegrationImage,
-      alt: 'Edge 平台开放集成拓扑，展示设备驱动、模型点表、数据集、适配器和应用之间的连接',
+      alt: 'Edge 平台开放集成组态画布，展示边缘服务器挂接的应用、CAN 与 TCP 驱动节点，可通过加号持续扩展新的驱动与模块',
     },
     textSide: 'left',
     showcase: {
