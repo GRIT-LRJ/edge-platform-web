@@ -21,11 +21,12 @@ export interface HomePlaceholderMedia {
   visual: HomeVisualVariant
 }
 
-export interface HomeIntegrationAnimationMedia {
-  kind: 'integration-animation'
+export interface HomeIntegrationTopologyMedia {
+  kind: 'integration-topology'
+  alt: string
 }
 
-export type HomeMedia = HomeImageMedia | HomePlaceholderMedia | HomeIntegrationAnimationMedia
+export type HomeMedia = HomeImageMedia | HomePlaceholderMedia | HomeIntegrationTopologyMedia
 
 export interface HomeHeroConfig {
   eyebrow: string
@@ -97,7 +98,8 @@ export const homeSections: readonly HomeSection[] = [
     description:
       '通过 SDK、组件注册和适配器接入数据、资源、权限与导航能力，沉淀行业组件，并将设计结果交付到运行环境。',
     media: {
-      kind: 'integration-animation',
+      kind: 'integration-topology',
+      alt: 'Edge 平台 DrillMind 工程开放集成拓扑，展示应用、边缘服务器、总线与设备驱动之间的连接',
     },
     textSide: 'left',
     showcase: {
