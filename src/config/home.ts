@@ -2,7 +2,6 @@ import editorHeroImage from '../assets/media/home/edge-drillmind-hero.webp'
 import editorHeroImageAvif from '../assets/media/home/edge-drillmind-hero.avif'
 import editorConfigurationImage from '../assets/media/home/edge-editor-configuration.svg'
 import monitoringDashboardImage from '../assets/media/home/edge-monitoring-dashboard.svg'
-import openIntegrationImage from '../assets/media/home/edge-open-integration.svg'
 import type { ShowcasePath } from './showcases'
 
 export type HomeVisualVariant = 'configuration' | 'monitoring' | 'integration'
@@ -22,7 +21,12 @@ export interface HomePlaceholderMedia {
   visual: HomeVisualVariant
 }
 
-export type HomeMedia = HomeImageMedia | HomePlaceholderMedia
+export interface HomeIntegrationTopologyMedia {
+  kind: 'integration-topology'
+  alt: string
+}
+
+export type HomeMedia = HomeImageMedia | HomePlaceholderMedia | HomeIntegrationTopologyMedia
 
 export interface HomeHeroConfig {
   eyebrow: string
@@ -94,9 +98,8 @@ export const homeSections: readonly HomeSection[] = [
     description:
       '通过 SDK、组件注册和适配器接入数据、资源、权限与导航能力，沉淀行业组件，并将设计结果交付到运行环境。',
     media: {
-      kind: 'image',
-      src: openIntegrationImage,
-      alt: 'Edge 平台开放集成拓扑，展示设备驱动、模型点表、数据集、适配器和应用之间的连接',
+      kind: 'integration-topology',
+      alt: 'Edge 平台 DrillMind 工程开放集成拓扑，展示应用、边缘服务器、总线与设备驱动之间的连接',
     },
     textSide: 'left',
     showcase: {

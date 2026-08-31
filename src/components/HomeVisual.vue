@@ -2,6 +2,7 @@
 import { computed } from 'vue'
 
 import type { HomeMedia } from '../config/home'
+import IntegrationTopologyVisual from './IntegrationTopologyVisual.vue'
 
 const props = defineProps<{
   media: HomeMedia
@@ -21,7 +22,13 @@ const imageStyle = computed<Record<string, string>>(() => {
 </script>
 
 <template>
-  <div class="home-visual" :class="{ 'home-visual--hero': hero }">
+  <div
+    class="home-visual"
+    :class="{
+      'home-visual--hero': hero,
+      'home-visual--integration-topology': media.kind === 'integration-topology',
+    }"
+  >
     <template v-if="media.kind === 'image'">
       <picture class="home-visual__picture">
         <source v-if="media.avif" :srcset="media.avif" type="image/avif" />
@@ -37,6 +44,11 @@ const imageStyle = computed<Record<string, string>>(() => {
       </picture>
       <span class="home-visual__image-badge" aria-hidden="true">产品演示界面</span>
     </template>
+
+    <IntegrationTopologyVisual
+      v-else-if="media.kind === 'integration-topology'"
+      :label="media.alt"
+    />
 
     <div
       v-else
