@@ -1,6 +1,5 @@
 import editorHeroImage from '../assets/media/home/edge-drillmind-hero.webp'
 import editorHeroImageAvif from '../assets/media/home/edge-drillmind-hero.avif'
-import editorConfigurationImage from '../assets/media/home/edge-editor-configuration.svg'
 import monitoringDashboardImage from '../assets/media/home/edge-monitoring-dashboard.svg'
 import type { ShowcasePath } from './showcases'
 
@@ -26,7 +25,16 @@ export interface HomeIntegrationTopologyMedia {
   alt: string
 }
 
-export type HomeMedia = HomeImageMedia | HomePlaceholderMedia | HomeIntegrationTopologyMedia
+export interface HomeConfigurationAnimationMedia {
+  kind: 'configuration-animation'
+  alt: string
+}
+
+export type HomeMedia =
+  | HomeImageMedia
+  | HomePlaceholderMedia
+  | HomeIntegrationTopologyMedia
+  | HomeConfigurationAnimationMedia
 
 export interface HomeHeroConfig {
   eyebrow: string
@@ -41,6 +49,10 @@ export interface HomeSection {
   description: string
   media: HomeMedia
   textSide: 'left' | 'right'
+  showcase?: {
+    path: ShowcasePath
+    label: string
+  }
 }
 
 export const homeHero: HomeHeroConfig = {
@@ -66,9 +78,8 @@ export const homeSections: readonly HomeSection[] = [
     description:
       '通过组件库、画布、图层和属性面板搭建设备界面，支持 SVG、图片与 Vue 组件，并提供对齐、分组、复制粘贴和撤销重做等常用编辑能力。',
     media: {
-      kind: 'image',
-      src: editorConfigurationImage,
-      alt: 'Edge 平台设备 HMI 组态画面，展示组件库、趋势图表和数据绑定',
+      kind: 'configuration-animation',
+      alt: 'DrillMind 平台设备画面组态动画，展示从组件库拖入模块并生成钻孔监测界面',
     },
     textSide: 'left',
     showcase: {

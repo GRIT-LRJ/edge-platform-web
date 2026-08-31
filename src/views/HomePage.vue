@@ -49,6 +49,8 @@ const router = inject(routerKey, null)
           <RouterLink
             class="home-feature__visual home-feature__visual--link"
             :class="{
+              'home-feature__visual--platform-animation':
+                section.media.kind === 'configuration-animation',
               'home-feature__visual--topology': section.media.kind === 'integration-topology',
             }"
             :to="section.showcase.path"
@@ -62,6 +64,8 @@ const router = inject(routerKey, null)
           <a
             class="home-feature__visual home-feature__visual--link"
             :class="{
+              'home-feature__visual--platform-animation':
+                section.media.kind === 'configuration-animation',
               'home-feature__visual--topology': section.media.kind === 'integration-topology',
             }"
             :href="section.showcase.path"

@@ -69,6 +69,28 @@ describe('首页视觉媒体', () => {
     expect(screen.getByRole('img', { name: '平台能力画面' })).toHaveAttribute('loading', 'lazy')
   })
 
+  it('组态媒体展示从组件库拖入四个模块并生成完整界面', () => {
+    const { container } = render(HomeVisual, {
+      props: {
+        media: {
+          kind: 'configuration-animation',
+          alt: 'DrillMind 平台组态动画',
+        },
+      },
+    })
+
+    expect(screen.getByRole('img', { name: 'DrillMind 平台组态动画' })).toBeVisible()
+    expect(container.querySelector('[data-home-visual="configuration-builder"]')).toBeVisible()
+    expect(container.querySelectorAll('[data-configuration-source]')).toHaveLength(4)
+    expect(container.querySelectorAll('[data-configuration-drag]')).toHaveLength(4)
+    expect(container.querySelectorAll('[data-configuration-widget]')).toHaveLength(4)
+    expect(container.querySelectorAll('[data-configuration-gauge="true"]')).toHaveLength(3)
+    expect(container.querySelector('[data-configuration-result="complete"]')).toBeInTheDocument()
+    expect(container.querySelector('[data-platform-region="main-menu"]')).toHaveTextContent(
+      'DrillMind',
+    )
+  })
+
   it('开放集成媒体渲染固定节点的 SVG 拓扑动画', () => {
     const { container } = render(HomeVisual, {
       props: {

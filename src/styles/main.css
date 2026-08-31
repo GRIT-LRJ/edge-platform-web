@@ -381,6 +381,11 @@ a {
 }
 
 .home-visual {
+  --drillmind-shell: #31394f;
+  --drillmind-toolbar: #424b65;
+  --drillmind-panel: #3d465f;
+  --drillmind-stage: #202638;
+  --drillmind-line: #56617b;
   position: relative;
   min-width: 0;
 }
@@ -995,16 +1000,18 @@ a {
   background: #03090f;
 }
 
+.home-feature__visual--platform-animation,
 .home-feature__visual--topology {
   --home-feature-media-padding: 0rem;
   padding: 0;
-  background: #202638;
+  background: var(--drillmind-stage);
 }
 
+.home-feature__visual--platform-animation > .home-visual,
 .home-feature__visual--topology > .home-visual {
   border: 0;
   border-radius: calc(var(--radius-md) - 1px);
-  background: #202638;
+  background: var(--drillmind-stage);
 }
 
 .home-feature__visual--link .home-visual__image {
@@ -1026,6 +1033,8 @@ a {
   transform: translateY(-3px);
 }
 
+.home-feature__visual--link.home-feature__visual--platform-animation:hover,
+.home-feature__visual--link.home-feature__visual--platform-animation:focus-visible,
 .home-feature__visual--link.home-feature__visual--topology:hover,
 .home-feature__visual--link.home-feature__visual--topology:focus-visible {
   transform: none;
