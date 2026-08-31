@@ -16,6 +16,7 @@ const { isLightTheme, toggleTheme } = useTheme()
 
 function updatePageMetadata() {
   const routeTitle = typeof route.meta.title === 'string' ? route.meta.title : ''
+  const routeDescription = typeof route.meta.description === 'string' ? route.meta.description : ''
   document.title = routeTitle
     ? `${routeTitle}｜${siteConfig.brandName}`
     : siteConfig.seo.defaultTitle
@@ -26,7 +27,20 @@ function updatePageMetadata() {
     description.name = 'description'
     document.head.append(description)
   }
-  description.content = siteConfig.seo.defaultDescription
+  description.content = routeDescription || siteConfig.seo.defaultDescription
+
+  const shouldNoIndex = route.meta.noindex === true
+  let robots = document.querySelector<HTMLMetaElement>('meta[name="robots"]')
+  if (shouldNoIndex) {
+    if (!robots) {
+      robots = document.createElement('meta')
+      robots.name = 'robots'
+      document.head.append(robots)
+    }
+    robots.content = 'noindex, nofollow'
+  } else {
+    robots?.remove()
+  }
 }
 
 async function openMenu() {

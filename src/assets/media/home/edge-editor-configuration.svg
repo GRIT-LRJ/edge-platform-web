@@ -1,0 +1,41 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1400 900" role="img" aria-labelledby="title desc">
+  <title id="title">Edge 平台设备画面组态</title>
+  <desc id="desc">组件库、组态画布和数据绑定面板组成的设备 HMI 编辑画面。</desc>
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#061523"/><stop offset="1" stop-color="#0b1e2c"/></linearGradient>
+    <pattern id="grid" width="34" height="34" patternUnits="userSpaceOnUse"><path d="M34 0H0V34" fill="none" stroke="#55dbe2" stroke-opacity=".1"/></pattern>
+    <linearGradient id="machine" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#39d2c8"/><stop offset="1" stop-color="#397fdc"/></linearGradient>
+  </defs>
+  <rect width="1400" height="900" rx="24" fill="url(#bg)"/>
+  <rect x="36" y="36" width="1328" height="828" rx="20" fill="#071b29" stroke="#5cd9dd" stroke-opacity=".35" stroke-width="2"/>
+  <rect x="36" y="36" width="1328" height="64" rx="20" fill="#0e2c3d"/>
+  <path d="M36 100h1328" stroke="#5cd9dd" stroke-opacity=".2"/>
+  <circle cx="70" cy="68" r="8" fill="#45dac7"/><circle cx="94" cy="68" r="8" fill="#4d9af5"/><circle cx="118" cy="68" r="8" fill="#e7b263"/>
+  <text x="154" y="75" fill="#dffaff" font-family="Microsoft YaHei, sans-serif" font-size="21" font-weight="600">Edge Studio · 设备画面</text>
+  <rect x="36" y="100" width="230" height="764" fill="#0b2535"/><path d="M266 100v764" stroke="#5cd9dd" stroke-opacity=".2"/>
+  <text x="70" y="145" fill="#6ee8da" font-family="Microsoft YaHei, sans-serif" font-size="16" font-weight="700">组件库</text>
+  <g fill="#143c51" stroke="#4fd4d2" stroke-opacity=".4"><rect x="62" y="176" width="76" height="62" rx="9"/><rect x="154" y="176" width="76" height="62" rx="9"/><rect x="62" y="254" width="76" height="62" rx="9"/><rect x="154" y="254" width="76" height="62" rx="9"/><rect x="62" y="332" width="76" height="62" rx="9"/><rect x="154" y="332" width="76" height="62" rx="9"/></g>
+  <g stroke="#63e5da" stroke-width="3" fill="none"><circle cx="100" cy="207" r="18"/><path d="M171 208h42M192 187v42"/><path d="M82 284h38l-19-22z"/><path d="M172 276h38v24h-38z"/><path d="M83 364h36M83 378h36"/><path d="M174 350l36 28M210 350l-36 28"/></g>
+  <text x="70" y="465" fill="#6ee8da" font-family="Microsoft YaHei, sans-serif" font-size="16" font-weight="700">图层</text>
+  <g fill="#23485a"><rect x="62" y="495" width="168" height="11" rx="5"/><rect x="62" y="532" width="126" height="11" rx="5"/><rect x="62" y="569" width="150" height="11" rx="5"/><rect x="62" y="606" width="110" height="11" rx="5"/></g>
+  <rect x="266" y="100" width="840" height="764" fill="#061722"/><rect x="266" y="100" width="840" height="764" fill="url(#grid)"/>
+  <text x="300" y="142" fill="#8db9c6" font-family="Microsoft YaHei, sans-serif" font-size="14">画布 / 主控画面</text>
+  <rect x="370" y="188" width="622" height="518" rx="16" fill="#0b2a3a" stroke="#49cbd0" stroke-opacity=".5"/>
+  <text x="408" y="230" fill="#dffaff" font-family="Microsoft YaHei, sans-serif" font-size="22" font-weight="600">地下装备运行总览</text>
+  <circle cx="938" cy="226" r="8" fill="#45dfc2"/><text x="956" y="232" fill="#8fd9d2" font-family="Microsoft YaHei, sans-serif" font-size="14">在线</text>
+  <g fill="#123c50" stroke="#47cdd0" stroke-opacity=".45"><rect x="408" y="270" width="164" height="82" rx="10"/><rect x="590" y="270" width="164" height="82" rx="10"/><rect x="772" y="270" width="182" height="82" rx="10"/></g>
+  <g fill="#83b5c5" font-family="Microsoft YaHei, sans-serif" font-size="13"><text x="430" y="300">设备状态</text><text x="612" y="300">推进压力</text><text x="794" y="300">钻臂姿态</text></g>
+  <g fill="#e2fbff" font-family="Consolas, monospace" font-size="24"><text x="430" y="333">RUN</text><text x="612" y="333">18.6 MPa</text><text x="794" y="333">+12.4°</text></g>
+  <path d="M412 420h540v194H412z" fill="#082333" stroke="#4acdd0" stroke-opacity=".38"/>
+  <path d="M442 556l64-24 62 32 68-76 73 40 74-98 68 48 72-28" fill="none" stroke="#51e1d2" stroke-width="5"/>
+  <path d="M442 576h484M442 536h484M442 496h484M504 444v164M570 444v164M636 444v164M702 444v164M768 444v164M834 444v164" stroke="#58ccd5" stroke-opacity=".14"/>
+  <text x="430" y="452" fill="#8fc2cd" font-family="Microsoft YaHei, sans-serif" font-size="13">推进压力趋势</text>
+  <rect x="410" y="640" width="540" height="36" rx="8" fill="#113a4a"/><text x="432" y="664" fill="#8fced0" font-family="Microsoft YaHei, sans-serif" font-size="13">数据绑定：$mdl.drill.pressure</text>
+  <rect x="1106" y="100" width="258" height="764" fill="#0b2535"/><path d="M1106 100v764" stroke="#5cd9dd" stroke-opacity=".2"/>
+  <text x="1140" y="145" fill="#6ee8da" font-family="Microsoft YaHei, sans-serif" font-size="16" font-weight="700">属性面板</text>
+  <text x="1140" y="190" fill="#86b7c4" font-family="Microsoft YaHei, sans-serif" font-size="13">选中组件</text><text x="1140" y="220" fill="#e0fbff" font-family="Microsoft YaHei, sans-serif" font-size="17">趋势图表</text>
+  <g fill="#22495b"><rect x="1140" y="254" width="180" height="10" rx="5"/><rect x="1140" y="290" width="136" height="10" rx="5"/><rect x="1140" y="326" width="192" height="10" rx="5"/></g>
+  <text x="1140" y="390" fill="#86b7c4" font-family="Microsoft YaHei, sans-serif" font-size="13">数据与动作</text>
+  <rect x="1140" y="416" width="180" height="44" rx="7" fill="#09202e" stroke="#4cd0cf" stroke-opacity=".5"/><text x="1158" y="444" fill="#8ce5d8" font-family="Consolas, monospace" font-size="13">$mdl.drill.pressure</text>
+  <g fill="#22495b"><rect x="1140" y="510" width="180" height="10" rx="5"/><rect x="1140" y="546" width="144" height="10" rx="5"/><rect x="1140" y="582" width="194" height="10" rx="5"/><rect x="1140" y="618" width="128" height="10" rx="5"/></g>
+</svg>

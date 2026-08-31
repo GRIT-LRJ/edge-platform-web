@@ -3,3 +3,5 @@ dist/
 .vite/
 coverage/
 *.local
+1.png
+.verify/

@@ -42,12 +42,24 @@ describe('示例页面', () => {
     expect(screen.getAllByRole('button', { name: /示例 \d{2}/ })).toHaveLength(15)
   })
 
-  it('点击占位示例时打开即将上线弹窗', async () => {
+  it('点击已发布示例时打开视频弹窗', async () => {
     await renderApp('/examples')
 
     await fireEvent.click(screen.getByRole('button', { name: /凿岩台车示例 01/ }))
 
     expect(screen.getByRole('dialog', { name: '凿岩台车示例 01' })).toBeVisible()
+    const video = document.querySelector('video')
+    expect(video).toBeInTheDocument()
+    expect(video).toHaveAttribute('src', '/media/demos/drill-jumbo-01.webm')
+    expect(screen.queryByText('视频即将上线')).not.toBeInTheDocument()
+  })
+
+  it('点击占位示例时打开即将上线弹窗', async () => {
+    await renderApp('/examples')
+
+    await fireEvent.click(screen.getByRole('button', { name: /凿岩台车示例 02/ }))
+
+    expect(screen.getByRole('dialog', { name: '凿岩台车示例 02' })).toBeVisible()
     expect(screen.getByText('视频即将上线')).toBeVisible()
     expect(screen.queryByRole('video')).not.toBeInTheDocument()
   })

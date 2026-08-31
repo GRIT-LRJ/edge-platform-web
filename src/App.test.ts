@@ -17,7 +17,7 @@ describe('Edge 官网壳层', () => {
 
     await waitFor(() => expect(router.currentRoute.value.path).toBe('/trial'))
     expect(screen.getByRole('link', { name: '试用' })).toHaveAttribute('aria-current', 'page')
-    expect(screen.getByRole('heading', { name: '试用' })).toBeVisible()
+    expect(screen.getByRole('heading', { name: '试用 Edge 平台' })).toBeVisible()
   })
 
   it('移动菜单支持打开、Escape 关闭并在路由切换后收起', async () => {

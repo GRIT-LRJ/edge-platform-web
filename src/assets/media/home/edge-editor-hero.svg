@@ -1,0 +1,81 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1600 1000" role="img" aria-labelledby="title desc">
+  <title id="title">Edge 平台可视化组态工作台</title>
+  <desc id="desc">深色工业风界面，包含项目目录、组件库、矿山装备组态画布和属性面板。</desc>
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#071725"/>
+      <stop offset="1" stop-color="#030a12"/>
+    </linearGradient>
+    <linearGradient id="panel" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#102b3d"/>
+      <stop offset="1" stop-color="#071724"/>
+    </linearGradient>
+    <linearGradient id="cyan" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#66f5dc"/>
+      <stop offset="1" stop-color="#348cf2"/>
+    </linearGradient>
+    <pattern id="grid" width="38" height="38" patternUnits="userSpaceOnUse">
+      <path d="M38 0H0V38" fill="none" stroke="#65dbe2" stroke-opacity=".11"/>
+    </pattern>
+    <filter id="glow"><feGaussianBlur stdDeviation="10" result="blur"/><feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge></filter>
+  </defs>
+  <rect width="1600" height="1000" rx="28" fill="url(#bg)"/>
+  <circle cx="1320" cy="160" r="300" fill="#2bc9c7" opacity=".09"/>
+  <rect x="60" y="58" width="1480" height="884" rx="24" fill="#06131f" stroke="#61dae2" stroke-opacity=".35" stroke-width="2"/>
+  <rect x="60" y="58" width="1480" height="72" rx="24" fill="#0d2636"/>
+  <path d="M60 130h1480" stroke="#63dbe2" stroke-opacity=".2"/>
+  <circle cx="96" cy="94" r="9" fill="#43d9c7"/><circle cx="124" cy="94" r="9" fill="#4c9af5"/><circle cx="152" cy="94" r="9" fill="#eab466"/>
+  <text x="190" y="101" fill="#d9f8ff" font-family="Microsoft YaHei, sans-serif" font-size="23" font-weight="600">Edge Studio</text>
+  <text x="1390" y="101" fill="#81b9ca" font-family="Microsoft YaHei, sans-serif" font-size="16" text-anchor="end">HMI / 设计</text>
+
+  <rect x="60" y="130" width="240" height="812" fill="url(#panel)"/>
+  <path d="M300 130v812" stroke="#63dbe2" stroke-opacity=".2"/>
+  <text x="92" y="177" fill="#6ee8da" font-family="Microsoft YaHei, sans-serif" font-size="17" font-weight="700">项目目录</text>
+  <text x="92" y="222" fill="#c5e8f1" font-family="Microsoft YaHei, sans-serif" font-size="16">▾ 设备应用</text>
+  <text x="119" y="260" fill="#8db7c7" font-family="Microsoft YaHei, sans-serif" font-size="15">▾ 主控画面</text>
+  <rect x="104" y="280" width="158" height="38" rx="7" fill="#1d6572" fill-opacity=".55"/>
+  <text x="124" y="305" fill="#e0fbff" font-family="Microsoft YaHei, sans-serif" font-size="15">运行总览</text>
+  <text x="124" y="348" fill="#8db7c7" font-family="Microsoft YaHei, sans-serif" font-size="15">设备状态</text>
+  <text x="124" y="391" fill="#8db7c7" font-family="Microsoft YaHei, sans-serif" font-size="15">报警监控</text>
+  <text x="92" y="455" fill="#6ee8da" font-family="Microsoft YaHei, sans-serif" font-size="17" font-weight="700">组件库</text>
+  <g fill="#12354a" stroke="#4ecbd0" stroke-opacity=".36">
+    <rect x="88" y="482" width="72" height="64" rx="9"/><rect x="174" y="482" width="72" height="64" rx="9"/>
+    <rect x="88" y="562" width="72" height="64" rx="9"/><rect x="174" y="562" width="72" height="64" rx="9"/>
+    <rect x="88" y="642" width="72" height="64" rx="9"/><rect x="174" y="642" width="72" height="64" rx="9"/>
+  </g>
+  <g stroke="#5cdbd1" stroke-width="3" fill="none" opacity=".9">
+    <path d="M107 514h34M124 497v34"/><path d="M193 512h34M210 495v34"/><circle cx="124" cy="594" r="15"/><path d="M101 676h46l-23-22z"/><path d="M190 662h38v28h-38z"/>
+  </g>
+
+  <rect x="300" y="130" width="984" height="812" fill="#071925"/>
+  <rect x="300" y="130" width="984" height="812" fill="url(#grid)"/>
+  <text x="340" y="178" fill="#81b9ca" font-family="Microsoft YaHei, sans-serif" font-size="15">画布 · 运行总览</text>
+  <path d="M358 680C500 620 560 490 708 520s188 76 288-52 170-104 254-76" fill="none" stroke="#3ed7cb" stroke-opacity=".25" stroke-width="3"/>
+  <g filter="url(#glow)">
+    <path d="M530 545h260l46 72H486z" fill="#174767" stroke="#65e7dd" stroke-width="3"/>
+    <path d="M590 545l-18-142h30l42 142M720 545l58-145h30l-20 145" fill="none" stroke="#5ce6da" stroke-width="14" stroke-linecap="round"/>
+    <path d="M472 617h390" stroke="#85c8ff" stroke-width="5"/>
+    <circle cx="535" cy="640" r="33" fill="#102c40" stroke="#58c9e1" stroke-width="7"/><circle cx="795" cy="640" r="33" fill="#102c40" stroke="#58c9e1" stroke-width="7"/>
+  </g>
+  <rect x="430" y="732" width="460" height="95" rx="14" fill="#0b2a3b" stroke="#51cbd0" stroke-opacity=".45"/>
+  <text x="460" y="770" fill="#dffaff" font-family="Microsoft YaHei, sans-serif" font-size="19">凿岩设备 · 运行总览</text>
+  <circle cx="462" cy="800" r="7" fill="#4be2c6"/><text x="480" y="807" fill="#8fc3cf" font-family="Microsoft YaHei, sans-serif" font-size="15">在线</text>
+  <circle cx="560" cy="800" r="7" fill="#4c9af5"/><text x="578" y="807" fill="#8fc3cf" font-family="Microsoft YaHei, sans-serif" font-size="15">数据同步</text>
+  <path d="M1000 384h196M1000 416h138M1000 448h174" stroke="#4cd8cf" stroke-width="8" stroke-linecap="round" opacity=".8"/>
+  <circle cx="1114" cy="595" r="94" fill="#0a2a38" stroke="#5bded1" stroke-width="3"/><path d="M1114 595l56-54" stroke="#5bded1" stroke-width="5"/><circle cx="1114" cy="595" r="12" fill="#5bded1"/>
+
+  <rect x="1284" y="130" width="256" height="812" fill="url(#panel)"/>
+  <path d="M1284 130v812" stroke="#63dbe2" stroke-opacity=".2"/>
+  <text x="1320" y="177" fill="#6ee8da" font-family="Microsoft YaHei, sans-serif" font-size="17" font-weight="700">属性面板</text>
+  <text x="1320" y="221" fill="#8db7c7" font-family="Microsoft YaHei, sans-serif" font-size="14">组件</text><text x="1320" y="250" fill="#d9f8ff" font-family="Microsoft YaHei, sans-serif" font-size="16">设备状态卡</text>
+  <g fill="#224659"><rect x="1320" y="288" width="182" height="10" rx="5"/><rect x="1320" y="324" width="148" height="10" rx="5"/><rect x="1320" y="360" width="200" height="10" rx="5"/><rect x="1320" y="396" width="162" height="10" rx="5"/></g>
+  <text x="1320" y="462" fill="#8db7c7" font-family="Microsoft YaHei, sans-serif" font-size="14">数据绑定</text>
+  <rect x="1320" y="486" width="182" height="48" rx="8" fill="#0a202e" stroke="#49cbd1" stroke-opacity=".42"/>
+  <text x="1340" y="517" fill="#8fe9de" font-family="Consolas, monospace" font-size="15">$mdl.status</text>
+  <text x="1320" y="590" fill="#8db7c7" font-family="Microsoft YaHei, sans-serif" font-size="14">样式与交互</text>
+  <g fill="#224659"><rect x="1320" y="620" width="182" height="10" rx="5"/><rect x="1320" y="656" width="140" height="10" rx="5"/><rect x="1320" y="692" width="196" height="10" rx="5"/></g>
+  <rect x="300" y="862" width="984" height="80" fill="#0b2434"/>
+  <path d="M300 862h984" stroke="#63dbe2" stroke-opacity=".2"/>
+  <text x="340" y="910" fill="#7eb8c5" font-family="Microsoft YaHei, sans-serif" font-size="15">基础图形</text>
+  <g fill="#173b4d" stroke="#51cbd0" stroke-opacity=".45"><rect x="488" y="882" width="72" height="38" rx="7"/><rect x="576" y="882" width="72" height="38" rx="7"/><rect x="664" y="882" width="72" height="38" rx="7"/><rect x="752" y="882" width="72" height="38" rx="7"/></g>
+</svg>
