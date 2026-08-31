@@ -1,6 +1,7 @@
 <script setup lang="ts">
 import { computed } from 'vue'
 
+import HomeIntegrationAnimation from './HomeIntegrationAnimation.vue'
 import type { HomeMedia } from '../config/home'
 
 const props = defineProps<{
@@ -35,6 +36,11 @@ const imageStyle = computed<Record<string, string>>(() => {
           decoding="async"
         />
       </picture>
+      <span class="home-visual__image-badge" aria-hidden="true">产品演示界面</span>
+    </template>
+
+    <template v-else-if="media.kind === 'integration-animation'">
+      <HomeIntegrationAnimation />
       <span class="home-visual__image-badge" aria-hidden="true">产品演示界面</span>
     </template>
 

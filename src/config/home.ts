@@ -2,7 +2,6 @@ import editorHeroImage from '../assets/media/home/edge-drillmind-hero.webp'
 import editorHeroImageAvif from '../assets/media/home/edge-drillmind-hero.avif'
 import editorConfigurationImage from '../assets/media/home/edge-editor-configuration.svg'
 import monitoringDashboardImage from '../assets/media/home/edge-monitoring-dashboard.svg'
-import openIntegrationImage from '../assets/media/home/edge-open-integration.svg'
 import type { ShowcasePath } from './showcases'
 
 export type HomeVisualVariant = 'configuration' | 'monitoring' | 'integration'
@@ -22,7 +21,11 @@ export interface HomePlaceholderMedia {
   visual: HomeVisualVariant
 }
 
-export type HomeMedia = HomeImageMedia | HomePlaceholderMedia
+export interface HomeIntegrationAnimationMedia {
+  kind: 'integration-animation'
+}
+
+export type HomeMedia = HomeImageMedia | HomePlaceholderMedia | HomeIntegrationAnimationMedia
 
 export interface HomeHeroConfig {
   eyebrow: string
@@ -94,9 +97,7 @@ export const homeSections: readonly HomeSection[] = [
     description:
       '通过 SDK、组件注册和适配器接入数据、资源、权限与导航能力，沉淀行业组件，并将设计结果交付到运行环境。',
     media: {
-      kind: 'image',
-      src: openIntegrationImage,
-      alt: 'Edge 平台开放集成组态画布，展示边缘服务器挂接的应用、CAN 与 TCP 驱动节点，可通过加号持续扩展新的驱动与模块',
+      kind: 'integration-animation',
     },
     textSide: 'left',
     showcase: {

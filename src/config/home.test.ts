@@ -17,9 +17,9 @@ describe('首页配置', () => {
     ])
     expect(homeSections.map((section) => section.textSide)).toEqual(['left', 'right', 'left'])
     expect(homeSections.every((section) => section.description.length > 20)).toBe(true)
-    expect(homeSections.every((section) => section.media.kind === 'image')).toBe(true)
-    expect(homeSections.every((section) => section.media.kind === 'image' && section.media.alt)).toBe(
-      true,
-    )
+    expect(
+      homeSections.slice(0, 2).every((section) => section.media.kind === 'image' && section.media.alt),
+    ).toBe(true)
+    expect(homeSections[2].media.kind).toBe('integration-animation')
   })
 })
