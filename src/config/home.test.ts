@@ -18,7 +18,7 @@ describe('首页配置', () => {
     expect(homeSections.map((section) => section.textSide)).toEqual(['left', 'right', 'left'])
     expect(homeSections.every((section) => section.description.length > 20)).toBe(true)
     expect(homeSections.map((section) => section.media.kind)).toEqual([
-      'image',
+      'configuration-animation',
       'image',
       'integration-topology',
     ])

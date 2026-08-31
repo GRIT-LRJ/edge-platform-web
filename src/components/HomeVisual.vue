@@ -2,6 +2,7 @@
 import { computed } from 'vue'
 
 import type { HomeMedia } from '../config/home'
+import ConfigurationAssemblyVisual from './ConfigurationAssemblyVisual.vue'
 import IntegrationTopologyVisual from './IntegrationTopologyVisual.vue'
 
 const props = defineProps<{
@@ -26,6 +27,7 @@ const imageStyle = computed<Record<string, string>>(() => {
     class="home-visual"
     :class="{
       'home-visual--hero': hero,
+      'home-visual--configuration-animation': media.kind === 'configuration-animation',
       'home-visual--integration-topology': media.kind === 'integration-topology',
     }"
   >
@@ -44,6 +46,11 @@ const imageStyle = computed<Record<string, string>>(() => {
       </picture>
       <span class="home-visual__image-badge" aria-hidden="true">产品演示界面</span>
     </template>
+
+    <ConfigurationAssemblyVisual
+      v-else-if="media.kind === 'configuration-animation'"
+      :label="media.alt"
+    />
 
     <IntegrationTopologyVisual
       v-else-if="media.kind === 'integration-topology'"

@@ -17,9 +17,11 @@ describe('首页', () => {
     )
     expect(screen.getAllByRole('article')).toHaveLength(3)
     expect(container.querySelectorAll('.home-feature__visual')).toHaveLength(3)
+    expect(container.querySelectorAll('.home-feature__visual--platform-animation')).toHaveLength(1)
     expect(container.querySelectorAll('.home-feature__visual--topology')).toHaveLength(1)
     expect(screen.queryByText('内容待项目分析后补充')).not.toBeInTheDocument()
-    expect(screen.getAllByText('产品演示界面')).toHaveLength(3)
+    expect(screen.getAllByText('产品演示界面')).toHaveLength(2)
+    expect(container.querySelector('[data-home-visual="configuration-builder"]')).toBeVisible()
     expect(
       screen.getByRole('img', {
         name: 'Edge 平台 DrillMind 工程开放集成拓扑，展示应用、边缘服务器、总线与设备驱动之间的连接',

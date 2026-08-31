@@ -284,9 +284,10 @@ const extensionSlots: readonly ExtensionSlot[] = [
 </template>
 
 <style scoped>
-.integration-topology { width: 100%; height: 100%; overflow: hidden; border-radius: inherit; background: #202638; }
+.integration-topology { width: 100%; height: 100%; overflow: hidden; border-radius: inherit; background: var(--drillmind-stage, #202638); }
 .integration-topology svg { width: 100%; height: 100%; display: block; font-family: Inter, "PingFang SC", "Microsoft YaHei", sans-serif; shape-rendering: geometricPrecision; }
-.integration-topology__main-menu > rect, .integration-topology__device-tab > rect:first-child, .integration-topology__toolbar > rect, .integration-topology__statusbar rect { fill: #31394f; stroke: #56617b; stroke-width: 0.6; }
+.integration-topology__main-menu > rect, .integration-topology__statusbar rect { fill: var(--drillmind-shell, #31394f); stroke: var(--drillmind-line, #56617b); stroke-width: 0.6; }
+.integration-topology__device-tab > rect:first-child, .integration-topology__toolbar > rect { fill: var(--drillmind-toolbar, #424b65); stroke: var(--drillmind-line, #56617b); stroke-width: 0.6; }
 .integration-topology__brand path:first-child { fill: #33d6ff; }
 .integration-topology__brand path:nth-child(2) { fill: #f0cf39; }
 .integration-topology__brand path:nth-child(3) { fill: #65efff; }
