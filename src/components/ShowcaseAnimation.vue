@@ -2,6 +2,7 @@
 import { computed } from 'vue'
 
 import type { ShowcaseDefinition, ShowcaseId } from '../config/showcases'
+import ProductWorkflowVisual, { type ProductWorkflowKind } from './ProductWorkflowVisual.vue'
 
 const props = defineProps<{
   definition: ShowcaseDefinition
@@ -17,10 +18,27 @@ const animationStyle = computed<Record<string, string>>(() => ({
 
 const titleId = computed(() => `showcase-animation-title-${props.kind}`)
 const descriptionId = computed(() => `showcase-animation-description-${props.kind}`)
+const workflowKind = computed<ProductWorkflowKind | undefined>(() => {
+  if (props.kind === 'parameter-alarm' || props.kind === 'sfc' || props.kind === 'monitoring') {
+    return props.kind
+  }
+  return undefined
+})
 </script>
 
 <template>
+  <ProductWorkflowVisual
+    v-if="workflowKind"
+    :kind="workflowKind"
+    :label="definition.title"
+    :controlled="true"
+    :playing="playing"
+    :reduced-motion="reducedMotion"
+    :duration-ms="definition.durationMs"
+    :replay-key="replayKey"
+  />
   <div
+    v-else
     class="showcase-animation"
     :class="{ 'showcase-animation--playing': playing }"
     :data-scene="kind"
@@ -100,22 +118,6 @@ const descriptionId = computed(() => `showcase-animation-description-${props.kin
         <g class="showcase-property property-one"><text x="772" y="208">变量路径</text><rect x="772" y="220" width="162" height="34" rx="6" /><text x="784" y="242" class="showcase-code">$mdl.status</text></g>
         <g class="showcase-property property-two"><text x="772" y="292">刷新周期</text><rect x="772" y="304" width="162" height="34" rx="6" /><text x="784" y="326" class="showcase-code">1000 ms</text></g>
         <g class="showcase-preview"><rect x="772" y="398" width="162" height="94" rx="8" /><circle cx="802" cy="438" r="16" /><path d="M802 427v12l7 5" /><text x="828" y="441">运行预览</text><text x="828" y="461" class="showcase-value">已连接</text></g>
-      </g>
-
-      <g v-else-if="kind === 'monitoring'" class="showcase-monitoring-scene">
-        <rect class="showcase-panel" x="42" y="108" width="236" height="450" rx="12" /><text class="showcase-panel-title" x="66" y="142">设备状态</text><text class="showcase-panel-subtitle" x="66" y="164">示例工程 · 运行总览</text>
-        <g class="showcase-device-row row-one"><circle cx="73" cy="210" r="7" /><text x="94" y="215">设备 A01</text><text x="222" y="215" class="showcase-value">在线</text><path d="M66 234h188" /></g>
-        <g class="showcase-device-row row-two"><circle cx="73" cy="274" r="7" /><text x="94" y="279">设备 A02</text><text x="222" y="279" class="showcase-value">在线</text><path d="M66 298h188" /></g>
-        <g class="showcase-device-row row-three"><circle cx="73" cy="338" r="7" /><text x="94" y="343">设备 B01</text><text x="222" y="343" class="showcase-muted">待机</text><path d="M66 362h188" /></g>
-        <g class="showcase-device-row row-four"><circle cx="73" cy="402" r="7" /><text x="94" y="407">设备 B02</text><text x="222" y="407" class="showcase-value">在线</text></g>
-        <g class="showcase-summary"><text x="66" y="478">在线率</text><text x="66" y="526" class="showcase-number">75<tspan>%</tspan></text><path d="M166 520h82M166 520l16-18 18 12 24-22 24 15" /></g>
-
-        <rect class="showcase-panel" x="298" y="108" width="660" height="220" rx="12" /><text class="showcase-panel-title" x="324" y="142">实时指标</text><text class="showcase-panel-subtitle" x="324" y="164">设备 A01 · 最近 30 分钟</text>
-        <g class="showcase-metric metric-one"><rect x="324" y="188" width="166" height="110" rx="8" /><text x="344" y="216">转速</text><text x="344" y="258" class="showcase-number">1,280</text><text x="344" y="280" class="showcase-muted">rpm</text></g>
-        <g class="showcase-metric metric-two"><rect x="506" y="188" width="166" height="110" rx="8" /><text x="526" y="216">温度</text><text x="526" y="258" class="showcase-number">42.8</text><text x="526" y="280" class="showcase-muted">°C</text></g>
-        <g class="showcase-metric metric-three"><rect x="688" y="188" width="244" height="110" rx="8" /><text x="708" y="216">负载趋势</text><path class="showcase-sparkline" d="M708 270l26-25 23 17 28-32 26 22 29-40 31 26 30-17" /></g>
-        <rect class="showcase-panel" x="298" y="352" width="386" height="206" rx="12" /><text class="showcase-panel-title" x="324" y="386">参数趋势</text><path class="showcase-axis" d="M324 526h330M324 424v102" /><path class="showcase-chart-line chart-one" d="M324 500c34-22 58-8 84-42s52 20 78-14 52 21 80-28 56 8 88-34" /><path class="showcase-chart-line chart-two" d="M324 518c34-10 58 4 84-23s52 10 78-15 52 8 80-27 56 10 88-18" />
-        <g class="showcase-alarm"><rect class="showcase-panel" x="710" y="352" width="248" height="206" rx="12" /><text class="showcase-panel-title" x="736" y="386">事件与视频</text><rect class="showcase-alarm-row" x="736" y="412" width="196" height="48" rx="7" /><circle cx="756" cy="436" r="7" /><text x="774" y="433">通道 01 波动</text><text x="774" y="450" class="showcase-muted">刚刚</text><rect class="showcase-video" x="736" y="480" width="196" height="58" rx="7" /><path d="M818 493l20 13-20 13z" /><text x="850" y="510">现场视频</text></g>
       </g>
 
       <g v-else class="showcase-integration-scene">

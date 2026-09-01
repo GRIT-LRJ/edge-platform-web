@@ -4,6 +4,7 @@ import { computed } from 'vue'
 import type { HomeMedia } from '../config/home'
 import ConfigurationAssemblyVisual from './ConfigurationAssemblyVisual.vue'
 import IntegrationTopologyVisual from './IntegrationTopologyVisual.vue'
+import ProductWorkflowVisual, { type ProductWorkflowKind } from './ProductWorkflowVisual.vue'
 
 const props = defineProps<{
   media: HomeMedia
@@ -20,6 +21,21 @@ const imageStyle = computed<Record<string, string>>(() => {
     '--home-image-position-mobile': props.media.mobilePosition ?? props.media.desktopPosition ?? 'center',
   }
 })
+
+const workflowMedia = computed<
+  { kind: ProductWorkflowKind; label: string; durationMs: number } | undefined
+>(() => {
+  if (props.media.kind === 'parameter-alarm-animation') {
+    return { kind: 'parameter-alarm', label: props.media.alt, durationMs: props.media.durationMs }
+  }
+  if (props.media.kind === 'sfc-animation') {
+    return { kind: 'sfc', label: props.media.alt, durationMs: props.media.durationMs }
+  }
+  if (props.media.kind === 'monitoring-animation') {
+    return { kind: 'monitoring', label: props.media.alt, durationMs: props.media.durationMs }
+  }
+  return undefined
+})
 </script>
 
 <template>
@@ -29,6 +45,7 @@ const imageStyle = computed<Record<string, string>>(() => {
       'home-visual--hero': hero,
       'home-visual--configuration-animation': media.kind === 'configuration-animation',
       'home-visual--integration-topology': media.kind === 'integration-topology',
+      'home-visual--product-workflow': workflowMedia,
     }"
   >
     <template v-if="media.kind === 'image'">
@@ -55,6 +72,13 @@ const imageStyle = computed<Record<string, string>>(() => {
     <IntegrationTopologyVisual
       v-else-if="media.kind === 'integration-topology'"
       :label="media.alt"
+    />
+
+    <ProductWorkflowVisual
+      v-else-if="workflowMedia"
+      :kind="workflowMedia.kind"
+      :label="workflowMedia.label"
+      :duration-ms="workflowMedia.durationMs"
     />
 
     <div

@@ -20,6 +20,7 @@ describe('开放集成拓扑动画', () => {
     const container = renderTopology()
 
     expect(container.querySelector('[data-platform-shell="true"]')).toHaveTextContent('DrillMind')
+    expect(container.querySelector('[data-platform-chrome="shared"]')).toBeInTheDocument()
     expect(container.querySelector('[data-platform-region="main-menu"]')).toHaveTextContent(
       '保存工程',
     )

@@ -52,6 +52,10 @@ const router = inject(routerKey, null)
               'home-feature__visual--platform-animation':
                 section.media.kind === 'configuration-animation',
               'home-feature__visual--topology': section.media.kind === 'integration-topology',
+              'home-feature__visual--workflow':
+                section.media.kind === 'parameter-alarm-animation' ||
+                section.media.kind === 'sfc-animation' ||
+                section.media.kind === 'monitoring-animation',
             }"
             :to="section.showcase.path"
             :aria-label="section.showcase.label"
@@ -67,6 +71,10 @@ const router = inject(routerKey, null)
               'home-feature__visual--platform-animation':
                 section.media.kind === 'configuration-animation',
               'home-feature__visual--topology': section.media.kind === 'integration-topology',
+              'home-feature__visual--workflow':
+                section.media.kind === 'parameter-alarm-animation' ||
+                section.media.kind === 'sfc-animation' ||
+                section.media.kind === 'monitoring-animation',
             }"
             :href="section.showcase.path"
             :aria-label="section.showcase.label"

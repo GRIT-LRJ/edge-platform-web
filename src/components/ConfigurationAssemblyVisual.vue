@@ -1,6 +1,8 @@
 <script setup lang="ts">
 import { onBeforeUnmount, onMounted, ref } from 'vue'
 
+import PlatformVisualChrome from './PlatformVisualChrome.vue'
+
 defineProps<{ label: string }>()
 
 const root = ref<HTMLElement | null>(null)
@@ -9,15 +11,6 @@ const isStatic = ref(false)
 
 let visibilityObserver: IntersectionObserver | undefined
 let reducedMotionQuery: MediaQueryList | undefined
-
-const headerMenus = [
-  { id: 'save', x: 132, label: '保存工程' },
-  { id: 'compile', x: 196, label: '编译工程' },
-  { id: 'start', x: 260, label: '启动工程' },
-  { id: 'upload', x: 324, label: '上传资产' },
-  { id: 'about', x: 388, label: '关于' },
-  { id: 'help', x: 452, label: '帮助' },
-] as const
 
 const projectItems = [
   { id: 'device', y: 103, label: '设备' },
@@ -143,40 +136,8 @@ onBeforeUnmount(() => {
 
       <rect width="960" height="540" rx="18" fill="url(#configuration-stage)" />
 
-      <g class="configuration-assembly__header" data-platform-region="main-menu">
-        <rect width="960" height="44" />
-        <g class="configuration-assembly__brand" transform="translate(12 10)">
-          <path d="M 0 15 L 6 1 L 11 8 L 7 20 Z" />
-          <path d="M 8 2 L 16 6 L 12 12 Z" />
-          <path d="M 9 13 L 18 8 L 15 19 Z" />
-          <text x="25" y="17">DrillMind</text>
-        </g>
-        <g
-          v-for="menu in headerMenus"
-          :key="menu.id"
-          class="configuration-assembly__menu"
-          :transform="`translate(${menu.x} 5)`"
-        >
-          <circle cx="14" cy="8" r="3.3" />
-          <path d="M 10 8 H 18 M 14 4 V 12" />
-          <text x="14" y="29">{{ menu.label }}</text>
-        </g>
-        <g class="configuration-assembly__runtime" transform="translate(737 7)">
-          <rect width="91" height="28" rx="3" />
-          <path d="M 10 6 V 17 M 6 13 L 10 17 L 14 13 M 6 21 H 14" />
-          <text x="20" y="13">下载运行时</text>
-          <text x="20" y="22">EdgeClr · EdgeHmi</text>
-        </g>
-        <g class="configuration-assembly__window-actions" transform="translate(844 13)">
-          <rect x="0" width="11" height="11" rx="1" />
-          <rect x="28" width="11" height="11" rx="1" />
-          <rect x="56" width="11" height="11" rx="1" />
-          <path d="M 84 1 V 10 M 80 5.5 H 89 M 109 1 L 118 10 M 118 1 L 109 10" />
-        </g>
-      </g>
-
       <g class="configuration-assembly__project" data-platform-region="project-tree">
-        <rect x="0" y="44" width="126" height="482" />
+        <rect x="0" y="44" width="126" height="478" />
         <text class="configuration-assembly__panel-title" x="14" y="68">工程目录</text>
         <path class="configuration-assembly__panel-close" d="M 112 57 L 120 65 M 120 57 L 112 65" />
         <g v-for="item in projectItems" :key="item.id" :transform="`translate(0 ${item.y})`">
@@ -206,7 +167,7 @@ onBeforeUnmount(() => {
       </g>
 
       <g class="configuration-assembly__properties" data-platform-region="properties">
-        <rect x="814" y="44" width="146" height="482" />
+        <rect x="814" y="44" width="146" height="478" />
         <rect class="configuration-assembly__properties-tab" x="814" y="44" width="72" height="27" />
         <text class="configuration-assembly__panel-title" x="838" y="62">属性</text>
         <text x="833" y="92">钻孔监测</text>
@@ -362,19 +323,7 @@ onBeforeUnmount(() => {
         <path class="configuration-assembly__cursor" d="M 91 31 L 91 50 L 97 44 L 102 54 L 107 51 L 102 42 L 111 41 Z" />
       </g>
 
-      <g class="configuration-assembly__statusbar" data-platform-region="statusbar">
-        <rect y="526" width="960" height="14" />
-        <circle cx="9" cy="533" r="2.2" />
-        <text x="15" y="536">16:52:14</text>
-        <text x="75" y="536">本地配置</text>
-        <circle class="configuration-assembly__connected" cx="144" cy="533" r="2.5" />
-        <text x="151" y="536">已连接</text>
-        <text x="214" y="536">工作区仓库：···</text>
-        <text x="378" y="536">尚未建立同步基线（需先全量同步一次）</text>
-        <text x="658" y="536">就绪</text>
-        <text x="772" y="536">DrillMind工业自动化组态平台（开发）</text>
-        <text x="946" y="536" text-anchor="end">就绪</text>
-      </g>
+      <PlatformVisualChrome />
     </svg>
   </div>
 </template>
@@ -401,27 +350,6 @@ onBeforeUnmount(() => {
   font-family: Inter, "PingFang SC", "Microsoft YaHei", sans-serif;
   shape-rendering: geometricPrecision;
 }
-
-.configuration-assembly__header > rect,
-.configuration-assembly__statusbar rect {
-  fill: var(--drillmind-shell, #31394f);
-  stroke: var(--drillmind-line, #56617b);
-  stroke-width: 0.6;
-}
-
-.configuration-assembly__brand path:first-child { fill: #33d6ff; }
-.configuration-assembly__brand path:nth-child(2) { fill: #f0cf39; }
-.configuration-assembly__brand path:nth-child(3) { fill: #65efff; }
-.configuration-assembly__brand text { fill: #f8fbff; font-size: 16px; font-weight: 800; }
-.configuration-assembly__menu circle { fill: #9eca2b; }
-.configuration-assembly__menu path { fill: none; stroke: #30384c; stroke-width: 1; }
-.configuration-assembly__menu text { fill: #f3f6fb; font-size: 7.8px; font-weight: 700; text-anchor: middle; }
-.configuration-assembly__runtime rect,
-.configuration-assembly__window-actions rect { fill: none; stroke: #78849d; stroke-width: 0.8; }
-.configuration-assembly__runtime path,
-.configuration-assembly__window-actions path { fill: none; stroke: #abb4c7; stroke-width: 0.9; }
-.configuration-assembly__runtime text:first-of-type { fill: #f3f6fb; font-size: 7.4px; font-weight: 700; }
-.configuration-assembly__runtime text:last-of-type { fill: #929db3; font-size: 4.8px; }
 
 .configuration-assembly__project > rect:first-child,
 .configuration-assembly__properties > rect:first-child,
@@ -538,10 +466,6 @@ onBeforeUnmount(() => {
 .configuration-assembly__drag--controls { animation-name: configuration-drag-controls; }
 .configuration-assembly__drag--progress { animation-name: configuration-drag-progress; }
 
-.configuration-assembly__statusbar text { fill: #9da8bc; font-size: 5.7px; }
-.configuration-assembly__statusbar circle { fill: #8793a8; }
-.configuration-assembly__statusbar .configuration-assembly__connected { fill: #62cf42; }
-
 @keyframes configuration-empty { 0%, 8% { opacity: 1; } 12%, 92% { opacity: 0; } 96%, 100% { opacity: 1; } }
 @keyframes configuration-widget-gauges { 0%, 20% { opacity: 0; } 22%, 92% { opacity: 1; } 96%, 100% { opacity: 0; } }
 @keyframes configuration-widget-metrics { 0%, 36% { opacity: 0; } 38%, 92% { opacity: 1; } 96%, 100% { opacity: 0; } }
@@ -591,9 +515,7 @@ onBeforeUnmount(() => {
 
 @media (max-width: 44rem) {
   .configuration-assembly__project text:not(.configuration-assembly__panel-title),
-  .configuration-assembly__properties > text:not(.configuration-assembly__panel-title):not(.configuration-assembly__property-heading),
-  .configuration-assembly__statusbar text:nth-of-type(4),
-  .configuration-assembly__statusbar text:nth-of-type(6) { opacity: 0; }
+  .configuration-assembly__properties > text:not(.configuration-assembly__panel-title):not(.configuration-assembly__property-heading) { opacity: 0; }
   .configuration-assembly__widget > rect:first-child { stroke-width: 1; }
   .configuration-assembly__gauge-label { font-size: 11px; }
   .configuration-assembly__source text { font-size: 7.2px; }

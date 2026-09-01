@@ -41,6 +41,28 @@ const routes: RouteRecordRaw[] = [
     },
   },
   {
+    path: '/showcase/parameter-alarm',
+    name: 'showcase-parameter-alarm',
+    component: ShowcasePage,
+    meta: {
+      title: '参数与报警管理动态演示',
+      description: 'Edge 平台参数配置、管理、报警规则与处置追溯动态演示。',
+      noindex: true,
+      showcaseId: 'parameter-alarm',
+    },
+  },
+  {
+    path: '/showcase/sfc',
+    name: 'showcase-sfc',
+    component: ShowcasePage,
+    meta: {
+      title: 'SFC 流程编排动态演示',
+      description: 'Edge 平台 SFC 流程编排、校验、运行与调试动态演示。',
+      noindex: true,
+      showcaseId: 'sfc',
+    },
+  },
+  {
     path: '/showcase/monitoring',
     name: 'showcase-monitoring',
     component: ShowcasePage,

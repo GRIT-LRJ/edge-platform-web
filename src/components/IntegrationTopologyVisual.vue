@@ -1,4 +1,6 @@
 <script setup lang="ts">
+import PlatformVisualChrome from './PlatformVisualChrome.vue'
+
 defineProps<{ label: string }>()
 
 type TopologyBus = 'application' | 'can1' | 'can2' | 'tcp'
@@ -33,15 +35,6 @@ type ExtensionSlot = {
   label: string
   timeline: string
 }
-
-const headerMenus = [
-  { id: 'save', x: 128, label: '保存工程' },
-  { id: 'edit', x: 190, label: '编辑工程' },
-  { id: 'start', x: 252, label: '启动工程' },
-  { id: 'upload', x: 314, label: '上传资产' },
-  { id: 'about', x: 376, label: '关于' },
-  { id: 'help', x: 438, label: '帮助' },
-] as const
 
 const appNodes: readonly TopologyNode[] = [
   { id: 'vehicle', x: 118, y: 112, width: 88, height: 42, label: '车载操作软件', lines: ['车载操作软件'] },
@@ -137,53 +130,26 @@ const extensionSlots: readonly ExtensionSlot[] = [
 
       <rect width="960" height="540" rx="18" fill="url(#topology-panel)" />
 
-      <g class="integration-topology__platform" data-platform-shell="true">
-        <g class="integration-topology__main-menu" data-platform-region="main-menu">
-          <rect width="960" height="38" />
-          <g class="integration-topology__brand" transform="translate(12 8)">
-            <path d="M 0 15 L 6 1 L 11 8 L 7 19 Z" />
-            <path d="M 8 2 L 15 6 L 12 12 Z" />
-            <path d="M 9 13 L 17 8 L 15 18 Z" />
-            <text x="23" y="16">DrillMind</text>
-          </g>
-          <g v-for="menu in headerMenus" :key="menu.id" class="integration-topology__menu-item" :transform="`translate(${menu.x} 4)`">
-            <circle cx="15" cy="7" r="3.2" />
-            <path d="M 11 7 H 19 M 15 3 V 11" />
-            <text x="15" y="27">{{ menu.label }}</text>
-          </g>
-          <g class="integration-topology__runtime" transform="translate(742 6)">
-            <rect width="88" height="26" rx="3" />
-            <path d="M 9 7 V 16 M 5 12 L 9 16 L 13 12 M 5 20 H 13" />
-            <text x="19" y="13">下载运行时</text>
-            <text x="19" y="21">EdgeClr · EdgeHmi</text>
-          </g>
-          <g class="integration-topology__window-actions" transform="translate(844 12)">
-            <rect x="0" width="10" height="10" rx="1" />
-            <rect x="27" width="10" height="10" rx="1" />
-            <rect x="54" width="10" height="10" rx="1" />
-            <path d="M 82 0 V 10 M 77 5 H 87 M 108 1 L 116 9 M 116 1 L 108 9" />
-          </g>
-        </g>
-
+      <g class="integration-topology__platform">
         <g class="integration-topology__device-tab" data-platform-region="device-tab">
-          <rect y="38" width="960" height="22" />
-          <rect y="38" width="82" height="22" class="integration-topology__device-tab-active" />
-          <circle cx="13" cy="49" r="4" />
-          <path d="M 11 49 H 15 M 13 47 V 51" />
-          <text x="24" y="53">设备</text>
-          <path d="M 65 46 L 71 52 M 71 46 L 65 52" />
+          <rect y="44" width="960" height="22" />
+          <rect y="44" width="82" height="22" class="integration-topology__device-tab-active" />
+          <circle cx="13" cy="55" r="4" />
+          <path d="M 11 55 H 15 M 13 53 V 57" />
+          <text x="24" y="59">设备</text>
+          <path d="M 65 52 L 71 58 M 71 52 L 65 58" />
         </g>
 
         <g class="integration-topology__toolbar" data-platform-region="toolbar">
-          <rect y="60" width="960" height="28" />
-          <g transform="translate(16 63)"><path d="M 6 4 H 14 M 8 4 V 2 H 12 V 4 M 8 7 V 16 M 12 7 V 16" /><text x="10" y="24">删除</text></g>
-          <g transform="translate(54 63)"><circle cx="10" cy="8" r="5" /><path d="M 14 12 L 18 16 M 7 8 H 13 M 10 5 V 11" /><text x="10" y="24">放大</text></g>
-          <g transform="translate(92 63)"><circle cx="10" cy="8" r="5" /><path d="M 14 12 L 18 16 M 7 8 H 13" /><text x="10" y="24">缩小</text></g>
-          <g transform="translate(132 63)"><rect x="4" y="2" width="12" height="12" rx="1" /><path d="M 7 5 H 13 V 11 H 7 Z" /><text x="10" y="24">适应</text></g>
+          <rect y="66" width="960" height="28" />
+          <g transform="translate(16 69)"><path d="M 6 4 H 14 M 8 4 V 2 H 12 V 4 M 8 7 V 16 M 12 7 V 16" /><text x="10" y="24">删除</text></g>
+          <g transform="translate(54 69)"><circle cx="10" cy="8" r="5" /><path d="M 14 12 L 18 16 M 7 8 H 13 M 10 5 V 11" /><text x="10" y="24">放大</text></g>
+          <g transform="translate(92 69)"><circle cx="10" cy="8" r="5" /><path d="M 14 12 L 18 16 M 7 8 H 13" /><text x="10" y="24">缩小</text></g>
+          <g transform="translate(132 69)"><rect x="4" y="2" width="12" height="12" rx="1" /><path d="M 7 5 H 13 V 11 H 7 Z" /><text x="10" y="24">适应</text></g>
         </g>
       </g>
 
-      <rect y="88" width="960" height="434" fill="#23283a" />
+      <rect y="94" width="960" height="428" fill="#23283a" />
       <ellipse cx="440" cy="310" rx="330" ry="205" fill="url(#topology-glow)" />
       <g class="integration-topology__grid" aria-hidden="true">
         <path v-for="x in [80, 160, 240, 320, 400, 480, 560, 640, 720, 800, 880]" :key="`v-${x}`" :d="`M ${x} 96 V 514`" />
@@ -262,23 +228,7 @@ const extensionSlots: readonly ExtensionSlot[] = [
         </g>
       </g>
 
-      <g class="integration-topology__statusbar" data-platform-region="statusbar">
-        <rect y="522" width="960" height="18" />
-        <circle class="integration-topology__status-dot" cx="9" cy="531" r="2.4" />
-        <text x="15" y="535">18:55:40</text>
-        <path d="M 76 527 V 535 M 72 531 H 80 M 74 529 L 78 533 M 78 529 L 74 533" />
-        <text x="84" y="535">本地配置</text>
-        <circle class="integration-topology__status-connected" cx="174" cy="531" r="3" />
-        <text x="181" y="535">已连接</text>
-        <path d="M 229 531 L 233 527 L 237 531 L 233 535 Z" />
-        <text x="241" y="535">工作区仓库：···</text>
-        <circle cx="354" cy="531" r="3.4" />
-        <path d="M 354 528.5 V 531 L 356 532" />
-        <text x="362" y="535">尚未建立同步基线（需先全量同步一次）</text>
-        <text x="648" y="535">就绪</text>
-        <text x="776" y="535">DrillMind工业自动化组态平台（开发）</text>
-        <text x="944" y="535" text-anchor="end">就绪</text>
-      </g>
+      <PlatformVisualChrome />
     </svg>
   </div>
 </template>
@@ -286,19 +236,7 @@ const extensionSlots: readonly ExtensionSlot[] = [
 <style scoped>
 .integration-topology { width: 100%; height: 100%; overflow: hidden; border-radius: inherit; background: var(--drillmind-stage, #202638); }
 .integration-topology svg { width: 100%; height: 100%; display: block; font-family: Inter, "PingFang SC", "Microsoft YaHei", sans-serif; shape-rendering: geometricPrecision; }
-.integration-topology__main-menu > rect, .integration-topology__statusbar rect { fill: var(--drillmind-shell, #31394f); stroke: var(--drillmind-line, #56617b); stroke-width: 0.6; }
 .integration-topology__device-tab > rect:first-child, .integration-topology__toolbar > rect { fill: var(--drillmind-toolbar, #424b65); stroke: var(--drillmind-line, #56617b); stroke-width: 0.6; }
-.integration-topology__brand path:first-child { fill: #33d6ff; }
-.integration-topology__brand path:nth-child(2) { fill: #f0cf39; }
-.integration-topology__brand path:nth-child(3) { fill: #65efff; }
-.integration-topology__brand text { fill: #f8fbff; font-size: 15px; font-weight: 800; }
-.integration-topology__menu-item circle { fill: #9eca2b; }
-.integration-topology__menu-item path { fill: none; stroke: #30384c; stroke-width: 1; }
-.integration-topology__menu-item text { fill: #f4f6fb; font-size: 8px; font-weight: 700; text-anchor: middle; }
-.integration-topology__runtime rect, .integration-topology__window-actions rect { fill: none; stroke: #76839e; stroke-width: 0.8; }
-.integration-topology__runtime path, .integration-topology__window-actions path { fill: none; stroke: #a7b1c6; stroke-width: 0.9; }
-.integration-topology__runtime text:first-of-type { fill: #f3f6fb; font-size: 7.6px; font-weight: 700; }
-.integration-topology__runtime text:last-of-type { fill: #8f9ab1; font-size: 4.8px; }
 .integration-topology__device-tab-active { fill: #3e4b66; }
 .integration-topology__device-tab circle { fill: none; stroke: #b4bfd0; stroke-width: 0.9; }
 .integration-topology__device-tab path, .integration-topology__toolbar path, .integration-topology__toolbar circle, .integration-topology__toolbar g > rect { fill: none; stroke: #8f9bb4; stroke-width: 0.8; }
@@ -341,11 +279,6 @@ const extensionSlots: readonly ExtensionSlot[] = [
 .integration-topology__extension-ghost { opacity: 0; }
 .integration-topology__extension-ghost rect { fill: #123247; fill-opacity: 0; stroke: #5ce5f5; stroke-width: 1.4; stroke-dasharray: 260; stroke-dashoffset: 260; filter: url(#topology-line-glow); vector-effect: non-scaling-stroke; }
 .integration-topology__extension-ghost text { fill: #e7fbff; font-size: 8px; font-weight: 750; letter-spacing: 0.03em; text-anchor: middle; }
-.integration-topology__statusbar text { fill: #9ea9be; font-size: 6.5px; }
-.integration-topology__statusbar circle, .integration-topology__statusbar path { fill: none; stroke: #8f9bb4; stroke-width: 0.7; }
-.integration-topology__statusbar .integration-topology__status-dot { fill: #8f9bb4; stroke: none; }
-.integration-topology__statusbar .integration-topology__status-connected { fill: #62cf42; stroke: none; }
-
 @keyframes integration-topology-flow { to { stroke-dashoffset: -36; } }
 @keyframes integration-topology-breathe { 0%, 100% { filter: drop-shadow(0 0 2px rgb(74 204 242 / 8%)); stroke-opacity: 0.78; } 50% { filter: drop-shadow(0 0 6px rgb(74 204 242 / 26%)); stroke-opacity: 1; } }
 @keyframes integration-topology-hub-breathe { 0%, 100% { filter: drop-shadow(0 0 4px rgb(170 213 31 / 12%)); } 50% { filter: drop-shadow(0 0 10px rgb(170 213 31 / 32%)); } }

@@ -1,4 +1,4 @@
-export type ShowcaseId = 'configuration' | 'monitoring' | 'integration'
+export type ShowcaseId = 'configuration' | 'parameter-alarm' | 'sfc' | 'monitoring' | 'integration'
 
 export type ShowcasePath = `/showcase/${ShowcaseId}`
 
@@ -20,11 +20,25 @@ export const showcaseDefinitions: Readonly<Record<ShowcaseId, ShowcaseDefinition
     description: '组件组装、数据绑定与运行预览的示例工作流。',
     durationMs: SHOWCASE_DURATION_MS,
   },
+  'parameter-alarm': {
+    id: 'parameter-alarm',
+    path: '/showcase/parameter-alarm',
+    title: '参数与报警管理动态演示',
+    description: '参数配置、现场管理、报警规则与处置追溯的完整工作流。',
+    durationMs: 16_000,
+  },
+  sfc: {
+    id: 'sfc',
+    path: '/showcase/sfc',
+    title: 'SFC 流程编排动态演示',
+    description: '顺序功能图编排、校验、运行监控与断点调试工作流。',
+    durationMs: 22_000,
+  },
   monitoring: {
     id: 'monitoring',
     path: '/showcase/monitoring',
     title: '设备运行监控动态演示',
-    description: '设备上线、指标趋势、报警与视频状态的示例工作流。',
+    description: '设备状态、作业指标、趋势与实时视频联动的示例工作流。',
     durationMs: SHOWCASE_DURATION_MS,
   },
   integration: {
@@ -45,5 +59,11 @@ export function getShowcaseDefinition(id: string | undefined): ShowcaseDefinitio
 }
 
 export function isShowcaseId(value: string | undefined): value is ShowcaseId {
-  return value === 'configuration' || value === 'monitoring' || value === 'integration'
+  return (
+    value === 'configuration' ||
+    value === 'parameter-alarm' ||
+    value === 'sfc' ||
+    value === 'monitoring' ||
+    value === 'integration'
+  )
 }

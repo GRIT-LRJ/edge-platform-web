@@ -29,6 +29,8 @@ describe('动态演示页面', () => {
 
   it.each([
     ['/showcase/configuration', '可视化组态动态演示'],
+    ['/showcase/parameter-alarm', '参数与报警管理动态演示'],
+    ['/showcase/sfc', 'SFC 流程编排动态演示'],
     ['/showcase/monitoring', '设备运行监控动态演示'],
     ['/showcase/integration', '开放集成动态演示'],
   ])('直接访问 %s 显示对应主题', async (path, title) => {
