@@ -1,5 +1,5 @@
-import editorHeroImage from '../assets/media/home/edge-drillmind-hero-v2.webp'
-import editorHeroImageAvif from '../assets/media/home/edge-drillmind-hero-v2.avif'
+import editorHeroImage from '../assets/media/home/edge-drillmind-hero-v3.webp'
+import editorHeroImageAvif from '../assets/media/home/edge-drillmind-hero-v3.avif'
 import { SFC_SHOWCASE_DURATION_MS, type ShowcasePath } from './showcases'
 
 export type HomeVisualVariant = 'configuration' | 'monitoring' | 'integration'
@@ -83,7 +83,7 @@ export const homeHero: HomeHeroConfig = {
   media: {
     kind: 'image',
     src: editorHeroImage,
-    alt: 'DrillMind 工业自动化组态平台首界面，下方展示由数据链路连接的数字孪生工厂设备',
+    alt: 'DrillMind 工业自动化组态平台首界面，蓝黑画布下方展示数字孪生工厂设备与数据链路',
     avif: editorHeroImageAvif,
     webp: editorHeroImage,
     desktopPosition: 'center',

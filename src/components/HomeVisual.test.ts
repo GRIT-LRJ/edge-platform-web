@@ -17,7 +17,7 @@ describe('首页视觉媒体', () => {
     },
   )
 
-  it('首页正式图片显示产品演示标签并支持桌面与移动端焦点配置', () => {
+  it('首页正式图片隐藏产品演示标签并支持桌面与移动端焦点配置', () => {
     render(HomeVisual, {
       props: {
         hero: true,
@@ -52,7 +52,7 @@ describe('首页视觉媒体', () => {
       'srcset',
       '/images/home-hero.webp',
     )
-    expect(screen.getByText('产品演示界面')).toBeInTheDocument()
+    expect(screen.queryByText('产品演示界面')).not.toBeInTheDocument()
   })
 
   it('非首屏图片使用懒加载', () => {
@@ -67,6 +67,7 @@ describe('首页视觉媒体', () => {
     })
 
     expect(screen.getByRole('img', { name: '平台能力画面' })).toHaveAttribute('loading', 'lazy')
+    expect(screen.getByText('产品演示界面')).toBeInTheDocument()
   })
 
   it('组态媒体展示从组件库拖入四个模块并生成完整界面', () => {

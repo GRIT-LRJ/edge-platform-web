@@ -21,7 +21,7 @@ describe('首页', () => {
     expect(container.querySelectorAll('.home-feature__visual--workflow')).toHaveLength(3)
     expect(container.querySelectorAll('.home-feature__visual--topology')).toHaveLength(1)
     expect(screen.queryByText('内容待项目分析后补充')).not.toBeInTheDocument()
-    expect(screen.getAllByText('产品演示界面')).toHaveLength(1)
+    expect(screen.queryByText('产品演示界面')).not.toBeInTheDocument()
     expect(container.querySelector('[data-home-visual="configuration-builder"]')).toBeVisible()
     expect(
       screen.getByRole('img', {

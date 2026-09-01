@@ -61,7 +61,7 @@ const workflowMedia = computed<
           decoding="async"
         />
       </picture>
-      <span class="home-visual__image-badge" aria-hidden="true">产品演示界面</span>
+      <span v-if="!hero" class="home-visual__image-badge" aria-hidden="true">产品演示界面</span>
     </template>
 
     <ConfigurationAssemblyVisual
