@@ -1,9 +1,69 @@
 <script setup lang="ts">
-import { computed, onBeforeUnmount, onMounted, ref, useId } from 'vue'
+import { computed, onBeforeUnmount, onMounted, ref, useId, watch } from 'vue'
 
 import PlatformVisualChrome from './PlatformVisualChrome.vue'
 
 export type ProductWorkflowKind = 'parameter-alarm' | 'sfc' | 'monitoring'
+
+const MONITORING_TICK_MS = 50
+const MONITORING_PROGRESS_X = 538
+const MONITORING_PROGRESS_WIDTH = 376
+const MONITORING_DEPTH_START = 2.3
+const MONITORING_DEPTH_TARGET = 3.2
+const MONITORING_REFRESH_START_SECONDS = 10 * 60 * 60 + 42 * 60 + 18
+const MONITORING_DURATION_START_SECONDS = 8 * 60 + 42
+
+interface MonitoringSample {
+  rpm: number
+  pressure: number
+  feed: number
+  waterFlow: number
+  waterPressure: number
+}
+
+const monitoringSamples: MonitoringSample[] = [
+  { rpm: 96, pressure: 12.6, feed: 68, waterFlow: 30.0, waterPressure: 4.2 },
+  { rpm: 97, pressure: 12.7, feed: 69, waterFlow: 30.1, waterPressure: 4.2 },
+  { rpm: 98, pressure: 12.8, feed: 68, waterFlow: 30.3, waterPressure: 4.3 },
+  { rpm: 97, pressure: 12.7, feed: 67, waterFlow: 30.2, waterPressure: 4.2 },
+  { rpm: 96, pressure: 12.6, feed: 68, waterFlow: 30.0, waterPressure: 4.1 },
+  { rpm: 95, pressure: 12.5, feed: 69, waterFlow: 29.9, waterPressure: 4.2 },
+  { rpm: 94, pressure: 12.4, feed: 68, waterFlow: 29.7, waterPressure: 4.3 },
+  { rpm: 95, pressure: 12.5, feed: 67, waterFlow: 29.9, waterPressure: 4.2 },
+  { rpm: 96, pressure: 12.6, feed: 68, waterFlow: 30.0, waterPressure: 4.2 },
+  { rpm: 97, pressure: 12.7, feed: 68, waterFlow: 30.2, waterPressure: 4.1 },
+  { rpm: 96, pressure: 12.6, feed: 69, waterFlow: 30.1, waterPressure: 4.2 },
+  { rpm: 95, pressure: 12.5, feed: 68, waterFlow: 29.8, waterPressure: 4.3 },
+  { rpm: 96, pressure: 12.6, feed: 67, waterFlow: 29.9, waterPressure: 4.2 },
+  { rpm: 97, pressure: 12.7, feed: 68, waterFlow: 30.1, waterPressure: 4.1 },
+  { rpm: 98, pressure: 12.8, feed: 69, waterFlow: 30.3, waterPressure: 4.2 },
+  { rpm: 97, pressure: 12.7, feed: 68, waterFlow: 30.1, waterPressure: 4.3 },
+  { rpm: 96, pressure: 12.6, feed: 67, waterFlow: 29.9, waterPressure: 4.2 },
+  { rpm: 96, pressure: 12.6, feed: 68, waterFlow: 30.0, waterPressure: 4.2 },
+]
+
+function padClockPart(value: number) {
+  return String(value).padStart(2, '0')
+}
+
+function formatMonitoringRefreshTime(elapsedSeconds: number) {
+  const totalSeconds = (MONITORING_REFRESH_START_SECONDS + elapsedSeconds) % (24 * 60 * 60)
+  const hours = Math.floor(totalSeconds / (60 * 60))
+  const minutes = Math.floor((totalSeconds % (60 * 60)) / 60)
+  const seconds = totalSeconds % 60
+  return `${padClockPart(hours)}:${padClockPart(minutes)}:${padClockPart(seconds)}`
+}
+
+function formatMonitoringDuration(elapsedSeconds: number) {
+  const totalSeconds = MONITORING_DURATION_START_SECONDS + elapsedSeconds
+  const minutes = Math.floor(totalSeconds / 60)
+  const seconds = totalSeconds % 60
+  return `${padClockPart(minutes)}:${padClockPart(seconds)}`
+}
+
+function roundMonitoringAngle(angle: number) {
+  return Math.round(angle * 100) / 100
+}
 
 const props = withDefaults(
   defineProps<{
@@ -42,6 +102,84 @@ const animationStyle = computed<Record<string, string>>(() => ({
   '--workflow-duration': `${props.durationMs}ms`,
 }))
 
+const monitoringElapsedMs = ref(0)
+const monitoringSampleIndex = computed(
+  () => Math.floor(monitoringElapsedMs.value / 1000) % monitoringSamples.length,
+)
+const monitoringSample = computed(() => monitoringSamples[monitoringSampleIndex.value] ?? monitoringSamples[0])
+const monitoringElapsedSeconds = computed(() => Math.floor(monitoringElapsedMs.value / 1000))
+const monitoringRefreshTime = computed(() =>
+  formatMonitoringRefreshTime(monitoringElapsedSeconds.value),
+)
+const monitoringWorkDuration = computed(() =>
+  formatMonitoringDuration(monitoringElapsedSeconds.value),
+)
+const monitoringDepth = computed(() => {
+  const duration = Math.max(props.durationMs, MONITORING_TICK_MS)
+  const progress = Math.min(monitoringElapsedMs.value / duration, 1)
+  return MONITORING_DEPTH_START + (MONITORING_DEPTH_TARGET - MONITORING_DEPTH_START) * progress
+})
+const monitoringDepthRatio = computed(
+  () => Math.min(monitoringDepth.value / MONITORING_DEPTH_TARGET, 1),
+)
+const monitoringProgressWidth = computed(
+  () => Math.round(MONITORING_PROGRESS_WIDTH * monitoringDepthRatio.value * 1000) / 1000,
+)
+const monitoringProgressEndX = computed(
+  () => Math.round((MONITORING_PROGRESS_X + monitoringProgressWidth.value) * 1000) / 1000,
+)
+const monitoringNeedleAngles = computed(() => ({
+  rpm: roundMonitoringAngle((monitoringSample.value.rpm - 96) * 2),
+  pressure: roundMonitoringAngle((monitoringSample.value.pressure - 12.6) * 20),
+  feed: roundMonitoringAngle((monitoringSample.value.feed - 68) * 4),
+}))
+
+let monitoringTimer: number | undefined
+
+function stopMonitoringTimer() {
+  if (monitoringTimer === undefined || typeof window === 'undefined') return
+  window.clearInterval(monitoringTimer)
+  monitoringTimer = undefined
+}
+
+function advanceMonitoringClock() {
+  const duration = Math.max(props.durationMs, MONITORING_TICK_MS)
+  const nextElapsedMs = monitoringElapsedMs.value + MONITORING_TICK_MS
+  monitoringElapsedMs.value = nextElapsedMs >= duration ? 0 : nextElapsedMs
+}
+
+function syncMonitoringTimer() {
+  const shouldPlay = props.kind === 'monitoring' && isPlaying.value && !isStatic.value
+  if (!shouldPlay) {
+    stopMonitoringTimer()
+    return
+  }
+
+  if (monitoringTimer === undefined && typeof window !== 'undefined') {
+    monitoringTimer = window.setInterval(advanceMonitoringClock, MONITORING_TICK_MS)
+  }
+}
+
+function resetMonitoringClock() {
+  monitoringElapsedMs.value = 0
+}
+
+watch([isPlaying, isStatic, () => props.kind], syncMonitoringTimer, { immediate: true })
+watch(
+  () => props.replayKey,
+  () => {
+    resetMonitoringClock()
+  },
+)
+watch(
+  () => props.durationMs,
+  (durationMs) => {
+    if (monitoringElapsedMs.value >= Math.max(durationMs, MONITORING_TICK_MS)) {
+      resetMonitoringClock()
+    }
+  },
+)
+
 function observeVisibility() {
   if (typeof window.IntersectionObserver !== 'function') {
     isVisible.value = true
@@ -77,6 +215,7 @@ onMounted(() => {
 })
 
 onBeforeUnmount(() => {
+  stopMonitoringTimer()
   visibilityObserver?.disconnect()
   reducedMotionQuery?.removeEventListener?.('change', syncReducedMotion)
 })
@@ -290,21 +429,21 @@ onBeforeUnmount(() => {
         </g>
         <g class="product-workflow__monitor-stage">
           <rect x="126" y="44" width="834" height="490" :fill="`url(#${idPrefix}-hmi)`" />
-          <text class="product-workflow__monitor-title" x="150" y="78">钻孔设备运行监控</text><text class="product-workflow__muted" x="818" y="78">实时刷新 · 10:42:18</text>
-          <g class="product-workflow__monitor-status"><circle cx="150" cy="100" r="5" /><text x="162" y="104">自动钻进</text><text x="265" y="104">孔位 M8</text><text x="345" y="104">当前深度 2.30 m</text><text x="828" y="104">通讯正常</text></g>
+          <text class="product-workflow__monitor-title" x="150" y="78">钻孔设备运行监控</text><text class="product-workflow__muted product-workflow__monitor-refresh" data-monitoring-clock="refresh" x="818" y="78">实时刷新 · {{ monitoringRefreshTime }}</text>
+          <g class="product-workflow__monitor-status"><circle cx="150" cy="100" r="5" /><text x="162" y="104">自动钻进</text><text x="265" y="104">孔位 M8</text><text x="345" y="104">当前深度 {{ monitoringDepth.toFixed(2) }} m</text><text x="828" y="104">通讯正常</text></g>
           <g class="product-workflow__gauges">
             <rect x="150" y="124" width="356" height="174" rx="5" />
             <text class="product-workflow__subheading" x="168" y="150">作业指标</text>
-            <g transform="translate(217 215)"><circle r="45" /><circle class="product-workflow__gauge-value" r="36" /><path d="M0 0l23-19" /><text y="8">96</text><text y="67">回转 rpm</text></g>
-            <g transform="translate(328 215)"><circle r="45" /><circle class="product-workflow__gauge-value product-workflow__gauge-value--two" r="36" /><path d="M0 0l18-25" /><text y="8">12.6</text><text y="67">压力 MPa</text></g>
-            <g transform="translate(439 215)"><circle r="45" /><circle class="product-workflow__gauge-value product-workflow__gauge-value--three" r="36" /><path d="M0 0l27-12" /><text y="8">68</text><text y="67">推进 mm/s</text></g>
+            <g transform="translate(217 215)"><circle r="45" /><circle class="product-workflow__gauge-value" r="36" /><path class="product-workflow__gauge-needle" :style="{ transform: `rotate(${monitoringNeedleAngles.rpm}deg)` }" d="M0 0l23-19" /><text class="product-workflow__monitor-rpm" data-monitoring-gauge="rpm" y="8">{{ monitoringSample.rpm }}</text><text y="67">回转 rpm</text></g>
+            <g transform="translate(328 215)"><circle r="45" /><circle class="product-workflow__gauge-value product-workflow__gauge-value--two" r="36" /><path class="product-workflow__gauge-needle" :style="{ transform: `rotate(${monitoringNeedleAngles.pressure}deg)` }" d="M0 0l18-25" /><text class="product-workflow__monitor-pressure" data-monitoring-gauge="pressure" y="8">{{ monitoringSample.pressure.toFixed(1) }}</text><text y="67">压力 MPa</text></g>
+            <g transform="translate(439 215)"><circle r="45" /><circle class="product-workflow__gauge-value product-workflow__gauge-value--three" r="36" /><path class="product-workflow__gauge-needle" :style="{ transform: `rotate(${monitoringNeedleAngles.feed}deg)` }" d="M0 0l27-12" /><text class="product-workflow__monitor-feed" data-monitoring-gauge="feed" y="8">{{ monitoringSample.feed }}</text><text y="67">推进 mm/s</text></g>
           </g>
           <g class="product-workflow__monitor-metrics">
             <rect x="520" y="124" width="134" height="78" rx="5" /><rect x="668" y="124" width="134" height="78" rx="5" /><rect x="816" y="124" width="120" height="78" rx="5" />
-            <text x="536" y="148">水量</text><text x="536" y="181">30.0 L/min</text><text x="684" y="148">水压</text><text x="684" y="181">4.2 MPa</text><text x="832" y="148">作业时长</text><text x="832" y="181">08:42</text>
+            <text x="536" y="148">水量</text><text class="product-workflow__monitor-water-flow" data-monitoring-metric="water-flow" x="536" y="181">{{ monitoringSample.waterFlow.toFixed(1) }} L/min</text><text x="684" y="148">水压</text><text class="product-workflow__monitor-water-pressure" data-monitoring-metric="water-pressure" x="684" y="181">{{ monitoringSample.waterPressure.toFixed(1) }} MPa</text><text x="832" y="148">作业时长</text><text class="product-workflow__monitor-duration" data-monitoring-clock="duration" x="832" y="181">{{ monitoringWorkDuration }}</text>
           </g>
           <g class="product-workflow__monitor-progress">
-            <rect x="520" y="216" width="416" height="82" rx="5" /><text x="538" y="242">钻进进度</text><text x="875" y="242">2.30 / 3.20 m</text><rect x="538" y="261" width="376" height="10" rx="5" /><rect class="product-workflow__progress-value" x="538" y="261" width="270" height="10" rx="5" /><circle cx="808" cy="266" r="6" />
+            <rect x="520" y="216" width="416" height="82" rx="5" /><text x="538" y="242">钻孔深度</text><text class="product-workflow__monitor-depth" data-monitoring-depth="value" x="875" y="242">{{ monitoringDepth.toFixed(2) }} / 3.20 m</text><rect x="538" y="261" width="376" height="10" rx="5" /><rect class="product-workflow__progress-value" data-monitoring-depth="bar" x="538" y="261" :width="monitoringProgressWidth" height="10" rx="5" /><circle data-monitoring-depth="marker" :cx="monitoringProgressEndX" cy="266" r="6" />
           </g>
           <g class="product-workflow__monitor-chart">
             <rect x="150" y="314" width="512" height="182" rx="5" /><text class="product-workflow__subheading" x="168" y="342">作业趋势</text><text class="product-workflow__muted" x="582" y="342">最近 30 分钟</text>
@@ -409,8 +548,8 @@ onBeforeUnmount(() => {
 .product-workflow__sfc-node rect { fill: #31394e; stroke: #abb4c6; stroke-width: 1.5; }.product-workflow__sfc-node circle { fill: #334965; stroke: #b9c4d6; }.product-workflow__sfc-node path { fill: #d9e3f0; }.product-workflow__sfc-node text, .product-workflow__sfc-transition text { fill: #f2f4f8; font-size: 10px; text-anchor: middle; }.product-workflow__sfc-transition path { stroke: #b9c2d2; stroke-width: 2; }
 .product-workflow__sfc-runner { fill: #72df4c; offset-path: path("M515 126v176m0 20h116v96m0 24H515v54"); animation: workflow-sfc-run var(--workflow-duration) linear infinite; animation-play-state: paused; }.product-workflow__sfc-breakpoint circle { fill: #f05c67; }.product-workflow__sfc-breakpoint text { fill: #ffbec3; font-size: 8px; }.product-workflow__sfc-vars path { stroke: #59657a; }.product-workflow__value { fill: #65e0c5 !important; }.product-workflow__sfc-validation, .product-workflow__sfc-debug { opacity: 0; animation: workflow-sfc-panel var(--workflow-duration) ease-in-out infinite; animation-play-state: paused; }.product-workflow__sfc-validation circle { fill: #2c6758; stroke: #65e2c8; }.product-workflow__sfc-validation path { fill: none; stroke: #dffef5; stroke-width: 2; }.product-workflow__sfc-debug { animation-delay: -4s; }.product-workflow__sfc-debug rect { stroke: #d75f69; }.product-workflow__sfc-debug > rect:not(:first-child) { fill: #3a4b5c; stroke: #69c9d3; }
 .product-workflow__monitor-shell, .product-workflow__monitor-nav > rect:first-child { fill: #1f2637; }.product-workflow__monitor-nav circle { fill: #64dc49; }.product-workflow__monitor-stage > rect:first-child { stroke: #56627a; }.product-workflow__monitor-title { fill: #f4f6fb; font-size: 13px; font-weight: 750; }.product-workflow__monitor-status circle, .product-workflow__live-pulse circle { fill: #61dfc6; }.product-workflow__monitor-status text { fill: #dce3ee; font-size: 9px; }
-.product-workflow__gauges > rect, .product-workflow__monitor-metrics rect, .product-workflow__monitor-progress > rect:first-child, .product-workflow__monitor-chart > rect, .product-workflow__monitor-video > rect:first-child { fill: #222b3d; stroke: #5a6a82; }.product-workflow__gauges g > circle:first-child { fill: #1b2232; stroke: #49566d; stroke-width: 8; }.product-workflow__gauge-value { fill: none; stroke: #69dc4e; stroke-width: 5; stroke-dasharray: 190 95; transform: rotate(-90deg); }.product-workflow__gauge-value--two { stroke: #65dce0; stroke-dasharray: 145 140; }.product-workflow__gauge-value--three { stroke: #d7d85b; stroke-dasharray: 170 115; }.product-workflow__gauges g path { stroke: #f1f6fb; stroke-width: 2; }.product-workflow__gauges g text { fill: #f5f8fc; font-size: 13px; font-weight: 700; text-anchor: middle; }.product-workflow__gauges g text:last-child { fill: #a7b2c5; font-size: 8px; }
-.product-workflow__monitor-metrics text, .product-workflow__monitor-progress text { fill: #aeb9ca; font-size: 8px; }.product-workflow__monitor-metrics text:nth-of-type(even) { fill: #f1f5fa; font-size: 13px; font-weight: 700; }.product-workflow__monitor-progress > rect:nth-of-type(2) { fill: #182131; stroke: none; }.product-workflow__progress-value { fill: #62d9c3 !important; stroke: none !important; animation: workflow-progress var(--workflow-duration) ease-in-out infinite; animation-play-state: paused; }.product-workflow__monitor-progress circle { fill: #d8fcf5; }
+.product-workflow__gauges > rect, .product-workflow__monitor-metrics rect, .product-workflow__monitor-progress > rect:first-child, .product-workflow__monitor-chart > rect, .product-workflow__monitor-video > rect:first-child { fill: #222b3d; stroke: #5a6a82; }.product-workflow__gauges g > circle:first-child { fill: #1b2232; stroke: #49566d; stroke-width: 8; }.product-workflow__gauge-value { fill: none; stroke: #69dc4e; stroke-width: 5; stroke-dasharray: 190 95; transform: rotate(-90deg); }.product-workflow__gauge-value--two { stroke: #65dce0; stroke-dasharray: 145 140; }.product-workflow__gauge-value--three { stroke: #d7d85b; stroke-dasharray: 170 115; }.product-workflow__gauges g path { stroke: #f1f6fb; stroke-width: 2; }.product-workflow__gauge-needle { transform-box: fill-box; transform-origin: 0 100%; transition: transform 280ms ease-out; }.product-workflow__gauges g text { fill: #f5f8fc; font-size: 13px; font-weight: 700; text-anchor: middle; }.product-workflow__gauges g text:last-child { fill: #a7b2c5; font-size: 8px; }
+.product-workflow__monitor-metrics text, .product-workflow__monitor-progress text { fill: #aeb9ca; font-size: 8px; }.product-workflow__monitor-metrics text:nth-of-type(even) { fill: #f1f5fa; font-size: 13px; font-weight: 700; }.product-workflow__monitor-progress > rect:nth-of-type(2) { fill: #182131; stroke: none; }.product-workflow__progress-value { fill: #62d9c3 !important; stroke: none !important; }.product-workflow__monitor-progress circle { fill: #d8fcf5; }
 .product-workflow__chart-grid { fill: none; stroke: #718098; stroke-opacity: .2; }.product-workflow__chart-line { fill: none; stroke-width: 2.2; stroke-linecap: round; stroke-linejoin: round; stroke-dasharray: 620; stroke-dashoffset: 620; animation: workflow-chart var(--workflow-duration) ease-in-out infinite; animation-play-state: paused; }.product-workflow__chart-line--one { stroke: #5ee0c8; }.product-workflow__chart-line--two { stroke: #63a7f0; animation-delay: -1.2s; }
 .product-workflow__monitor-video > rect:nth-of-type(2) { fill: #161d2b; stroke: #4b596f; }.product-workflow__mine { fill: #2d4351; stroke: #65a9b5; }.product-workflow__monitor-video circle { fill: none; stroke: #70dbc8; }.product-workflow__monitor-video path:not(.product-workflow__mine):not(.product-workflow__video-scan) { stroke: #70dbc8; }.product-workflow__video-scan { stroke: #58e3cd; opacity: .75; animation: workflow-video-scan 4s ease-in-out infinite; animation-play-state: paused; }
 .product-workflow__live-pulse circle { animation: workflow-live 1.7s ease-in-out infinite; animation-play-state: paused; }
@@ -418,7 +557,7 @@ onBeforeUnmount(() => {
 @keyframes workflow-stage-one { 0%, 23.125% { opacity: 1; } 25%, 98.125% { opacity: 0; } 100% { opacity: 1; } } @keyframes workflow-stage-two { 0%, 23.125% { opacity: 0; } 25%, 45% { opacity: 1; } 46.875%, 100% { opacity: 0; } } @keyframes workflow-stage-three { 0%, 45% { opacity: 0; } 46.875%, 73.125% { opacity: 1; } 75%, 100% { opacity: 0; } } @keyframes workflow-stage-four { 0%, 73.125% { opacity: 0; } 75%, 98.125% { opacity: 1; } 100% { opacity: 0; } }
 @keyframes workflow-parameter-saved { 0%, 10% { opacity: 0; transform: translateY(6px); } 15%, 23% { opacity: 1; transform: translateY(0); } 25%, 100% { opacity: 0; } } @keyframes workflow-parameter-validated { 0%, 58% { opacity: 0; transform: translateY(6px); } 63%, 73% { opacity: 1; transform: translateY(0); } 75%, 100% { opacity: 0; } } @keyframes workflow-cursor { 0%, 27% { transform: translate(576px, 236px); } 34%, 43% { transform: translate(590px, 283px); } 47%, 100% { transform: translate(606px, 236px); } } @keyframes workflow-ack { 0%, 78% { opacity: 0; transform: scale(.7); } 84%, 94% { opacity: 1; transform: scale(1); } 100% { opacity: 0; } }
 @keyframes workflow-sfc-draw { 0%, 14% { stroke-dashoffset: 480; } 42%, 100% { stroke-dashoffset: 0; } } @keyframes workflow-sfc-node { 0%, 12% { opacity: 0; transform: translateY(8px); } 30%, 100% { opacity: 1; transform: translateY(0); } } @keyframes workflow-sfc-run { 0%, 50% { offset-distance: 0%; opacity: 0; } 55% { opacity: 1; } 92% { offset-distance: 100%; opacity: 1; } 100% { offset-distance: 100%; opacity: 0; } } @keyframes workflow-sfc-panel { 0%, 38% { opacity: 0; transform: translateY(8px); } 52%, 100% { opacity: 1; transform: translateY(0); } }
-@keyframes workflow-progress { 0%, 100% { width: 270px; } 50% { width: 315px; } } @keyframes workflow-chart { 0%, 18% { stroke-dashoffset: 620; } 55%, 100% { stroke-dashoffset: 0; } } @keyframes workflow-video-scan { 0%, 100% { transform: translateY(0); opacity: .2; } 50% { transform: translateY(96px); opacity: .9; } } @keyframes workflow-live { 0%, 100% { opacity: .45; } 50% { opacity: 1; } }
+@keyframes workflow-chart { 0%, 18% { stroke-dashoffset: 620; } 55%, 100% { stroke-dashoffset: 0; } } @keyframes workflow-video-scan { 0%, 100% { transform: translateY(0); opacity: .2; } 50% { transform: translateY(96px); opacity: .9; } } @keyframes workflow-live { 0%, 100% { opacity: .45; } 50% { opacity: 1; } }
 @media (max-width: 44rem) { .product-workflow--parameter-alarm svg { transform: scale(1.22) translateX(-5%); transform-origin: 57% center; }.product-workflow--sfc svg { transform: scale(1.17) translateX(-4%); transform-origin: 59% center; }.product-workflow--monitoring svg { transform: scale(1.13) translateX(-4%); transform-origin: 59% center; } }
 @media (prefers-reduced-motion: reduce) { .product-workflow svg * { animation-duration: .01ms !important; }.product-workflow[data-playing="true"] svg * { animation-duration: var(--workflow-duration) !important; } }
 </style>
