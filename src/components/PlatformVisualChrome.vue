@@ -84,7 +84,7 @@ const headerMenus = [
 .platform-visual-chrome__brand path:nth-of-type(2) { fill: #f0cf39; }
 .platform-visual-chrome__brand path:nth-of-type(3) { fill: #65efff; }
 .platform-visual-chrome__brand .platform-visual-chrome__brand-underline { fill: none; stroke: #e5af22; stroke-width: 1.5; }
-.platform-visual-chrome__brand text { fill: #f8f9fb; font-size: 16px; font-weight: 800; }
+.platform-visual-chrome__brand text { fill: #f8f9fb; font-size: 16px; font-weight: 800; text-rendering: geometricPrecision; font-synthesis: none; }
 .platform-visual-chrome__menu rect,
 .platform-visual-chrome__menu circle,
 .platform-visual-chrome__menu path { fill: none; stroke: #8f9aaf; stroke-width: 1; stroke-linecap: round; stroke-linejoin: round; }
@@ -92,10 +92,10 @@ const headerMenus = [
 .platform-visual-chrome__menu--accent rect,
 .platform-visual-chrome__menu--accent circle { fill: #a3ce27; stroke: #a3ce27; }
 .platform-visual-chrome__menu--accent path { stroke: #34404b; }
-.platform-visual-chrome__menu text { fill: #eef2f8; font-size: 8px; font-weight: 700; text-anchor: middle; }
+.platform-visual-chrome__menu text { fill: #eef2f8; font-size: 9px; font-weight: 700; text-anchor: middle; text-rendering: geometricPrecision; font-synthesis: none; }
 .platform-visual-chrome__actions path,
 .platform-visual-chrome__actions circle { fill: none; stroke: #aab4c6; stroke-width: 1; stroke-linecap: round; stroke-linejoin: round; }
-.platform-visual-chrome__statusbar text { fill: #9ea9be; font-size: 6.5px; }
+.platform-visual-chrome__statusbar text { fill: #9ea9be; font-size: 7.5px; text-rendering: geometricPrecision; font-synthesis: none; }
 .platform-visual-chrome__statusbar path { fill: none; stroke: #8f9bb4; stroke-width: 0.8; }
 .platform-visual-chrome__statusbar circle { fill: #8994a8; }
 .platform-visual-chrome__statusbar .platform-visual-chrome__connected { fill: #62cf42; }

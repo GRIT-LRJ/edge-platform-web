@@ -237,7 +237,7 @@ const extensionSlots: readonly ExtensionSlot[] = [
 
 <style scoped>
 .integration-topology { width: 100%; height: 100%; overflow: hidden; border-radius: inherit; background: var(--drillmind-stage, #202638); }
-.integration-topology svg { width: 100%; height: 100%; display: block; font-family: Inter, "PingFang SC", "Microsoft YaHei", sans-serif; shape-rendering: geometricPrecision; }
+.integration-topology svg { width: 100%; height: 100%; display: block; font-family: Inter, "PingFang SC", "Microsoft YaHei", sans-serif; shape-rendering: geometricPrecision; text-rendering: geometricPrecision; font-synthesis: none; -webkit-font-smoothing: antialiased; }
 .integration-topology__device-tab > rect:first-child, .integration-topology__toolbar > rect { fill: var(--drillmind-toolbar, #424b65); stroke: var(--drillmind-line, #56617b); stroke-width: 0.6; }
 .integration-topology__device-tab-active { fill: #3e4b66; }
 .integration-topology__device-tab circle { fill: none; stroke: #b4bfd0; stroke-width: 0.9; }
@@ -281,6 +281,16 @@ const extensionSlots: readonly ExtensionSlot[] = [
 .integration-topology__extension-ghost { opacity: 0; }
 .integration-topology__extension-ghost rect { fill: #123247; fill-opacity: 0; stroke: #5ce5f5; stroke-width: 1.4; stroke-dasharray: 260; stroke-dashoffset: 260; filter: url(#topology-line-glow); vector-effect: non-scaling-stroke; }
 .integration-topology__extension-ghost text { fill: #e7fbff; font-size: 8px; font-weight: 750; letter-spacing: 0.03em; text-anchor: middle; }
+
+/* Keep topology labels crisp and readable when the homepage visual is enlarged. */
+.integration-topology text { text-rendering: geometricPrecision; font-kerning: normal; }
+.integration-topology__device-tab text, .integration-topology__toolbar text { font-size: 9px; }
+.integration-topology__bus-label { font-size: 12px; }
+.integration-topology__node text { font-size: 11.5px; }
+.integration-topology__node--app text { font-size: 10.5px; }
+.integration-topology__hub text { font-size: 16px; }
+.integration-topology__extension-ghost text { font-size: 9px; }
+
 @keyframes integration-topology-flow { to { stroke-dashoffset: -36; } }
 @keyframes integration-topology-breathe { 0%, 100% { filter: drop-shadow(0 0 2px rgb(74 204 242 / 8%)); stroke-opacity: 0.78; } 50% { filter: drop-shadow(0 0 6px rgb(74 204 242 / 26%)); stroke-opacity: 1; } }
 @keyframes integration-topology-hub-breathe { 0%, 100% { filter: drop-shadow(0 0 4px rgb(170 213 31 / 12%)); } 50% { filter: drop-shadow(0 0 10px rgb(170 213 31 / 32%)); } }

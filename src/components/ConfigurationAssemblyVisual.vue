@@ -351,6 +351,9 @@ onBeforeUnmount(() => {
   height: 100%;
   font-family: Inter, "PingFang SC", "Microsoft YaHei", sans-serif;
   shape-rendering: geometricPrecision;
+  text-rendering: geometricPrecision;
+  font-synthesis: none;
+  -webkit-font-smoothing: antialiased;
 }
 
 .configuration-assembly__project > rect:first-child,
@@ -515,12 +518,37 @@ onBeforeUnmount(() => {
 .configuration-assembly[data-static='true'] .configuration-assembly__complete-outline { display: none; }
 .configuration-assembly[data-static='true'] .configuration-assembly__widget { opacity: 1; animation: none; }
 
+/* Keep labels legible in the compact 960 × 540 editor canvas. */
+.configuration-assembly text { text-rendering: geometricPrecision; font-kerning: normal; }
+.configuration-assembly__project text,
+.configuration-assembly__properties text,
+.configuration-assembly__library text { font-size: 9.5px; }
+.configuration-assembly__panel-title { font-size: 12px !important; }
+.configuration-assembly__work-tabs text { font-size: 10px; }
+.configuration-assembly__properties > text { font-size: 8.5px; }
+.configuration-assembly__property-heading { font-size: 9.5px !important; }
+.configuration-assembly__selection-text { font-size: 9px; }
+.configuration-assembly__dashboard-muted { font-size: 8px; }
+.configuration-assembly__dashboard-step, .configuration-assembly__dashboard-time { font-size: 9px; }
+.configuration-assembly__empty-state text { font-size: 10px; }
+.configuration-assembly__gauge-number { font-size: 11px; }
+.configuration-assembly__gauge-label { font-size: 11px; }
+.configuration-assembly__metric-label { font-size: 8px; }
+.configuration-assembly__metric-value { font-size: 8px; }
+.configuration-assembly__widget--controls text { font-size: 8px; }
+.configuration-assembly__control-title { font-size: 9px !important; }
+.configuration-assembly__progress-number { font-size: 9px; }
+.configuration-assembly__progress-label { font-size: 8px; }
+.configuration-assembly__source text { font-size: 8.5px; }
+.configuration-assembly__library-search-text { font-size: 8px !important; }
+.configuration-assembly__drag > text { font-size: 8.5px; }
+
 @media (max-width: 44rem) {
   .configuration-assembly__project text:not(.configuration-assembly__panel-title),
   .configuration-assembly__properties > text:not(.configuration-assembly__panel-title):not(.configuration-assembly__property-heading) { opacity: 0; }
   .configuration-assembly__widget > rect:first-child { stroke-width: 1; }
   .configuration-assembly__gauge-label { font-size: 11px; }
-  .configuration-assembly__source text { font-size: 7.2px; }
+  .configuration-assembly__source text { font-size: 8.5px; }
 }
 
 @media (prefers-reduced-motion: reduce) {

@@ -500,7 +500,7 @@ onBeforeUnmount(() => {
 
 <style scoped>
 .product-workflow { --workflow-duration: 18000ms; width: 100%; height: 100%; overflow: hidden; border-radius: inherit; background: #171d2c; }
-.product-workflow svg { width: 100%; height: 100%; display: block; font-family: Inter, "PingFang SC", "Microsoft YaHei", sans-serif; shape-rendering: geometricPrecision; }
+.product-workflow svg { width: 100%; height: 100%; display: block; font-family: Inter, "PingFang SC", "Microsoft YaHei", sans-serif; shape-rendering: geometricPrecision; text-rendering: geometricPrecision; font-synthesis: none; }
 .product-workflow__sidebar rect:first-child, .product-workflow__monitor-nav > rect:first-child { fill: #252c3e; stroke: #505b72; stroke-width: .6; }
 .product-workflow__sidebar text, .product-workflow__monitor-nav text { fill: #d9dfec; font-size: 10px; }.product-workflow__panel-title { fill: #f3f6fb !important; font-size: 11px !important; font-weight: 700; }
 .product-workflow__sidebar-active { fill: #43516b !important; stroke: #6b7893 !important; }.product-workflow__workspace { fill: #1d2435; }
@@ -516,7 +516,7 @@ onBeforeUnmount(() => {
 .product-workflow__severity { fill: #7b353e; stroke: #e07177; }.product-workflow__form-panel > .product-workflow__severity + text { fill: #ffd9dc; font-size: 8px; }.product-workflow__thresholds rect { fill: #252e42; stroke: #65718a; }.product-workflow__thresholds rect:nth-child(4) { fill: #67333d; stroke: #dd6d76; }.product-workflow__thresholds text { text-anchor: middle; }
 .product-workflow__alarm-summary rect { fill: #253044; stroke: #5c6b86; }.product-workflow__alarm-summary text { fill: #dce3ef; font-size: 9px; }.product-workflow__alarm-summary text:nth-of-type(even) { fill: #f5f8fd; font-size: 20px; font-weight: 750; }.product-workflow__alarm-table-head text { fill: #9eabc0; font-size: 8px; }.product-workflow__alarm-live rect { fill: #552c38; stroke: #de6975; }.product-workflow__alarm-live circle { fill: #f26471; }.product-workflow__alarm-live text, .product-workflow__alarm-history text { fill: #f0e7eb; font-size: 9px; }.product-workflow__alarm-live > rect:nth-last-of-type(1) { fill: #3c5664; stroke: #58d7c4; }.product-workflow__alarm-history rect { fill: #252f41; stroke: #536077; }.product-workflow__alarm-history circle { fill: #5bd5bc; }.product-workflow__ack { opacity: 0; animation: workflow-ack var(--workflow-duration) ease-in-out infinite; }.product-workflow__ack circle { fill: #235c51; stroke: #62e2c9; }.product-workflow__ack path { fill: none; stroke: #dffff7; stroke-width: 3; }
 
-.product-workflow--parameter-alarm svg { font-synthesis: none; text-rendering: optimizeLegibility; }
+.product-workflow--parameter-alarm svg { font-synthesis: none; text-rendering: geometricPrecision; }
 .product-workflow--parameter-alarm text { stroke: none; font-weight: 400; }
 .product-workflow__parameter-project > rect:first-child { fill: var(--drillmind-panel, #3d465f); stroke: var(--drillmind-line, #56617b); stroke-width: .6; }
 .product-workflow__parameter-project .product-workflow__panel-title { fill: #f4f7fb !important; font-size: 14px !important; font-weight: 700; }
@@ -582,7 +582,7 @@ onBeforeUnmount(() => {
 .product-workflow--parameter-alarm .product-workflow__parameter-tab-active path { fill: none; stroke: #f2bf32; stroke-width: 2; }
 
 /* SVG rects and labels are siblings in this illustration, so style the actual regions explicitly. */
-.product-workflow--parameter-alarm .product-workflow__stage text { fill: #e7edf5; stroke: none; font-size: 10.5px; }
+.product-workflow--parameter-alarm .product-workflow__stage text { fill: #e7edf5; stroke: none; }
 .product-workflow--parameter-alarm .product-workflow__stage .product-workflow__heading { fill: #f7f9fd; font-size: 16px; font-weight: 700; }
 .product-workflow--parameter-alarm .product-workflow__stage .product-workflow__subheading { fill: #eef3fa; font-size: 13px; font-weight: 700; }
 .product-workflow--parameter-alarm .product-workflow__stage .product-workflow__muted { fill: #aeb9ca !important; font-size: 11px !important; }
@@ -640,6 +640,35 @@ onBeforeUnmount(() => {
 .product-workflow__chart-grid { fill: none; stroke: #718098; stroke-opacity: .2; }.product-workflow__chart-line { fill: none; stroke-width: 2.2; stroke-linecap: round; stroke-linejoin: round; stroke-dasharray: 620; stroke-dashoffset: 620; animation: workflow-chart var(--workflow-duration) ease-in-out infinite; animation-play-state: paused; }.product-workflow__chart-line--one { stroke: #5ee0c8; }.product-workflow__chart-line--two { stroke: #63a7f0; animation-delay: -1.2s; }
 .product-workflow__monitor-video > rect:nth-of-type(2) { fill: #161d2b; stroke: #4b596f; }.product-workflow__mine { fill: #2d4351; stroke: #65a9b5; }.product-workflow__monitor-video circle { fill: none; stroke: #70dbc8; }.product-workflow__monitor-video path:not(.product-workflow__mine):not(.product-workflow__video-scan) { stroke: #70dbc8; }.product-workflow__video-scan { stroke: #58e3cd; opacity: .75; animation: workflow-video-scan 4s ease-in-out infinite; animation-play-state: paused; }
 .product-workflow__live-pulse circle { animation: workflow-live 1.7s ease-in-out infinite; animation-play-state: paused; }
+/* Legibility pass: use crisp vector text and a readable minimum size in every workflow view. */
+.product-workflow { -webkit-font-smoothing: antialiased; }
+.product-workflow text { font-kerning: normal; }
+.product-workflow__sidebar text, .product-workflow__monitor-nav text { font-size: 11px; }
+.product-workflow__sfc-toolbar text { font-size: 10px; }
+.product-workflow__sfc-palette text, .product-workflow__sfc-vars text, .product-workflow__sfc-validation text, .product-workflow__sfc-debug text { font-size: 9px; }
+.product-workflow__sfc-node text, .product-workflow__sfc-transition text { font-size: 11px; }
+.product-workflow__sfc-breakpoint text { font-size: 9px; }
+.product-workflow__monitor-status text { font-size: 10px; }
+.product-workflow__gauges g text:last-child { font-size: 9px; }
+.product-workflow__monitor-metrics text, .product-workflow__monitor-progress text { font-size: 9px; }
+.product-workflow--parameter-alarm .product-workflow__parameter-tab text { font-size: 9.5px; }
+.product-workflow--parameter-alarm .product-workflow__tree-search-label { font-size: 10px !important; }
+.product-workflow--parameter-alarm .product-workflow__tree-group-label { font-size: 12px !important; }
+.product-workflow--parameter-alarm .product-workflow__tree-item text, .product-workflow--parameter-alarm .product-workflow__alarm-tree-item text { font-size: 11.5px !important; }
+.product-workflow--parameter-alarm .product-workflow__permission-label { fill: #dce3ee !important; font-size: 11px !important; }
+.product-workflow--parameter-alarm .product-workflow__hmi-title { fill: #f7f9fd !important; font-size: 17px !important; font-weight: 700; }
+.product-workflow--parameter-alarm .product-workflow__category-tabs text { fill: #eef2f8 !important; font-size: 12px !important; font-weight: 700; }
+.product-workflow--parameter-alarm .product-workflow__param-row text { fill: #edf1f7 !important; font-size: 12px !important; }
+.product-workflow--parameter-alarm .product-workflow__alarm-type-tabs text { fill: #eef2f8 !important; font-size: 12px !important; font-weight: 700; }
+.product-workflow--parameter-alarm .product-workflow__alarm-summary text { fill: #cbd4e2 !important; font-size: 11px !important; font-weight: 700; }
+.product-workflow--parameter-alarm .product-workflow__alarm-summary text:nth-of-type(even) { fill: #f8fafd !important; font-size: 22px !important; font-weight: 700; }
+.product-workflow--parameter-alarm .product-workflow__alarm-table-head text { fill: #b6c0d0 !important; font-size: 11px !important; font-weight: 700; }
+.product-workflow--parameter-alarm .product-workflow__alarm-live text, .product-workflow--parameter-alarm .product-workflow__alarm-history text { fill: #f2edf0 !important; font-size: 11px !important; }
+.product-workflow--parameter-alarm .product-workflow__diagram-status text { font-size: 9px !important; }
+.product-workflow--parameter-alarm .product-workflow__diagram-scale text { font-size: 8.5px !important; }
+.product-workflow--parameter-alarm .product-workflow__diagram-labels text { font-size: 9.5px !important; }
+.product-workflow--parameter-alarm .product-workflow__diagram-binding { font-size: 9.5px !important; }
+.product-workflow--parameter-alarm .product-workflow__field-label, .product-workflow--parameter-alarm .product-workflow__field-value { font-size: 11.5px !important; }
 .product-workflow[data-static="true"] .product-workflow__stage { opacity: 0; animation: none; }.product-workflow[data-static="true"] .product-workflow__stage--4 { opacity: 1; }.product-workflow[data-static="true"] .product-workflow__parameter-tab-active { opacity: 0; animation: none; }.product-workflow[data-static="true"] .product-workflow__parameter-tab--4 .product-workflow__parameter-tab-active { opacity: 1; }.product-workflow[data-static="true"] .product-workflow__sfc-flow *, .product-workflow[data-static="true"] .product-workflow__sfc-validation, .product-workflow[data-static="true"] .product-workflow__sfc-debug { opacity: 1; animation: none; stroke-dashoffset: 0; }.product-workflow[data-static="true"] .product-workflow__sfc-runner { display: none; }.product-workflow[data-static="true"] .product-workflow__monitor-stage * { animation: none; stroke-dashoffset: 0; }
 @keyframes workflow-stage-one { 0%, 23.125% { opacity: 1; } 25%, 98.125% { opacity: 0; } 100% { opacity: 1; } } @keyframes workflow-stage-two { 0%, 23.125% { opacity: 0; } 25%, 45% { opacity: 1; } 46.875%, 100% { opacity: 0; } } @keyframes workflow-stage-three { 0%, 45% { opacity: 0; } 46.875%, 73.125% { opacity: 1; } 75%, 100% { opacity: 0; } } @keyframes workflow-stage-four { 0%, 73.125% { opacity: 0; } 75%, 98.125% { opacity: 1; } 100% { opacity: 0; } }
 @keyframes workflow-parameter-saved { 0%, 10% { opacity: 0; transform: translateY(6px); } 15%, 23% { opacity: 1; transform: translateY(0); } 25%, 100% { opacity: 0; } } @keyframes workflow-parameter-validated { 0%, 58% { opacity: 0; transform: translateY(6px); } 63%, 73% { opacity: 1; transform: translateY(0); } 75%, 100% { opacity: 0; } } @keyframes workflow-ack { 0%, 78% { opacity: 0; transform: scale(.7); } 84%, 94% { opacity: 1; transform: scale(1); } 100% { opacity: 0; } }

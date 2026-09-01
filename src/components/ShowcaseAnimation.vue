@@ -153,6 +153,10 @@ const workflowKind = computed<ProductWorkflowKind | undefined>(() => {
   width: 100%;
   height: 100%;
   display: block;
+  shape-rendering: geometricPrecision;
+  text-rendering: geometricPrecision;
+  font-synthesis: none;
+  -webkit-font-smoothing: antialiased;
 }
 
 .showcase-animation__ambient {
@@ -519,6 +523,23 @@ const workflowKind = computed<ProductWorkflowKind | undefined>(() => {
 .showcase-integration-footer rect { fill: rgb(21 86 94 / 32%); stroke: rgb(79 220 205 / 38%); }
 .showcase-integration-footer circle { fill: #4fe0c9; filter: url(#showcase-glow); }
 .showcase-integration-footer text { fill: rgb(209 246 247 / 82%); font-family: ui-monospace, SFMono-Regular, Consolas, monospace; font-size: 10px; }
+
+/* Keep SVG labels readable when a showcase is opened at full size. */
+.showcase-animation__svg text { text-rendering: geometricPrecision; font-synthesis: none; font-kerning: normal; }
+.showcase-animation__chrome text { font-size: 13px; }
+.showcase-animation__chrome-status { font-size: 10px !important; }
+.showcase-panel-title { font-size: 18px; }
+.showcase-panel-subtitle { font-size: 12px; }
+.showcase-config-node text { fill: #e8f8ff; font-size: 12px; font-weight: 650; }
+.showcase-config-card text, .showcase-property text, .showcase-preview text, .showcase-metric text, .showcase-device-row text, .showcase-summary text, .showcase-alarm text { font-size: 12px; }
+.showcase-number tspan { font-size: 12px; }
+.showcase-code { font-size: 11px !important; }
+.showcase-kicker { font-size: 11px; }
+.showcase-heading { font-size: 26px; }
+.showcase-subtitle { font-size: 13px; }
+.integration-node text { font-size: 12px; }
+.integration-node .showcase-muted { font-size: 10px; }
+.showcase-integration-footer text { font-size: 11px; }
 
 .showcase-animation[data-static="true"] .showcase-config-node,
 .showcase-animation[data-static="true"] .showcase-config-link,
