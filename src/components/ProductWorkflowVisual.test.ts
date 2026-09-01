@@ -72,8 +72,24 @@ describe('产品工作流视觉', () => {
     })
 
     expect(container.querySelector('[data-sfc-region="project-tree"]')).toBeInTheDocument()
-    expect(container.querySelectorAll('[data-sfc-tree-item]')).toHaveLength(1)
-    expect(container.querySelector('[data-sfc-tree-item]')).toHaveTextContent('流程')
+    expect(container.querySelectorAll('[data-sfc-tree-item]')).toHaveLength(6)
+    expect(
+      Array.from(container.querySelectorAll('[data-sfc-tree-item]'), (item) => item.textContent),
+    ).toEqual(['设备', '数据', '模型', '报警', '应用', '流程'])
+    expect(
+      Array.from(container.querySelectorAll('[data-sfc-tree-item]'), (item) =>
+        item.getAttribute('transform'),
+      ),
+    ).toEqual([
+      'translate(0 103)',
+      'translate(0 130)',
+      'translate(0 157)',
+      'translate(0 184)',
+      'translate(0 211)',
+      'translate(0 238)',
+    ])
+    expect(container.querySelector('[data-sfc-selection="flow"]')).toHaveAttribute('y', '225')
+    expect(container.querySelector('[data-sfc-selection="flow"]')).toHaveAttribute('height', '26')
     expect(container).not.toHaveTextContent('任务组')
     expect(container).not.toHaveTextContent('设备自检')
     expect(container).not.toHaveTextContent('急停信号')
@@ -99,10 +115,18 @@ describe('产品工作流视觉', () => {
       'end',
     ])
     expect(container.querySelectorAll('.product-workflow__sfc-connector')).toHaveLength(4)
+    expect(container.querySelectorAll('[data-sfc-progress]')).toHaveLength(4)
+    expect(
+      Array.from(container.querySelectorAll('[data-sfc-progress]'), (path) =>
+        path.getAttribute('pathLength'),
+      ),
+    ).toEqual(['1', '1', '1', '1'])
     expect(container.querySelector('[data-sfc-block="condition"] rect')).toHaveAttribute('width', '64')
     expect(container.querySelector('[data-sfc-block="state"] rect')).toHaveAttribute('width', '120')
     expect(container.querySelector('[data-sfc-block="end"] path')).toHaveAttribute('d', 'M430 418l22 40h-44z')
-    expect(container.querySelector('[data-sfc-runner="true"]')).toBeInTheDocument()
+    expect(container.querySelector('[data-sfc-label="start"]')).toHaveAttribute('x', '430')
+    expect(container.querySelector('[data-sfc-label="start"]')).toHaveAttribute('y', '158')
+    expect(container.querySelector('[data-sfc-runner]')).toBeNull()
 
     expect(container.querySelector('[data-sfc-region="variables"]')).toHaveTextContent('流程变量')
     expect(container.querySelectorAll('.product-workflow__sfc-table-row')).toHaveLength(1)

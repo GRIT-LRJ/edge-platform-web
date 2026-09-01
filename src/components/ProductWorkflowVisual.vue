@@ -5,6 +5,15 @@ import PlatformVisualChrome from './PlatformVisualChrome.vue'
 
 export type ProductWorkflowKind = 'parameter-alarm' | 'sfc' | 'monitoring'
 
+const sfcProjectItems = [
+  { id: 'device', y: 103, label: '设备' },
+  { id: 'data', y: 130, label: '数据' },
+  { id: 'model', y: 157, label: '模型' },
+  { id: 'alarm', y: 184, label: '报警' },
+  { id: 'application', y: 211, label: '应用' },
+  { id: 'flow', y: 238, label: '流程' },
+] as const
+
 const MONITORING_TICK_MS = 50
 const MONITORING_PROGRESS_X = 538
 const MONITORING_PROGRESS_WIDTH = 376
@@ -397,13 +406,19 @@ onBeforeUnmount(() => {
         <g class="product-workflow__sfc-tree" data-sfc-region="project-tree">
           <rect x="0" y="44" width="126" height="490" />
           <text class="product-workflow__panel-title" x="14" y="68">工程目录</text>
-          <path class="product-workflow__panel-close" d="M110 57l8 8m0-8-8 8" />
-          <rect class="product-workflow__sfc-tree-selection" x="8" y="92" width="110" height="30" rx="3" />
-          <g class="product-workflow__sfc-tree-item" data-sfc-tree-item="flow">
-            <path class="product-workflow__sfc-tree-chevron" d="M18 104l4 4 4-4" />
-            <path class="product-workflow__sfc-tree-folder" d="M33 99h6l2 2h8v9H33z" />
-            <text x="54" y="110">流程</text>
+          <path class="product-workflow__panel-close" d="M112 57l8 8m0-8-8 8" />
+          <g
+            v-for="item in sfcProjectItems"
+            :key="item.id"
+            class="product-workflow__sfc-tree-item"
+            :data-sfc-tree-item="item.id"
+            :transform="`translate(0 ${item.y})`"
+          >
+            <circle cx="18" cy="0" r="4.5" />
+            <path d="M15 0h6m-3-3v6" />
+            <text x="31" y="4">{{ item.label }}</text>
           </g>
+          <rect class="product-workflow__sfc-tree-selection" data-sfc-selection="flow" x="8" y="225" width="110" height="26" rx="3" />
         </g>
 
         <g class="product-workflow__sfc-editor-tabs" data-sfc-region="editor-tabs">
@@ -436,9 +451,13 @@ onBeforeUnmount(() => {
           <path class="product-workflow__sfc-connector" d="M430 234v24" :marker-end="`url(#${idPrefix}-arrow)`" />
           <path class="product-workflow__sfc-connector" d="M430 316v42" :marker-end="`url(#${idPrefix}-arrow)`" />
           <path class="product-workflow__sfc-connector" d="M430 376v42" :marker-end="`url(#${idPrefix}-arrow)`" />
+          <path class="product-workflow__sfc-progress product-workflow__sfc-progress--one" data-sfc-progress="one" pathLength="1" d="M430 180v24" />
+          <path class="product-workflow__sfc-progress product-workflow__sfc-progress--two" data-sfc-progress="two" pathLength="1" d="M430 234v24" />
+          <path class="product-workflow__sfc-progress product-workflow__sfc-progress--three" data-sfc-progress="three" pathLength="1" d="M430 316v42" />
+          <path class="product-workflow__sfc-progress product-workflow__sfc-progress--four" data-sfc-progress="four" pathLength="1" d="M430 376v42" />
           <g class="product-workflow__sfc-flow-block product-workflow__sfc-flow-block--start" data-sfc-block="start">
             <path class="product-workflow__sfc-flow-shape" d="M408 142h44l-22 38z" />
-            <text x="430" y="165">开始</text>
+            <text class="product-workflow__sfc-start-label" data-sfc-label="start" x="430" y="158">开始</text>
           </g>
           <g class="product-workflow__sfc-flow-block product-workflow__sfc-flow-block--condition" data-sfc-block="condition">
             <rect class="product-workflow__sfc-flow-shape" x="398" y="204" width="64" height="30" rx="2" />
@@ -456,7 +475,6 @@ onBeforeUnmount(() => {
             <path class="product-workflow__sfc-flow-shape" d="M430 418l22 40h-44z" />
             <text x="430" y="449">结束</text>
           </g>
-          <circle class="product-workflow__sfc-runner" data-sfc-runner="true" cx="430" cy="162" r="6" :filter="`url(#${idPrefix}-glow)`" />
         </g>
 
         <g class="product-workflow__sfc-vars" data-sfc-region="variables">
@@ -688,11 +706,13 @@ onBeforeUnmount(() => {
 .product-workflow--parameter-alarm .product-workflow__field-value { fill: #d3deeb !important; font-size: 10.5px !important; }
 .product-workflow--parameter-alarm .product-workflow__severity-label { fill: #ffe2e5 !important; font-size: 10.5px !important; font-weight: 700; }
 
-.product-workflow__sfc-tree > rect { fill: #252839; stroke: #4f5b72; stroke-width: .7; }
-.product-workflow__sfc-tree text { fill: #edf2fa; font-size: 11.5px; font-weight: 650; }
-.product-workflow__sfc-tree-selection { fill: #43516b; stroke: #6c7c97; stroke-width: .7; }
-.product-workflow__sfc-tree-chevron { fill: none; stroke: #9aa8bd; stroke-width: 1.4; stroke-linecap: round; stroke-linejoin: round; }
-.product-workflow__sfc-tree-folder { fill: #a5cf27; stroke: #a5cf27; stroke-width: .6; }
+.product-workflow__sfc-tree > rect:first-child { fill: var(--drillmind-panel, #3d465f); stroke: var(--drillmind-line, #56617b); stroke-width: .6; }
+.product-workflow__sfc-tree text { fill: #dce3ee; font-size: 9.5px; }
+.product-workflow__sfc-tree .product-workflow__panel-title { fill: #f4f7fb !important; font-size: 12px !important; font-weight: 750; }
+.product-workflow__sfc-tree circle { fill: none; stroke: #9eabc1; stroke-width: .9; }
+.product-workflow__sfc-tree path { fill: none; stroke: #9eabc1; stroke-width: .8; }
+.product-workflow__sfc-tree .product-workflow__panel-close { stroke: #8894aa; stroke-width: 1; }
+.product-workflow__sfc-tree-selection { fill: #343c52; opacity: .7; }
 .product-workflow__sfc-editor-tabs-base { fill: #252839; stroke: #4f5b72; stroke-width: .7; }
 .product-workflow__sfc-editor-tab > rect { fill: #3b455f; stroke: #596781; stroke-width: .7; }
 .product-workflow__sfc-editor-tab--active > rect { fill: #4b5a76; stroke: #6a7995; }
@@ -710,18 +730,23 @@ onBeforeUnmount(() => {
 .product-workflow__sfc-flow { isolation: isolate; }
 .product-workflow__sfc-connector { fill: none; stroke: #8995aa; stroke-width: 1.5; stroke-linecap: round; }
 .product-workflow__sfc-flow-block text { fill: #f7f9fd; font-size: 12.5px; font-weight: 700; text-anchor: middle; }
-.product-workflow__sfc-flow-shape { animation: workflow-sfc-shape-pulse var(--workflow-duration) ease-in-out infinite; animation-play-state: paused; }
+.product-workflow__sfc-start-label { font-size: 8px !important; }
+.product-workflow__sfc-flow-shape { animation-duration: var(--workflow-duration); animation-timing-function: ease-in-out; animation-iteration-count: infinite; animation-play-state: paused; }
 .product-workflow__sfc-flow-block--start .product-workflow__sfc-flow-shape { fill: #252839; stroke: #a7d522; stroke-width: 2; }
 .product-workflow__sfc-flow-block--condition .product-workflow__sfc-flow-shape { fill: #252839; stroke: #4aaeff; stroke-width: 1.8; stroke-dasharray: 5 3; }
 .product-workflow__sfc-flow-block--state .product-workflow__sfc-flow-shape { fill: #252839; stroke: #aab4c5; stroke-width: 1.8; }
 .product-workflow__sfc-flow-block--mode .product-workflow__sfc-flow-shape { fill: none; stroke: #aab4c5; stroke-width: 1.8; stroke-linecap: round; }
 .product-workflow__sfc-flow-block--end .product-workflow__sfc-flow-shape { fill: #252839; stroke: #9f72ff; stroke-width: 2; }
-.product-workflow__sfc-flow-block--start .product-workflow__sfc-flow-shape { animation-delay: 0s; }
-.product-workflow__sfc-flow-block--condition .product-workflow__sfc-flow-shape { animation-delay: -2.2s; }
-.product-workflow__sfc-flow-block--state .product-workflow__sfc-flow-shape { animation-delay: -4.6s; }
-.product-workflow__sfc-flow-block--mode .product-workflow__sfc-flow-shape { animation-delay: -7.3s; }
-.product-workflow__sfc-flow-block--end .product-workflow__sfc-flow-shape { animation-delay: -9.6s; }
-.product-workflow__sfc-runner { fill: #7de18c; offset-path: path("M430 162V204V258V338V418V458"); offset-distance: 0%; animation: workflow-sfc-run var(--workflow-duration) linear infinite; animation-play-state: paused; }
+.product-workflow__sfc-flow-block--start .product-workflow__sfc-flow-shape { animation-name: workflow-sfc-highlight-start; }
+.product-workflow__sfc-flow-block--condition .product-workflow__sfc-flow-shape { animation-name: workflow-sfc-highlight-condition; }
+.product-workflow__sfc-flow-block--state .product-workflow__sfc-flow-shape { animation-name: workflow-sfc-highlight-state; }
+.product-workflow__sfc-flow-block--mode .product-workflow__sfc-flow-shape { animation-name: workflow-sfc-highlight-mode; }
+.product-workflow__sfc-flow-block--end .product-workflow__sfc-flow-shape { animation-name: workflow-sfc-highlight-end; }
+.product-workflow__sfc-progress { fill: none; stroke: #64e0c8; stroke-width: 2.6; stroke-linecap: round; stroke-dasharray: 1; stroke-dashoffset: 1; opacity: 0; filter: drop-shadow(0 0 2px rgb(100 224 200 / 90%)); animation-duration: var(--workflow-duration); animation-timing-function: linear; animation-iteration-count: infinite; animation-play-state: paused; }
+.product-workflow__sfc-progress--one { animation-name: workflow-sfc-progress-one; }
+.product-workflow__sfc-progress--two { animation-name: workflow-sfc-progress-two; }
+.product-workflow__sfc-progress--three { animation-name: workflow-sfc-progress-three; }
+.product-workflow__sfc-progress--four { animation-name: workflow-sfc-progress-four; }
 
 .product-workflow__sfc-vars-panel, .product-workflow__sfc-properties-panel { fill: #343c53; stroke: #66738c; stroke-width: .8; }
 .product-workflow__sfc-vars-title, .product-workflow__sfc-section-title { fill: #f2f5fb; font-size: 11.5px; font-weight: 750; }
@@ -786,11 +811,19 @@ onBeforeUnmount(() => {
 .product-workflow--parameter-alarm .product-workflow__diagram-labels text { font-size: 9.5px !important; }
 .product-workflow--parameter-alarm .product-workflow__diagram-binding { font-size: 9.5px !important; }
 .product-workflow--parameter-alarm .product-workflow__field-label, .product-workflow--parameter-alarm .product-workflow__field-value { font-size: 11.5px !important; }
-.product-workflow[data-static="true"] .product-workflow__stage { opacity: 0; animation: none; }.product-workflow[data-static="true"] .product-workflow__stage--4 { opacity: 1; }.product-workflow[data-static="true"] .product-workflow__parameter-tab-active { opacity: 0; animation: none; }.product-workflow[data-static="true"] .product-workflow__parameter-tab--4 .product-workflow__parameter-tab-active { opacity: 1; }.product-workflow[data-static="true"] .product-workflow__sfc-flow * { opacity: 1; animation: none; stroke-dashoffset: 0; }.product-workflow[data-static="true"] .product-workflow__sfc-runner { display: none; }.product-workflow[data-static="true"] .product-workflow__monitor-stage * { animation: none; stroke-dashoffset: 0; }
+.product-workflow[data-static="true"] .product-workflow__stage { opacity: 0; animation: none; }.product-workflow[data-static="true"] .product-workflow__stage--4 { opacity: 1; }.product-workflow[data-static="true"] .product-workflow__parameter-tab-active { opacity: 0; animation: none; }.product-workflow[data-static="true"] .product-workflow__parameter-tab--4 .product-workflow__parameter-tab-active { opacity: 1; }.product-workflow[data-static="true"] .product-workflow__sfc-flow * { opacity: 1; animation: none; stroke-dashoffset: 0; }.product-workflow[data-static="true"] .product-workflow__monitor-stage * { animation: none; stroke-dashoffset: 0; }
 @keyframes workflow-stage-one { 0%, 23.125% { opacity: 1; } 25%, 98.125% { opacity: 0; } 100% { opacity: 1; } } @keyframes workflow-stage-two { 0%, 23.125% { opacity: 0; } 25%, 45% { opacity: 1; } 46.875%, 100% { opacity: 0; } } @keyframes workflow-stage-three { 0%, 45% { opacity: 0; } 46.875%, 73.125% { opacity: 1; } 75%, 100% { opacity: 0; } } @keyframes workflow-stage-four { 0%, 73.125% { opacity: 0; } 75%, 98.125% { opacity: 1; } 100% { opacity: 0; } }
 @keyframes workflow-parameter-saved { 0%, 10% { opacity: 0; transform: translateY(6px); } 15%, 23% { opacity: 1; transform: translateY(0); } 25%, 100% { opacity: 0; } } @keyframes workflow-parameter-validated { 0%, 58% { opacity: 0; transform: translateY(6px); } 63%, 73% { opacity: 1; transform: translateY(0); } 75%, 100% { opacity: 0; } } @keyframes workflow-ack { 0%, 78% { opacity: 0; transform: scale(.7); } 84%, 94% { opacity: 1; transform: scale(1); } 100% { opacity: 0; } }
-@keyframes workflow-sfc-shape-pulse { 0%, 100% { opacity: .84; } 9%, 20% { opacity: 1; } 28%, 100% { opacity: .84; } } @keyframes workflow-sfc-run { 0%, 7% { offset-distance: 0%; opacity: 0; } 12% { offset-distance: 0%; opacity: 1; } 88% { offset-distance: 100%; opacity: 1; } 94%, 100% { offset-distance: 100%; opacity: 0; } }
+@keyframes workflow-sfc-progress-one { 0%, 8% { stroke-dashoffset: 1; opacity: 0; } 9% { opacity: 1; } 22%, 92% { stroke-dashoffset: 0; opacity: 1; } 98%, 100% { stroke-dashoffset: 0; opacity: 0; } }
+@keyframes workflow-sfc-progress-two { 0%, 26% { stroke-dashoffset: 1; opacity: 0; } 27% { opacity: 1; } 40%, 92% { stroke-dashoffset: 0; opacity: 1; } 98%, 100% { stroke-dashoffset: 0; opacity: 0; } }
+@keyframes workflow-sfc-progress-three { 0%, 44% { stroke-dashoffset: 1; opacity: 0; } 45% { opacity: 1; } 60%, 92% { stroke-dashoffset: 0; opacity: 1; } 98%, 100% { stroke-dashoffset: 0; opacity: 0; } }
+@keyframes workflow-sfc-progress-four { 0%, 64% { stroke-dashoffset: 1; opacity: 0; } 65% { opacity: 1; } 80%, 92% { stroke-dashoffset: 0; opacity: 1; } 98%, 100% { stroke-dashoffset: 0; opacity: 0; } }
+@keyframes workflow-sfc-highlight-start { 0%, 8% { opacity: 1; filter: drop-shadow(0 0 3px rgb(100 224 200 / 95%)); } 12%, 92% { opacity: .9; filter: none; } 98%, 100% { opacity: .9; filter: none; } }
+@keyframes workflow-sfc-highlight-condition { 0%, 20% { opacity: .9; filter: none; } 22%, 27% { opacity: 1; filter: drop-shadow(0 0 3px rgb(100 224 200 / 95%)); } 31%, 100% { opacity: .9; filter: none; } }
+@keyframes workflow-sfc-highlight-state { 0%, 38% { opacity: .9; filter: none; } 40%, 45% { opacity: 1; filter: drop-shadow(0 0 3px rgb(100 224 200 / 95%)); } 49%, 100% { opacity: .9; filter: none; } }
+@keyframes workflow-sfc-highlight-mode { 0%, 58% { opacity: .9; filter: none; } 60%, 65% { opacity: 1; filter: drop-shadow(0 0 3px rgb(100 224 200 / 95%)); } 69%, 100% { opacity: .9; filter: none; } }
+@keyframes workflow-sfc-highlight-end { 0%, 78% { opacity: .9; filter: none; } 80%, 90% { opacity: 1; filter: drop-shadow(0 0 3px rgb(100 224 200 / 95%)); } 92%, 100% { opacity: .9; filter: none; } }
 @keyframes workflow-chart { 0%, 18% { stroke-dashoffset: 620; } 55%, 100% { stroke-dashoffset: 0; } } @keyframes workflow-video-scan { 0%, 100% { transform: translateY(0); opacity: .2; } 50% { transform: translateY(96px); opacity: .9; } } @keyframes workflow-live { 0%, 100% { opacity: .45; } 50% { opacity: 1; } }
-@media (max-width: 44rem) { .product-workflow--parameter-alarm svg { transform: scale(1.22) translateX(-5%); transform-origin: 57% center; }.product-workflow--sfc .product-workflow__sfc-vars, .product-workflow--sfc .product-workflow__sfc-properties { display: none; }.product-workflow--sfc svg { transform: scale(1.24) translateX(6%); transform-origin: 46% center; }.product-workflow--monitoring svg { transform: scale(1.13) translateX(-4%); transform-origin: 59% center; } }
+@media (max-width: 44rem) { .product-workflow--parameter-alarm svg { transform: scale(1.22) translateX(-5%); transform-origin: 57% center; }.product-workflow--sfc .product-workflow__sfc-vars, .product-workflow--sfc .product-workflow__sfc-properties { display: none; }.product-workflow--sfc .product-workflow__sfc-tree-item text { opacity: 0; }.product-workflow--sfc svg { transform: scale(1.24) translateX(6%); transform-origin: 46% center; }.product-workflow--monitoring svg { transform: scale(1.13) translateX(-4%); transform-origin: 59% center; } }
 @media (prefers-reduced-motion: reduce) { .product-workflow svg * { animation-duration: .01ms !important; }.product-workflow[data-playing="true"] svg * { animation-duration: var(--workflow-duration) !important; } }
 </style>
