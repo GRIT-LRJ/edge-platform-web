@@ -12,8 +12,8 @@ const headerMenus = [
 <template>
   <g data-platform-chrome="shared" data-platform-shell="true">
     <g class="platform-visual-chrome__main-menu" data-platform-region="main-menu">
-      <rect width="960" height="28" />
-      <g class="platform-visual-chrome__brand" transform="translate(12 3)">
+      <rect width="960" height="32" />
+      <g class="platform-visual-chrome__brand" transform="translate(12 5)">
         <path d="M0 15L6 1l5 7-4 12z" />
         <path d="M8 2l8 4-4 6z" />
         <path d="M9 13l9-5-3 11z" />
@@ -26,7 +26,7 @@ const headerMenus = [
         :class="['platform-visual-chrome__menu', { 'platform-visual-chrome__menu--accent': menu.accent }]"
         :transform="`translate(${menu.x} 0)`"
       >
-        <g class="platform-visual-chrome__menu-icon" transform="translate(0 -2)">
+        <g class="platform-visual-chrome__menu-icon" transform="translate(0 0)">
           <template v-if="menu.id === 'save'"><rect x="-3" y="9" width="7" height="7" rx="1" /><path d="M-1 9v3h3V9M-1 15v-2h3v2" /></template>
           <template v-else-if="menu.id === 'compile'"><path d="M-4 16l8-8M-3 8l3 3M1 13l3 3M2 7l3-1-1 3" /></template>
           <template v-else-if="menu.id === 'start'"><path class="platform-visual-chrome__menu-fill" d="M-3 8l7 4-7 4z" /></template>
@@ -34,17 +34,17 @@ const headerMenus = [
           <template v-else-if="menu.id === 'about'"><circle cy="12" r="5" /><path d="M0 11v4M0 8.5v.5" /></template>
           <template v-else><circle cy="12" r="5" /><path d="M-2 10a2 2 0 1 1 3 2c-1 .5-1 1.2-1 2M0 16v.3" /></template>
         </g>
-        <text x="0" y="24">{{ menu.label }}</text>
+        <text x="0" y="26">{{ menu.label }}</text>
       </g>
 
       <g class="platform-visual-chrome__actions">
-        <g data-platform-header-action="layout-left" transform="translate(742 7)"><path d="M0 0h12v14H0zM4 0v14" /></g>
-        <g data-platform-header-action="layout-bottom" transform="translate(776 7)"><path d="M0 0h12v14H0zM0 10h12" /></g>
-        <g data-platform-header-action="layout-right" transform="translate(810 7)"><path d="M0 0h12v14H0zM8 0v14" /></g>
-        <g data-platform-header-action="fullscreen" transform="translate(843 7)"><path d="M0 5V0h5M9 0h5v5M14 9v5H9M5 14H0V9" /></g>
-        <g data-platform-header-action="theme" transform="translate(884 14)"><circle r="4.5" /><path d="M0-9v3M0 6v3M-9 0h3M6 0h3M-6-6l2 2M4 4l2 2M6-6L4-4M-4 4l-2 2" /></g>
-        <g data-platform-header-action="settings" transform="translate(918 14)"><circle r="5" /><circle r="2" /><path d="M0-9v3M0 6v3M-9 0h3M6 0h3M-6-6l2 2M4 4l2 2M6-6L4-4M-4 4l-2 2" /></g>
-        <g data-platform-header-action="account" transform="translate(952 12)"><circle cy="-2" r="4" /><path d="M-6 10c0-5 12-5 12 0" /></g>
+        <g data-platform-header-action="layout-left" transform="translate(742 9)"><path d="M0 0h12v14H0zM4 0v14" /></g>
+        <g data-platform-header-action="layout-bottom" transform="translate(776 9)"><path d="M0 0h12v14H0zM0 10h12" /></g>
+        <g data-platform-header-action="layout-right" transform="translate(810 9)"><path d="M0 0h12v14H0zM8 0v14" /></g>
+        <g data-platform-header-action="fullscreen" transform="translate(843 9)"><path d="M0 5V0h5M9 0h5v5M14 9v5H9M5 14H0V9" /></g>
+        <g data-platform-header-action="theme" transform="translate(884 16)"><circle r="4.5" /><path d="M0-9v3M0 6v3M-9 0h3M6 0h3M-6-6l2 2M4 4l2 2M6-6L4-4M-4 4l-2 2" /></g>
+        <g data-platform-header-action="settings" transform="translate(918 16)"><circle r="5" /><circle r="2" /><path d="M0-9v3M0 6v3M-9 0h3M6 0h3M-6-6l2 2M4 4l2 2M6-6L4-4M-4 4l-2 2" /></g>
+        <g data-platform-header-action="account" transform="translate(952 14)"><circle cy="-2" r="4" /><path d="M-6 10c0-5 12-5 12 0" /></g>
       </g>
     </g>
 

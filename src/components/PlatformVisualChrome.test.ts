@@ -3,7 +3,7 @@ import { render } from '@testing-library/vue'
 import PlatformVisualChrome from './PlatformVisualChrome.vue'
 
 describe('DrillMind 动图公共框架', () => {
-  it('提供统一的 28px 紧凑顶栏和 18px 底栏完整内容', () => {
+  it('提供统一的 32px 紧凑顶栏和 18px 底栏完整内容', () => {
     const { container } = render(PlatformVisualChrome)
 
     const mainMenu = container.querySelector('[data-platform-region="main-menu"]')
@@ -13,10 +13,10 @@ describe('DrillMind 动图公共框架', () => {
       mainMenu?.querySelectorAll('[data-platform-header-action]') ?? [],
     )
 
-    expect(mainMenu?.querySelector(':scope > rect')).toHaveAttribute('height', '28')
+    expect(mainMenu?.querySelector(':scope > rect')).toHaveAttribute('height', '32')
     expect(mainMenu?.querySelector('.platform-visual-chrome__brand')).toHaveAttribute(
       'transform',
-      'translate(12 3)',
+      'translate(12 5)',
     )
     expect(mainMenu).toHaveTextContent('DrillMind保存工程编译工程启动工程上传资产关于帮助')
     expect(mainMenu).not.toHaveTextContent('搜索模型变量')
@@ -31,18 +31,18 @@ describe('DrillMind 动图公共框架', () => {
     ])
     expect(
       menus.map((menu) => menu.querySelector('.platform-visual-chrome__menu-icon')?.getAttribute('transform')),
-    ).toEqual(Array(6).fill('translate(0 -2)'))
+    ).toEqual(Array(6).fill('translate(0 0)'))
     expect(menus.map((menu) => menu.querySelector('text')?.getAttribute('y'))).toEqual(
-      Array(6).fill('24'),
+      Array(6).fill('26'),
     )
     expect(actions.map((action) => action.getAttribute('transform'))).toEqual([
-      'translate(742 7)',
-      'translate(776 7)',
-      'translate(810 7)',
-      'translate(843 7)',
-      'translate(884 14)',
-      'translate(918 14)',
-      'translate(952 12)',
+      'translate(742 9)',
+      'translate(776 9)',
+      'translate(810 9)',
+      'translate(843 9)',
+      'translate(884 16)',
+      'translate(918 16)',
+      'translate(952 14)',
     ])
     expect(statusbar?.querySelector(':scope > rect')).toHaveAttribute('y', '522')
     expect(statusbar?.querySelector(':scope > rect')).toHaveAttribute('height', '18')

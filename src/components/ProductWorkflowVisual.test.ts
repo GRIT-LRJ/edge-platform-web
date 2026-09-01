@@ -26,14 +26,14 @@ describe('产品工作流视觉', () => {
     expect(container.querySelector('[data-platform-chrome="shared"]')).toBeInTheDocument()
     expect(container.querySelector('[data-platform-body="true"]')).toHaveAttribute(
       'transform',
-      'translate(0 -16)',
+      'translate(0 -12)',
     )
   })
 
   it.each([
-    ['parameter-alarm', '.product-workflow__parameter-project > rect', '494'],
-    ['sfc', '.product-workflow__sfc-canvas', '447'],
-    ['monitoring', '.product-workflow__monitor-shell', '494'],
+    ['parameter-alarm', '.product-workflow__parameter-project > rect', '490'],
+    ['sfc', '.product-workflow__sfc-canvas', '443'],
+    ['monitoring', '.product-workflow__monitor-shell', '490'],
   ] as const)('让 %s 的结构背景承接紧凑顶栏释放的空间', (kind, selector, height) => {
     const { container } = render(ProductWorkflowVisual, {
       props: { kind, label: `${kind} 紧凑顶栏`, controlled: true, playing: false },

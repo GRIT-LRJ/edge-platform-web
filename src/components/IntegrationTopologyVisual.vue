@@ -130,7 +130,7 @@ const extensionSlots: readonly ExtensionSlot[] = [
 
       <rect width="960" height="540" rx="18" fill="url(#topology-panel)" />
 
-      <g data-platform-body="true" transform="translate(0 -16)">
+      <g data-platform-body="true" transform="translate(0 -12)">
       <g class="integration-topology__platform">
         <g class="integration-topology__device-tab" data-platform-region="device-tab">
           <rect y="44" width="960" height="22" />
@@ -150,7 +150,7 @@ const extensionSlots: readonly ExtensionSlot[] = [
         </g>
       </g>
 
-      <rect y="94" width="960" height="444" fill="#23283a" />
+      <rect y="94" width="960" height="440" fill="#23283a" />
       <ellipse cx="440" cy="310" rx="330" ry="205" fill="url(#topology-glow)" />
       <g class="integration-topology__grid" aria-hidden="true">
         <path v-for="x in [80, 160, 240, 320, 400, 480, 560, 640, 720, 800, 880]" :key="`v-${x}`" :d="`M ${x} 96 V 514`" />

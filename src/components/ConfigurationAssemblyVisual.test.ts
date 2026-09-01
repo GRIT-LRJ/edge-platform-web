@@ -36,11 +36,11 @@ describe('首页组态动画播放状态', () => {
     expect(root).toHaveAttribute('data-playing', 'false')
     expect(container.querySelector('[data-platform-body="true"]')).toHaveAttribute(
       'transform',
-      'translate(0 -16)',
+      'translate(0 -12)',
     )
     expect(
       container.querySelector('[data-platform-region="project-tree"] > rect'),
-    ).toHaveAttribute('height', '494')
+    ).toHaveAttribute('height', '490')
 
     intersectionCallback?.(
       [{ isIntersecting: true } as IntersectionObserverEntry],
