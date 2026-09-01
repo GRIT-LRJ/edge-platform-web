@@ -136,8 +136,9 @@ onBeforeUnmount(() => {
 
       <rect width="960" height="540" rx="18" fill="url(#configuration-stage)" />
 
+      <g data-platform-body="true" transform="translate(0 -16)">
       <g class="configuration-assembly__project" data-platform-region="project-tree">
-        <rect x="0" y="44" width="126" height="478" />
+        <rect x="0" y="44" width="126" height="494" />
         <text class="configuration-assembly__panel-title" x="14" y="68">工程目录</text>
         <path class="configuration-assembly__panel-close" d="M 112 57 L 120 65 M 120 57 L 112 65" />
         <g v-for="item in projectItems" :key="item.id" :transform="`translate(0 ${item.y})`">
@@ -167,7 +168,7 @@ onBeforeUnmount(() => {
       </g>
 
       <g class="configuration-assembly__properties" data-platform-region="properties">
-        <rect x="814" y="44" width="146" height="478" />
+        <rect x="814" y="44" width="146" height="494" />
         <rect class="configuration-assembly__properties-tab" x="814" y="44" width="72" height="27" />
         <text class="configuration-assembly__panel-title" x="838" y="62">属性</text>
         <text x="833" y="92">钻孔监测</text>
@@ -285,7 +286,7 @@ onBeforeUnmount(() => {
       </g>
 
       <g class="configuration-assembly__library" data-platform-region="component-library">
-        <rect x="126" y="406" width="688" height="120" />
+        <rect x="126" y="406" width="688" height="136" />
         <rect class="configuration-assembly__library-tabs" x="126" y="406" width="688" height="28" />
         <text x="151" y="424">基础图形</text>
         <text x="226" y="424">图表图形</text>
@@ -321,6 +322,7 @@ onBeforeUnmount(() => {
         <path d="M 10 19 H 18 M 14 15 V 23" />
         <text x="51" y="23">{{ item.label }}</text>
         <path class="configuration-assembly__cursor" d="M 91 31 L 91 50 L 97 44 L 102 54 L 107 51 L 102 42 L 111 41 Z" />
+      </g>
       </g>
 
       <PlatformVisualChrome />

@@ -132,9 +132,10 @@ onBeforeUnmount(() => {
 
       <rect width="960" height="540" rx="18" :fill="`url(#${idPrefix}-shell)`" />
 
+      <g data-platform-body="true" transform="translate(0 -16)">
       <template v-if="kind === 'parameter-alarm'">
         <g class="product-workflow__sidebar product-workflow__parameter-project">
-          <rect x="0" y="44" width="126" height="478" />
+          <rect x="0" y="44" width="126" height="494" />
           <text class="product-workflow__panel-title" x="14" y="68">工程目录</text>
           <path class="product-workflow__panel-close" d="M112 57l8 8m0-8-8 8" />
           <rect class="product-workflow__sidebar-active" x="8" y="114" width="110" height="27" rx="3" />
@@ -158,7 +159,7 @@ onBeforeUnmount(() => {
         </g>
 
         <g class="product-workflow__stage product-workflow__stage--1" data-workflow-stage="parameter-configuration">
-          <rect class="product-workflow__workspace" x="126" y="71" width="834" height="451" />
+          <rect class="product-workflow__workspace" x="126" y="71" width="834" height="467" />
           <rect class="product-workflow__tree-panel" x="140" y="105" width="190" height="401" rx="4" />
           <text class="product-workflow__heading" x="156" y="132">参数分类</text>
           <rect class="product-workflow__search" x="152" y="146" width="166" height="25" rx="3" /><text x="164" y="163">搜索参数组</text>
@@ -177,7 +178,7 @@ onBeforeUnmount(() => {
         </g>
 
         <g class="product-workflow__stage product-workflow__stage--2" data-workflow-stage="parameter-management">
-          <rect class="product-workflow__workspace" x="126" y="71" width="834" height="451" />
+          <rect class="product-workflow__workspace" x="126" y="71" width="834" height="467" />
           <rect class="product-workflow__hmi" x="142" y="107" width="802" height="399" rx="5" :fill="`url(#${idPrefix}-hmi)`" />
           <text class="product-workflow__hmi-title" x="166" y="139">钻进参数管理</text><text class="product-workflow__muted" x="866" y="139">设备 01 · 在线</text>
           <g class="product-workflow__category-tabs"><rect x="162" y="156" width="160" height="34" rx="4" /><rect x="330" y="156" width="160" height="34" rx="4" /><rect x="498" y="156" width="160" height="34" rx="4" /><text x="209" y="178">推进参数</text><text x="377" y="178">回转参数</text><text x="545" y="178">安全参数</text></g>
@@ -191,7 +192,7 @@ onBeforeUnmount(() => {
         </g>
 
         <g class="product-workflow__stage product-workflow__stage--3" data-workflow-stage="alarm-rules">
-          <rect class="product-workflow__workspace" x="126" y="71" width="834" height="451" />
+          <rect class="product-workflow__workspace" x="126" y="71" width="834" height="467" />
           <rect class="product-workflow__tree-panel" x="140" y="105" width="250" height="401" rx="4" />
           <text class="product-workflow__heading" x="158" y="133">报警组</text><text class="product-workflow__muted" x="324" y="133">已启用 12</text>
           <text x="158" y="176">▾ 钻进系统</text><text x="178" y="208">推进压力过高</text><text x="178" y="240">水压开关异常</text><text x="178" y="272">钻具健康诊断</text>
@@ -208,7 +209,7 @@ onBeforeUnmount(() => {
         </g>
 
         <g class="product-workflow__stage product-workflow__stage--4" data-workflow-stage="alarm-response">
-          <rect class="product-workflow__workspace" x="126" y="71" width="834" height="451" />
+          <rect class="product-workflow__workspace" x="126" y="71" width="834" height="467" />
           <rect class="product-workflow__hmi" x="142" y="107" width="802" height="399" rx="5" :fill="`url(#${idPrefix}-hmi)`" />
           <text class="product-workflow__hmi-title" x="166" y="139">报警监控</text><text class="product-workflow__muted" x="854" y="139">实时订阅 · 已连接</text>
           <g class="product-workflow__alarm-summary"><rect x="162" y="158" width="236" height="72" rx="5" /><rect x="410" y="158" width="236" height="72" rx="5" /><rect x="658" y="158" width="236" height="72" rx="5" /><text x="182" y="183">当前报警</text><text x="182" y="216">03</text><text x="430" y="183">待确认</text><text x="430" y="216">01</text><text x="678" y="183">今日已处置</text><text x="678" y="216">12</text></g>
@@ -223,7 +224,7 @@ onBeforeUnmount(() => {
 
       <template v-else-if="kind === 'sfc'">
         <g class="product-workflow__sidebar product-workflow__sfc-tree">
-          <rect x="0" y="44" width="208" height="478" />
+          <rect x="0" y="44" width="208" height="494" />
           <text class="product-workflow__panel-title" x="14" y="68">任务组</text>
           <text x="16" y="105">▾ 00 主流程</text><text x="38" y="136">手动流程</text><text x="38" y="164">自动流程</text><text x="38" y="192">急停流程</text>
           <text x="16" y="232">▾ 02 扫描</text><text x="38" y="263">巷道左侧扫描</text><text x="38" y="291">巷道右侧扫描</text>
@@ -237,8 +238,8 @@ onBeforeUnmount(() => {
           <g transform="translate(774 54)"><rect width="70" height="27" rx="4" /><path d="M12 8l10 6-10 6z" /><text x="28" y="18">运行</text></g>
           <g transform="translate(854 54)"><rect width="78" height="27" rx="4" /><text x="18" y="18">监控</text></g>
         </g>
-        <rect class="product-workflow__sfc-canvas" x="208" y="91" width="752" height="431" />
-        <rect x="208" y="91" width="752" height="431" :fill="`url(#${idPrefix}-grid)`" />
+        <rect class="product-workflow__sfc-canvas" x="208" y="91" width="752" height="447" />
+        <rect x="208" y="91" width="752" height="447" :fill="`url(#${idPrefix}-grid)`" />
 
         <g class="product-workflow__sfc-palette">
           <rect x="222" y="107" width="105" height="245" rx="4" />
@@ -279,16 +280,16 @@ onBeforeUnmount(() => {
       </template>
 
       <template v-else>
-        <rect class="product-workflow__monitor-shell" x="0" y="44" width="960" height="478" />
+        <rect class="product-workflow__monitor-shell" x="0" y="44" width="960" height="494" />
         <g class="product-workflow__monitor-nav">
-          <rect x="0" y="44" width="126" height="478" />
+          <rect x="0" y="44" width="126" height="494" />
           <text class="product-workflow__panel-title" x="14" y="70">运行画面</text>
           <rect class="product-workflow__sidebar-active" x="10" y="88" width="106" height="31" rx="3" />
           <text x="25" y="108">钻孔监测</text><text x="25" y="147">设备状态</text><text x="25" y="181">作业趋势</text><text x="25" y="215">实时视频</text>
           <circle cx="22" cy="477" r="4" /><text x="34" y="481">设备 01 在线</text>
         </g>
         <g class="product-workflow__monitor-stage">
-          <rect x="126" y="44" width="834" height="478" :fill="`url(#${idPrefix}-hmi)`" />
+          <rect x="126" y="44" width="834" height="494" :fill="`url(#${idPrefix}-hmi)`" />
           <text class="product-workflow__monitor-title" x="150" y="78">钻孔设备运行监控</text><text class="product-workflow__muted" x="818" y="78">实时刷新 · 10:42:18</text>
           <g class="product-workflow__monitor-status"><circle cx="150" cy="100" r="5" /><text x="162" y="104">自动钻进</text><text x="265" y="104">孔位 M8</text><text x="345" y="104">当前深度 2.30 m</text><text x="828" y="104">通讯正常</text></g>
           <g class="product-workflow__gauges">
@@ -319,6 +320,7 @@ onBeforeUnmount(() => {
           <g class="product-workflow__live-pulse"><circle cx="150" cy="100" r="5" :filter="`url(#${idPrefix}-glow)`" /><circle cx="808" cy="266" r="6" :filter="`url(#${idPrefix}-glow)`" /></g>
         </g>
       </template>
+      </g>
 
       <PlatformVisualChrome />
     </svg>
