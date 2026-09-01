@@ -28,9 +28,9 @@ const smoothstep = (value) => {
 const mix = (from, to, amount) => Math.round(from + (to - from) * amount)
 
 function gradientColor(position) {
-  const start = [3, 9, 15]
-  const middle = [6, 19, 33]
-  const end = [7, 24, 37]
+  const start = [7, 17, 27]
+  const middle = [10, 28, 43]
+  const end = [13, 35, 51]
 
   if (position <= 0.58) {
     const amount = position / 0.58
