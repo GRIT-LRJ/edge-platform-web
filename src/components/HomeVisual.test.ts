@@ -89,6 +89,7 @@ describe('首页视觉媒体', () => {
     expect(container.querySelector('[data-platform-region="main-menu"]')).toHaveTextContent(
       'DrillMind',
     )
+    expect(container.querySelector('[data-platform-chrome="shared"]')).toBeInTheDocument()
   })
 
   it('开放集成媒体渲染固定节点的 SVG 拓扑动画', () => {
@@ -109,5 +110,6 @@ describe('首页视觉媒体', () => {
     expect(container.querySelector('[data-platform-region="main-menu"]')).toHaveTextContent(
       'DrillMind',
     )
+    expect(container.querySelector('[data-platform-chrome="shared"]')).toBeInTheDocument()
   })
 })

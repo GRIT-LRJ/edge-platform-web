@@ -1,4 +1,5 @@
 import { homeHero, homeSections } from './home'
+import { SFC_SHOWCASE_DURATION_MS } from './showcases'
 
 describe('首页配置', () => {
   it('提供两行主标题和平台能力摘要', () => {
@@ -6,22 +7,44 @@ describe('首页配置', () => {
     expect(homeHero.eyebrow).toBe('矿山装备数字化应用平台')
     expect(homeHero.description).toContain('设备模型')
     expect(homeHero.media.kind).toBe('image')
+    expect(homeHero.media).toMatchObject({
+      desktopPosition: 'center',
+      mobilePosition: 'center',
+    })
   })
 
-  it('提供三段按左右交替排列的平台介绍正式内容', () => {
-    expect(homeSections).toHaveLength(3)
+  it('提供五段按左右交替排列的平台介绍正式内容', () => {
+    expect(homeSections).toHaveLength(5)
     expect(homeSections.map((section) => section.id)).toEqual([
       'platform-introduction',
+      'parameter-alarm-management',
+      'sfc-workflow',
       'platform-introduction-02',
       'platform-introduction-03',
     ])
-    expect(homeSections.map((section) => section.textSide)).toEqual(['left', 'right', 'left'])
+    expect(homeSections.map((section) => section.textSide)).toEqual([
+      'left',
+      'right',
+      'left',
+      'right',
+      'left',
+    ])
     expect(homeSections.every((section) => section.description.length > 20)).toBe(true)
     expect(homeSections.map((section) => section.media.kind)).toEqual([
       'configuration-animation',
-      'image',
+      'parameter-alarm-animation',
+      'sfc-animation',
+      'monitoring-animation',
       'integration-topology',
     ])
     expect(homeSections.every((section) => 'alt' in section.media && section.media.alt)).toBe(true)
+    expect(homeSections[1]?.media).toMatchObject({
+      kind: 'parameter-alarm-animation',
+      durationMs: 16_000,
+    })
+    expect(homeSections[2]?.media).toMatchObject({
+      kind: 'sfc-animation',
+      durationMs: SFC_SHOWCASE_DURATION_MS,
+    })
   })
 })

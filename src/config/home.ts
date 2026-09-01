@@ -1,7 +1,6 @@
-import editorHeroImage from '../assets/media/home/edge-drillmind-hero.webp'
-import editorHeroImageAvif from '../assets/media/home/edge-drillmind-hero.avif'
-import monitoringDashboardImage from '../assets/media/home/edge-monitoring-dashboard.svg'
-import type { ShowcasePath } from './showcases'
+import editorHeroImage from '../assets/media/home/edge-drillmind-hero-v2.webp'
+import editorHeroImageAvif from '../assets/media/home/edge-drillmind-hero-v2.avif'
+import { SFC_SHOWCASE_DURATION_MS, type ShowcasePath } from './showcases'
 
 export type HomeVisualVariant = 'configuration' | 'monitoring' | 'integration'
 
@@ -30,11 +29,32 @@ export interface HomeConfigurationAnimationMedia {
   alt: string
 }
 
+export interface HomeParameterAlarmAnimationMedia {
+  kind: 'parameter-alarm-animation'
+  alt: string
+  durationMs: number
+}
+
+export interface HomeSfcAnimationMedia {
+  kind: 'sfc-animation'
+  alt: string
+  durationMs: number
+}
+
+export interface HomeMonitoringAnimationMedia {
+  kind: 'monitoring-animation'
+  alt: string
+  durationMs: number
+}
+
 export type HomeMedia =
   | HomeImageMedia
   | HomePlaceholderMedia
   | HomeIntegrationTopologyMedia
   | HomeConfigurationAnimationMedia
+  | HomeParameterAlarmAnimationMedia
+  | HomeSfcAnimationMedia
+  | HomeMonitoringAnimationMedia
 
 export interface HomeHeroConfig {
   eyebrow: string
@@ -63,11 +83,11 @@ export const homeHero: HomeHeroConfig = {
   media: {
     kind: 'image',
     src: editorHeroImage,
-    alt: 'Edge 平台 DrillMind 工程组态界面，展示钻孔设备运行仪表、参数面板和组件库',
+    alt: 'DrillMind 工业自动化组态平台首界面，下方展示由数据链路连接的数字孪生工厂设备',
     avif: editorHeroImageAvif,
     webp: editorHeroImage,
     desktopPosition: 'center',
-    mobilePosition: '58% center',
+    mobilePosition: 'center',
   },
 }
 
@@ -88,14 +108,46 @@ export const homeSections: readonly HomeSection[] = [
     },
   },
   {
-    id: 'platform-introduction-02',
-    title: '连接设备数据，看见每一项运行状态',
+    id: 'parameter-alarm-management',
+    title: '从参数配置到报警处置，形成完整闭环',
     description:
-      '将设备变量、业务数据集和视图状态绑定到画面组件，集中呈现参数、状态、报警、趋势与实时视频。',
+      '可视化配置参数分组、变量绑定、范围与权限，通过参数管理组件完成现场读写；再以限值、开关和功能块规则驱动报警提示、实时监控、确认处置与历史追溯。',
     media: {
-      kind: 'image',
-      src: monitoringDashboardImage,
-      alt: 'Edge 平台设备运行监控画面，展示合成设备数据、趋势、报警和实时视频',
+      kind: 'parameter-alarm-animation',
+      alt: 'DrillMind 参数与报警管理动画，依次展示参数配置、现场参数管理、报警规则和处置追溯',
+      durationMs: 16_000,
+    },
+    textSide: 'right',
+    showcase: {
+      path: '/showcase/parameter-alarm',
+      label: '打开参数与报警管理动态演示',
+    },
+  },
+  {
+    id: 'sfc-workflow',
+    title: '用 SFC 编排并调试设备流程',
+    description:
+      '以顺序功能图拖拽组织步骤、条件、功能块与子流程，联动模型变量并实时校验；通过仿真、运行轨迹、断点和单步调试，让复杂控制流程更易设计、验证与维护。',
+    media: {
+      kind: 'sfc-animation',
+      alt: 'DrillMind SFC 流程动画，展示步骤编排、规则校验、运行轨迹、变量与断点调试',
+      durationMs: SFC_SHOWCASE_DURATION_MS,
+    },
+    textSide: 'left',
+    showcase: {
+      path: '/showcase/sfc',
+      label: '打开 SFC 流程编排动态演示',
+    },
+  },
+  {
+    id: 'platform-introduction-02',
+    title: '让设备状态、趋势与视频实时联动',
+    description:
+      '将设备状态、作业指标、趋势与实时视频汇聚到 HMI 运行画面，随现场数据同步刷新，帮助操作人员持续掌握设备与作业变化。',
+    media: {
+      kind: 'monitoring-animation',
+      alt: 'DrillMind 设备 HMI 运行监控动画，展示设备状态、作业指标、趋势和实时视频',
+      durationMs: 18_000,
     },
     textSide: 'right',
     showcase: {

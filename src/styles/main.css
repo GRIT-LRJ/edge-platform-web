@@ -418,7 +418,7 @@ a {
   order: 2;
   width: 100%;
   min-height: 0;
-  aspect-ratio: 16 / 10;
+  aspect-ratio: 16 / 9;
   overflow: hidden;
   border: 1px solid rgb(112 223 235 / 30%);
   border-radius: var(--radius-lg);
@@ -2122,7 +2122,7 @@ a {
   }
 
   .home-hero__visual {
-    aspect-ratio: 16 / 10;
+    aspect-ratio: 16 / 9;
   }
 
   .home-visual--hero .home-visual__editor {

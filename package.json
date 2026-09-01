@@ -9,6 +9,7 @@
     "typecheck": "vue-tsc --noEmit",
     "test": "vitest run",
     "test:watch": "vitest",
+    "media:hero": "node scripts/build-home-hero-v2.mjs",
     "media:optimize": "node scripts/optimize-media.mjs"
   },
   "dependencies": {

@@ -20,6 +20,14 @@ describe('开放集成拓扑动画', () => {
     const container = renderTopology()
 
     expect(container.querySelector('[data-platform-shell="true"]')).toHaveTextContent('DrillMind')
+    expect(container.querySelector('[data-platform-chrome="shared"]')).toBeInTheDocument()
+    expect(container.querySelector('[data-platform-body="true"]')).toHaveAttribute(
+      'transform',
+      'translate(0 -12)',
+    )
+    expect(
+      container.querySelector('[data-platform-body="true"] > rect[fill="#23283a"]'),
+    ).toHaveAttribute('height', '440')
     expect(container.querySelector('[data-platform-region="main-menu"]')).toHaveTextContent(
       '保存工程',
     )
