@@ -77,11 +77,34 @@ describe('产品工作流视觉', () => {
     expect(
       Array.from(container.querySelectorAll('[data-workflow-tab]'), (tab) => tab.textContent),
     ).toEqual(['参数配置', '参数管理', '报警规则', '处置追溯'])
-    expect(container.querySelector('[data-platform-region="editor-tabs"] > rect')).toHaveAttribute(
-      'height',
-      '27',
-    )
+    const editorTabs = container.querySelector('[data-platform-region="editor-tabs"]')
+    expect(editorTabs).not.toBeNull()
+    expect(editorTabs?.querySelector('rect')).toHaveAttribute('x', '126')
+    expect(editorTabs?.querySelector('rect')).toHaveAttribute('height', '27')
+    expect(
+      Array.from(editorTabs?.querySelectorAll('[data-workflow-tab]') ?? [], (tab) =>
+        tab.getAttribute('transform'),
+      ),
+    ).toEqual(['translate(126 44)', 'translate(210 44)', 'translate(294 44)', 'translate(378 44)'])
+    expect(
+      Array.from(editorTabs?.querySelectorAll('[data-workflow-tab] rect') ?? [], (rect) =>
+        rect.getAttribute('width'),
+      ),
+    ).toEqual(['84', '84', '84', '84'])
     expect(container).not.toHaveTextContent('01参数配置')
+    expect(container.querySelectorAll('[data-workflow-region="parameter-category-tree"]')).toHaveLength(1)
+    expect(container.querySelectorAll('[data-workflow-region="alarm-group-tree"]')).toHaveLength(1)
+    expect(container.querySelectorAll('.product-workflow__alarm-tree-dot')).toHaveLength(3)
+    const drillingDiagram = container.querySelector('[data-workflow-diagram="borehole"]')
+    expect(drillingDiagram).toHaveTextContent('钻孔参数')
+    expect(drillingDiagram).toHaveTextContent('绑定正常')
+    expect(drillingDiagram).toHaveTextContent('当前 2.30m')
+    expect(drillingDiagram).toHaveTextContent('目标 3.00m')
+    expect(drillingDiagram).toHaveTextContent('$mdl.depth')
+    expect(container.querySelector('.product-workflow__cursor--parameter')).toBeNull()
+    expect(container.querySelector('[data-workflow-stage="parameter-management"]')).not.toHaveTextContent(
+      '钻进',
+    )
     expect(container.querySelector('[data-platform-chrome="shared"]')).toBeInTheDocument()
     expect(container.querySelector('[data-workflow-visual="parameter-alarm"]')).toHaveStyle({
       '--workflow-duration': '16000ms',

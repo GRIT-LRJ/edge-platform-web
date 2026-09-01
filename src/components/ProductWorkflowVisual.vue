@@ -291,59 +291,91 @@ onBeforeUnmount(() => {
 
         <g class="product-workflow__parameter-tabs" data-platform-region="editor-tabs">
           <rect class="product-workflow__parameter-tabs-base" x="126" y="44" width="834" height="27" />
-          <g class="product-workflow__parameter-tab product-workflow__parameter-tab--1" data-workflow-tab="parameter-configuration" transform="translate(142 44)"><g class="product-workflow__parameter-tab-active"><rect width="92" height="27" /><path d="M0 26h92" /></g><path data-workflow-tab-icon="parameter-configuration" d="M4 8h8M4 12h8M4 16h8M7 6v4M10 10v4M6 14v4" /><text x="20" y="18">参数配置</text></g>
-          <g class="product-workflow__parameter-tab product-workflow__parameter-tab--2" data-workflow-tab="parameter-management" transform="translate(234 44)"><g class="product-workflow__parameter-tab-active"><rect width="92" height="27" /><path d="M0 26h92" /></g><path data-workflow-tab-icon="parameter-management" d="M4 8c0-2 8-2 8 0v8c0 2-8 2-8 0zM4 8c0 2 8 2 8 0M4 12c0 2 8 2 8 0" /><text x="20" y="18">参数管理</text></g>
-          <g class="product-workflow__parameter-tab product-workflow__parameter-tab--3" data-workflow-tab="alarm-rules" transform="translate(326 44)"><g class="product-workflow__parameter-tab-active"><rect width="92" height="27" /><path d="M0 26h92" /></g><path data-workflow-tab-icon="alarm-rules" d="M4 15h9l-2-3V9a3 3 0 0 0-6 0v3zM7 17h3" /><text x="20" y="18">报警规则</text></g>
-          <g class="product-workflow__parameter-tab product-workflow__parameter-tab--4" data-workflow-tab="alarm-response" transform="translate(418 44)"><g class="product-workflow__parameter-tab-active"><rect width="92" height="27" /><path d="M0 26h92" /></g><path data-workflow-tab-icon="alarm-response" d="M8 7a5 5 0 1 1-4 2M4 6v4h4M8 9v4l3 2" /><text x="20" y="18">处置追溯</text></g>
+          <g class="product-workflow__parameter-tab product-workflow__parameter-tab--1" data-workflow-tab="parameter-configuration" transform="translate(126 44)"><g class="product-workflow__parameter-tab-active"><rect width="84" height="27" /><path d="M0 26h84" /></g><path class="product-workflow__parameter-tab-icon" data-workflow-tab-icon="parameter-configuration" d="M12 8h12M12 12h12M12 16h12M15 6v4M18 10v4M14 14v4" /><text x="32" y="18">参数配置</text></g>
+          <g class="product-workflow__parameter-tab product-workflow__parameter-tab--2" data-workflow-tab="parameter-management" transform="translate(210 44)"><g class="product-workflow__parameter-tab-active"><rect width="84" height="27" /><path d="M0 26h84" /></g><path class="product-workflow__parameter-tab-icon" data-workflow-tab-icon="parameter-management" d="M12 8c0-2 8-2 8 0v8c0 2-8 2-8 0zM12 8c0 2 8 2 8 0M12 12c0 2 8 2 8 0" /><text x="32" y="18">参数管理</text></g>
+          <g class="product-workflow__parameter-tab product-workflow__parameter-tab--3" data-workflow-tab="alarm-rules" transform="translate(294 44)"><g class="product-workflow__parameter-tab-active"><rect width="84" height="27" /><path d="M0 26h84" /></g><path class="product-workflow__parameter-tab-icon" data-workflow-tab-icon="alarm-rules" d="M12 15h13l-2-3V9a3 3 0 0 0-6 0v3zM15 17h3" /><text x="32" y="18">报警规则</text></g>
+          <g class="product-workflow__parameter-tab product-workflow__parameter-tab--4" data-workflow-tab="alarm-response" transform="translate(378 44)"><g class="product-workflow__parameter-tab-active"><rect width="84" height="27" /><path d="M0 26h84" /></g><path class="product-workflow__parameter-tab-icon" data-workflow-tab-icon="alarm-response" d="M16 7a5 5 0 1 1-4 2M12 6v4h4M16 9v4l3 2" /><text x="32" y="18">处置追溯</text></g>
         </g>
 
         <g class="product-workflow__stage product-workflow__stage--1" data-workflow-stage="parameter-configuration">
           <rect class="product-workflow__workspace" x="126" y="71" width="834" height="463" />
-          <rect class="product-workflow__tree-panel" x="140" y="105" width="190" height="401" rx="4" />
-          <text class="product-workflow__heading" x="156" y="132">参数分类</text>
-          <rect class="product-workflow__search" x="152" y="146" width="166" height="25" rx="3" /><text x="164" y="163">搜索参数组</text>
-          <text x="160" y="201">▾ 钻孔参数</text><text x="180" y="232">推进参数</text><text x="180" y="260">回转参数</text>
-          <text x="160" y="297">▾ 安全参数</text><text x="180" y="328">温度限制</text><text x="180" y="356">压力限制</text>
-          <rect class="product-workflow__selected" x="166" y="214" width="148" height="27" rx="3" />
+          <g class="product-workflow__parameter-tree" data-workflow-region="parameter-category-tree">
+            <rect class="product-workflow__tree-panel" x="140" y="105" width="190" height="401" rx="6" />
+            <text class="product-workflow__heading" x="156" y="132">参数分类</text>
+            <g class="product-workflow__tree-count" transform="translate(274 116)"><rect width="42" height="20" rx="10" /><text x="21" y="14" text-anchor="middle">6 组</text></g>
+            <g class="product-workflow__search-row"><rect class="product-workflow__search" x="152" y="146" width="166" height="25" rx="4" /><path d="M164 156a4 4 0 1 0 3 7l4 4M167 163l3 4" /><text class="product-workflow__tree-search-label" x="180" y="163">搜索参数组</text></g>
+            <g class="product-workflow__tree-group" transform="translate(0 0)"><path class="product-workflow__tree-chevron" d="M160 197l4 4 4-4" /><text class="product-workflow__tree-group-label" x="174" y="201">钻孔参数</text><text class="product-workflow__tree-count-label" x="302" y="201" text-anchor="end">3</text></g>
+            <rect class="product-workflow__tree-selection" x="166" y="214" width="148" height="27" rx="4" />
+            <path class="product-workflow__tree-selection-bar" d="M166 218v19" />
+            <g class="product-workflow__tree-item product-workflow__tree-item--selected"><circle cx="180" cy="227" r="3" /><text x="192" y="232">推进参数</text></g>
+            <g class="product-workflow__tree-item"><circle cx="180" cy="255" r="3" /><text x="192" y="260">回转参数</text></g>
+            <g class="product-workflow__tree-group"><path class="product-workflow__tree-chevron" d="M160 293l4 4 4-4" /><text class="product-workflow__tree-group-label" x="174" y="297">安全参数</text><text class="product-workflow__tree-count-label" x="302" y="297" text-anchor="end">3</text></g>
+            <g class="product-workflow__tree-item"><circle cx="180" cy="323" r="3" /><text x="192" y="328">温度限制</text></g>
+            <g class="product-workflow__tree-item"><circle cx="180" cy="351" r="3" /><text x="192" y="356">压力限制</text></g>
+          </g>
           <rect class="product-workflow__form-panel" x="344" y="105" width="600" height="401" rx="4" />
-          <text class="product-workflow__heading" x="364" y="134">推进参数</text><text class="product-workflow__muted" x="920" y="134" text-anchor="end">模板：钻进基础参数</text>
+          <text class="product-workflow__heading" x="364" y="134">推进参数</text><text class="product-workflow__muted" x="920" y="134" text-anchor="end">模板：钻孔基础参数</text>
           <g class="product-workflow__form-row" transform="translate(364 158)"><text y="17">推进速度</text><rect x="118" width="185" height="28" rx="3" /><text x="130" y="18">$mdl.feedSpeed</text><rect x="322" width="88" height="28" rx="3" /><text x="337" y="18">0–120 mm/s</text><rect x="430" width="72" height="28" rx="3" /><text x="448" y="18">可写</text></g>
           <g class="product-workflow__form-row" transform="translate(364 202)"><text y="17">推进压力</text><rect x="118" width="185" height="28" rx="3" /><text x="130" y="18">$mdl.feedPressure</text><rect x="322" width="88" height="28" rx="3" /><text x="337" y="18">0–25 MPa</text><rect x="430" width="72" height="28" rx="3" /><text x="448" y="18">可写</text></g>
           <g class="product-workflow__form-row" transform="translate(364 246)"><text y="17">回转速度</text><rect x="118" width="185" height="28" rx="3" /><text x="130" y="18">$mdl.rotation</text><rect x="322" width="88" height="28" rx="3" /><text x="337" y="18">0–180 rpm</text><rect x="430" width="72" height="28" rx="3" /><text x="448" y="18">可写</text></g>
           <text class="product-workflow__subheading" x="364" y="323">权限与联动</text>
-          <rect class="product-workflow__permission" x="364" y="341" width="258" height="62" rx="4" /><text x="380" y="366">可见权限　操作员 / 工程师</text><text x="380" y="389">写入权限　工程师</text>
-          <rect class="product-workflow__permission" x="638" y="341" width="282" height="62" rx="4" /><text x="654" y="366">参数联动　推进模式 = 自动</text><text x="654" y="389">模板同步　已启用</text>
+          <rect class="product-workflow__permission" x="364" y="341" width="258" height="62" rx="6" /><text class="product-workflow__permission-label" x="380" y="366">可见权限　操作员 / 工程师</text><text class="product-workflow__permission-label" x="380" y="389">写入权限　工程师</text>
+          <rect class="product-workflow__permission" x="638" y="341" width="282" height="62" rx="6" /><text class="product-workflow__permission-label" x="654" y="366">参数联动　推进模式 = 自动</text><text class="product-workflow__permission-label" x="654" y="389">模板同步　已启用</text>
           <g class="product-workflow__saved" transform="translate(792 447)"><rect width="128" height="34" rx="17" /><circle cx="18" cy="17" r="5" /><text x="32" y="21">参数配置已保存</text></g>
         </g>
 
         <g class="product-workflow__stage product-workflow__stage--2" data-workflow-stage="parameter-management">
           <rect class="product-workflow__workspace" x="126" y="71" width="834" height="463" />
           <rect class="product-workflow__hmi" x="142" y="107" width="802" height="399" rx="5" :fill="`url(#${idPrefix}-hmi)`" />
-          <text class="product-workflow__hmi-title" x="166" y="139">钻进参数管理</text><text class="product-workflow__muted" x="866" y="139">设备 01 · 在线</text>
+          <text class="product-workflow__hmi-title" x="166" y="139">钻孔参数管理</text><text class="product-workflow__muted" x="866" y="139">设备 01 · 在线</text>
           <g class="product-workflow__category-tabs"><rect x="162" y="156" width="160" height="34" rx="4" /><rect x="330" y="156" width="160" height="34" rx="4" /><rect x="498" y="156" width="160" height="34" rx="4" /><text x="209" y="178">推进参数</text><text x="377" y="178">回转参数</text><text x="545" y="178">安全参数</text></g>
           <rect class="product-workflow__param-list" x="162" y="206" width="490" height="270" rx="5" />
           <g class="product-workflow__param-row"><text x="184" y="240">推进速度</text><text x="414" y="240">68.0 mm/s</text><rect x="536" y="220" width="92" height="28" rx="14" /><text x="557" y="239">写入参数</text></g>
           <g class="product-workflow__param-row"><text x="184" y="288">推进压力</text><text x="414" y="288">12.6 MPa</text><rect x="536" y="268" width="92" height="28" rx="14" /><text x="557" y="287">写入参数</text></g>
           <g class="product-workflow__param-row"><text x="184" y="336">回转速度</text><text x="414" y="336">96 rpm</text><rect x="536" y="316" width="92" height="28" rx="14" /><text x="557" y="335">写入参数</text></g>
           <g class="product-workflow__param-row"><text x="184" y="384">钻孔深度</text><text x="414" y="384">2.30 m</text><text class="product-workflow__muted" x="554" y="384">只读</text></g>
-          <rect class="product-workflow__diagram" x="672" y="206" width="248" height="270" rx="5" /><text class="product-workflow__subheading" x="692" y="236">参数示意</text><path d="M710 398h165M734 370h116M752 343h78M791 264v150M765 292h52" /><circle cx="791" cy="292" r="20" /><text x="733" y="446">所见即所得 · 权限隔离</text>
-          <g class="product-workflow__cursor product-workflow__cursor--parameter"><path d="M0 0l4 18 5-7 7 8 4-4-8-7 8-3z" /><circle cx="1" cy="1" r="12" /></g>
+          <g class="product-workflow__parameter-diagram" data-workflow-diagram="borehole">
+            <rect class="product-workflow__diagram" x="672" y="206" width="248" height="270" rx="6" />
+            <text class="product-workflow__subheading" x="692" y="233">钻孔参数</text>
+            <g class="product-workflow__diagram-status" transform="translate(830 217)"><rect width="78" height="20" rx="10" /><circle cx="11" cy="10" r="3" /><text x="19" y="14">绑定正常</text></g>
+            <g class="product-workflow__diagram-scale">
+              <path d="M700 256v166M700 270h14M700 320h14M700 370h14M700 420h14" />
+              <text x="680" y="274">0m</text><text x="680" y="324">1m</text><text x="680" y="374">2m</text><text x="680" y="424">3m</text>
+            </g>
+            <g class="product-workflow__borehole">
+              <path class="product-workflow__borehole-wall" d="M748 256h64v166h-64z" />
+              <path class="product-workflow__drill-rod" d="M773 256h14v114h-14z" />
+              <path class="product-workflow__drill-bit" d="M769 370h22l-11 14z" />
+              <path class="product-workflow__diagram-current" d="M742 384h76" />
+              <path class="product-workflow__diagram-target" d="M742 408h76" />
+              <circle class="product-workflow__diagram-current-dot" cx="780" cy="384" r="4" />
+            </g>
+            <g class="product-workflow__diagram-labels"><text x="826" y="387">当前 2.30m</text><text x="826" y="411">目标 3.00m</text></g>
+            <text class="product-workflow__diagram-binding" x="692" y="451">变量绑定　$mdl.depth</text>
+          </g>
         </g>
 
         <g class="product-workflow__stage product-workflow__stage--3" data-workflow-stage="alarm-rules">
           <rect class="product-workflow__workspace" x="126" y="71" width="834" height="463" />
-          <rect class="product-workflow__tree-panel" x="140" y="105" width="250" height="401" rx="4" />
-          <text class="product-workflow__heading" x="158" y="133">报警组</text><text class="product-workflow__muted" x="324" y="133">已启用 12</text>
-          <text x="158" y="176">▾ 钻进系统</text><text x="178" y="208">推进压力过高</text><text x="178" y="240">水压开关异常</text><text x="178" y="272">钻具健康诊断</text>
-          <rect class="product-workflow__selected" x="166" y="189" width="210" height="28" rx="3" />
+          <g class="product-workflow__alarm-tree" data-workflow-region="alarm-group-tree">
+            <rect class="product-workflow__tree-panel" x="140" y="105" width="250" height="401" rx="6" />
+            <text class="product-workflow__heading" x="158" y="133">报警组</text>
+            <g class="product-workflow__tree-count" transform="translate(314 116)"><rect width="58" height="20" rx="10" /><text x="29" y="14" text-anchor="middle">12 启用</text></g>
+            <g class="product-workflow__alarm-tree-group"><path class="product-workflow__tree-chevron" d="M158 172l4 4 4-4" /><text class="product-workflow__tree-group-label" x="172" y="176">钻孔系统</text><text class="product-workflow__tree-count-label" x="368" y="176" text-anchor="end">3</text></g>
+            <rect class="product-workflow__tree-selection product-workflow__tree-selection--alarm" x="166" y="189" width="210" height="28" rx="4" />
+            <path class="product-workflow__tree-selection-bar product-workflow__tree-selection-bar--alarm" d="M166 193v20" />
+            <g class="product-workflow__alarm-tree-item product-workflow__alarm-tree-item--selected"><circle class="product-workflow__alarm-tree-dot product-workflow__alarm-tree-dot--critical" cx="181" cy="203" r="4" /><text x="194" y="208">推进压力过高</text></g>
+            <g class="product-workflow__alarm-tree-item"><circle class="product-workflow__alarm-tree-dot product-workflow__alarm-tree-dot--warning" cx="181" cy="235" r="4" /><text x="194" y="240">水压开关异常</text></g>
+            <g class="product-workflow__alarm-tree-item"><circle class="product-workflow__alarm-tree-dot product-workflow__alarm-tree-dot--info" cx="181" cy="267" r="4" /><text x="194" y="272">钻具健康诊断</text></g>
+          </g>
           <g class="product-workflow__alarm-type-tabs"><rect x="410" y="105" width="160" height="38" rx="4" /><rect x="580" y="105" width="160" height="38" rx="4" /><rect x="750" y="105" width="180" height="38" rx="4" /><text x="454" y="130">限值报警</text><text x="624" y="130">开关报警</text><text x="794" y="130">功能块报警</text></g>
           <rect class="product-workflow__form-panel" x="410" y="157" width="520" height="349" rx="4" />
-          <text class="product-workflow__heading" x="430" y="187">推进压力过高</text><rect class="product-workflow__severity" x="820" y="170" width="88" height="26" rx="13" /><text x="844" y="188">严重</text>
-          <text x="430" y="225">监测目标</text><rect x="530" y="207" width="354" height="28" rx="3" /><text x="544" y="226">$mdl.feedPressure</text>
-          <text x="430" y="269">前置条件</text><rect x="530" y="251" width="354" height="28" rx="3" /><text x="544" y="270">推进模式 = 自动　·　延时 2s</text>
+          <text class="product-workflow__heading" x="430" y="187">推进压力过高</text><rect class="product-workflow__severity" x="820" y="170" width="88" height="26" rx="13" /><text class="product-workflow__severity-label" x="844" y="188">严重</text>
+          <text class="product-workflow__field-label" x="430" y="225">监测目标</text><rect class="product-workflow__field" x="530" y="207" width="354" height="28" rx="4" /><text class="product-workflow__field-value" x="544" y="226">$mdl.feedPressure</text>
+          <text class="product-workflow__field-label" x="430" y="269">前置条件</text><rect class="product-workflow__field" x="530" y="251" width="354" height="28" rx="4" /><text class="product-workflow__field-value" x="544" y="270">推进模式 = 自动　·　延时 2s</text>
           <text class="product-workflow__subheading" x="430" y="315">分级阈值与死区</text>
           <g class="product-workflow__thresholds"><rect x="430" y="331" width="104" height="64" rx="4" /><rect x="544" y="331" width="104" height="64" rx="4" /><rect x="658" y="331" width="104" height="64" rx="4" /><rect x="772" y="331" width="104" height="64" rx="4" /><text x="474" y="352">LL</text><text x="588" y="352">L</text><text x="702" y="352">H</text><text x="816" y="352">HH</text><text x="463" y="379">4.0</text><text x="577" y="379">6.0</text><text x="691" y="379">20.0</text><text x="805" y="379">23.0</text></g>
-          <text x="430" y="431">消息模板</text><rect x="530" y="413" width="354" height="28" rx="3" /><text x="544" y="432">推进压力达到 {value} MPa，请检查液压回路</text>
+          <text class="product-workflow__field-label" x="430" y="431">消息模板</text><rect class="product-workflow__field" x="530" y="413" width="354" height="28" rx="4" /><text class="product-workflow__field-value" x="544" y="432">推进压力达到 {value} MPa，请检查液压回路</text>
           <g class="product-workflow__validated" transform="translate(741 459)"><rect width="143" height="30" rx="15" /><circle cx="17" cy="15" r="5" /><text x="30" y="19">规则校验通过</text></g>
         </g>
 
@@ -474,14 +506,13 @@ onBeforeUnmount(() => {
 .product-workflow__sidebar-active { fill: #43516b !important; stroke: #6b7893 !important; }.product-workflow__workspace { fill: #1d2435; }
 .product-workflow__sfc-toolbar > rect { fill: var(--drillmind-toolbar, #424b65); stroke: var(--drillmind-line, #56617b); stroke-width: .6; }
 .product-workflow__stage { opacity: 0; animation-duration: var(--workflow-duration); animation-timing-function: linear; animation-iteration-count: infinite; animation-play-state: paused; }.product-workflow__stage--1 { animation-name: workflow-stage-one; }.product-workflow__stage--2 { animation-name: workflow-stage-two; }.product-workflow__stage--3 { animation-name: workflow-stage-three; }.product-workflow__stage--4 { animation-name: workflow-stage-four; }
-.product-workflow[data-playing="true"] .product-workflow__stage, .product-workflow[data-playing="true"] .product-workflow__parameter-tab-active, .product-workflow[data-playing="true"] .product-workflow__saved, .product-workflow[data-playing="true"] .product-workflow__validated, .product-workflow[data-playing="true"] .product-workflow__sfc-flow *, .product-workflow[data-playing="true"] .product-workflow__sfc-validation, .product-workflow[data-playing="true"] .product-workflow__sfc-debug, .product-workflow[data-playing="true"] .product-workflow__monitor-stage *, .product-workflow[data-playing="true"] .product-workflow__cursor { animation-play-state: running; }
+.product-workflow[data-playing="true"] .product-workflow__stage, .product-workflow[data-playing="true"] .product-workflow__parameter-tab-active, .product-workflow[data-playing="true"] .product-workflow__saved, .product-workflow[data-playing="true"] .product-workflow__validated, .product-workflow[data-playing="true"] .product-workflow__sfc-flow *, .product-workflow[data-playing="true"] .product-workflow__sfc-validation, .product-workflow[data-playing="true"] .product-workflow__sfc-debug, .product-workflow[data-playing="true"] .product-workflow__monitor-stage * { animation-play-state: running; }
 .product-workflow__tree-panel, .product-workflow__form-panel { fill: #272f42; stroke: #55617a; }.product-workflow__search, .product-workflow__form-row rect, .product-workflow__form-panel > rect:not(.product-workflow__permission), .product-workflow__alarm-type-tabs rect { fill: #1e2637; stroke: #59667e; }
 .product-workflow__heading, .product-workflow__subheading { fill: #f1f4fa; font-size: 12px; font-weight: 700; }.product-workflow__subheading { font-size: 10px; }.product-workflow__muted { fill: #9aa6bd !important; font-size: 8px !important; }.product-workflow__selected { fill: #40506b; }
 .product-workflow__tree-panel text, .product-workflow__form-panel text, .product-workflow__form-row text, .product-workflow__permission text, .product-workflow__alarm-type-tabs text, .product-workflow__thresholds text { fill: #d6ddea; font-size: 8px; }.product-workflow__form-row > text:first-child { font-size: 9px; }
 .product-workflow__permission { fill: #202a3b; stroke: #4b5971; }.product-workflow__saved rect, .product-workflow__validated rect { fill: #254a48; stroke: #57d7c0; }.product-workflow__saved circle, .product-workflow__validated circle { fill: #5de0c5; }.product-workflow__saved text, .product-workflow__validated text { fill: #dffbf5; font-size: 8px; }
 .product-workflow__hmi { stroke: #68748e; stroke-width: .8; }.product-workflow__hmi-title { fill: #f5f7fb; font-size: 13px; font-weight: 750; }.product-workflow__category-tabs rect { fill: #28344a; stroke: #60708c; }.product-workflow__category-tabs rect:first-child { fill: #426182; stroke: #62c6e6; }.product-workflow__category-tabs text { fill: #e8edf5; font-size: 9px; font-weight: 650; }
 .product-workflow__param-list, .product-workflow__diagram, .product-workflow__alarm-table { fill: #20283a; stroke: #56637c; }.product-workflow__param-row text { fill: #e1e6ef; font-size: 10px; }.product-workflow__param-row rect { fill: #2f5361; stroke: #54d5c4; }.product-workflow__param-row + .product-workflow__param-row { transform: translateY(0); }.product-workflow__diagram text { fill: #aab6c9; font-size: 9px; }.product-workflow__diagram path, .product-workflow__diagram circle { fill: none; stroke: #72bfd2; stroke-width: 2; }
-.product-workflow__cursor { transform: translate(576px, 236px); animation: workflow-cursor var(--workflow-duration) ease-in-out infinite; animation-play-state: paused; }.product-workflow__cursor path { fill: #f5fbff; stroke: #172130; }.product-workflow__cursor circle { fill: none; stroke: #55e0c6; opacity: .7; }
 .product-workflow__severity { fill: #7b353e; stroke: #e07177; }.product-workflow__form-panel > .product-workflow__severity + text { fill: #ffd9dc; font-size: 8px; }.product-workflow__thresholds rect { fill: #252e42; stroke: #65718a; }.product-workflow__thresholds rect:nth-child(4) { fill: #67333d; stroke: #dd6d76; }.product-workflow__thresholds text { text-anchor: middle; }
 .product-workflow__alarm-summary rect { fill: #253044; stroke: #5c6b86; }.product-workflow__alarm-summary text { fill: #dce3ef; font-size: 9px; }.product-workflow__alarm-summary text:nth-of-type(even) { fill: #f5f8fd; font-size: 20px; font-weight: 750; }.product-workflow__alarm-table-head text { fill: #9eabc0; font-size: 8px; }.product-workflow__alarm-live rect { fill: #552c38; stroke: #de6975; }.product-workflow__alarm-live circle { fill: #f26471; }.product-workflow__alarm-live text, .product-workflow__alarm-history text { fill: #f0e7eb; font-size: 9px; }.product-workflow__alarm-live > rect:nth-last-of-type(1) { fill: #3c5664; stroke: #58d7c4; }.product-workflow__alarm-history rect { fill: #252f41; stroke: #536077; }.product-workflow__alarm-history circle { fill: #5bd5bc; }.product-workflow__ack { opacity: 0; animation: workflow-ack var(--workflow-duration) ease-in-out infinite; }.product-workflow__ack circle { fill: #235c51; stroke: #62e2c9; }.product-workflow__ack path { fill: none; stroke: #dffff7; stroke-width: 3; }
 
@@ -542,6 +573,62 @@ onBeforeUnmount(() => {
 .product-workflow--parameter-alarm .product-workflow__alarm-summary text:nth-of-type(even) { fill: #f8fafd; font-size: 22px; font-weight: 700; }
 .product-workflow--parameter-alarm .product-workflow__alarm-table-head text { fill: #b6c0d0; font-size: 10.5px; font-weight: 700; }
 .product-workflow--parameter-alarm .product-workflow__alarm-live text, .product-workflow--parameter-alarm .product-workflow__alarm-history text { fill: #f2edf0; font-size: 11px; }
+
+/* Parameter/alarm editor polish: keep the four compact tabs aligned to the project rail. */
+.product-workflow--parameter-alarm .product-workflow__parameter-tab { overflow: visible; }
+.product-workflow--parameter-alarm .product-workflow__parameter-tab-icon { fill: none; stroke: #b4c0d2; stroke-width: .9; stroke-linecap: round; stroke-linejoin: round; }
+.product-workflow--parameter-alarm .product-workflow__parameter-tab text { fill: #edf2f8; font-size: 8.5px; font-weight: 650; }
+.product-workflow--parameter-alarm .product-workflow__parameter-tab-active rect { fill: #5b6479; }
+.product-workflow--parameter-alarm .product-workflow__parameter-tab-active path { fill: none; stroke: #f2bf32; stroke-width: 2; }
+
+/* SVG rects and labels are siblings in this illustration, so style the actual regions explicitly. */
+.product-workflow--parameter-alarm .product-workflow__stage text { fill: #e7edf5; stroke: none; font-size: 10.5px; }
+.product-workflow--parameter-alarm .product-workflow__stage .product-workflow__heading { fill: #f7f9fd; font-size: 16px; font-weight: 700; }
+.product-workflow--parameter-alarm .product-workflow__stage .product-workflow__subheading { fill: #eef3fa; font-size: 13px; font-weight: 700; }
+.product-workflow--parameter-alarm .product-workflow__stage .product-workflow__muted { fill: #aeb9ca !important; font-size: 11px !important; }
+
+/* Compact parameter-category and alarm-group trees. */
+.product-workflow--parameter-alarm .product-workflow__tree-count rect { fill: #1d3044; stroke: #4c7182; stroke-width: .8; }
+.product-workflow--parameter-alarm .product-workflow__tree-count text { fill: #9fe3df; font-size: 8.5px; font-weight: 700; }
+.product-workflow--parameter-alarm .product-workflow__search-row path { fill: none; stroke: #7ed9df; stroke-width: 1.2; stroke-linecap: round; stroke-linejoin: round; }
+.product-workflow--parameter-alarm .product-workflow__tree-search-label { fill: #9baac0 !important; font-size: 9.5px !important; }
+.product-workflow--parameter-alarm .product-workflow__tree-group-label { fill: #f0f4fa !important; font-size: 11.5px !important; font-weight: 700; }
+.product-workflow--parameter-alarm .product-workflow__tree-count-label { fill: #94a7bb !important; font-size: 9px !important; font-weight: 700; }
+.product-workflow--parameter-alarm .product-workflow__tree-chevron { fill: none; stroke: #85dce1; stroke-width: 1.4; stroke-linecap: round; stroke-linejoin: round; }
+.product-workflow--parameter-alarm .product-workflow__tree-item circle { fill: #7b8da5; stroke: none; }
+.product-workflow--parameter-alarm .product-workflow__tree-item text { fill: #dfe8f2 !important; font-size: 10.5px !important; }
+.product-workflow--parameter-alarm .product-workflow__tree-selection { fill: #34566a; stroke: #65d9ce; stroke-width: .8; opacity: .92; }
+.product-workflow--parameter-alarm .product-workflow__tree-selection-bar { fill: none; stroke: #63dfcf; stroke-width: 2.5; stroke-linecap: round; }
+.product-workflow--parameter-alarm .product-workflow__tree-selection--alarm { fill: #4a3949; stroke: #e27b75; }
+.product-workflow--parameter-alarm .product-workflow__tree-selection-bar--alarm { stroke: #ef7778; }
+.product-workflow--parameter-alarm .product-workflow__alarm-tree-item text { fill: #e8e9f0 !important; font-size: 10.5px !important; }
+.product-workflow--parameter-alarm .product-workflow__alarm-tree-dot { stroke: #1b2333; stroke-width: .8; }
+.product-workflow--parameter-alarm .product-workflow__alarm-tree-dot--critical { fill: #f2767b; }
+.product-workflow--parameter-alarm .product-workflow__alarm-tree-dot--warning { fill: #efb64e; }
+.product-workflow--parameter-alarm .product-workflow__alarm-tree-dot--info { fill: #72c9e1; }
+
+/* The static drilling-parameter schematic replaces the old default-black circle. */
+.product-workflow--parameter-alarm .product-workflow__parameter-diagram > .product-workflow__diagram { fill: #222d42; stroke: #5f718b; stroke-width: .8; }
+.product-workflow--parameter-alarm .product-workflow__diagram-status rect { fill: #214e4d; stroke: #61d7c8; stroke-width: .8; }
+.product-workflow--parameter-alarm .product-workflow__diagram-status circle { fill: #65e0c5; stroke: none; }
+.product-workflow--parameter-alarm .product-workflow__diagram-status text { fill: #d9fbf3 !important; font-size: 8px !important; font-weight: 700; }
+.product-workflow--parameter-alarm .product-workflow__diagram-scale path { fill: none; stroke: #71859e; stroke-width: .8; }
+.product-workflow--parameter-alarm .product-workflow__diagram-scale text { fill: #9eafc2 !important; font-size: 8px !important; }
+.product-workflow--parameter-alarm .product-workflow__borehole-wall { fill: #172539; stroke: #506b84; stroke-width: .8; }
+.product-workflow--parameter-alarm .product-workflow__drill-rod { fill: #3e7180; stroke: #78dcd0; stroke-width: 1; }
+.product-workflow--parameter-alarm .product-workflow__drill-bit { fill: #65d9c8; stroke: #d5fff8; stroke-width: .7; }
+.product-workflow--parameter-alarm .product-workflow__diagram-current { fill: none; stroke: #5de0c5; stroke-width: 1.4; }
+.product-workflow--parameter-alarm .product-workflow__diagram-target { fill: none; stroke: #e9b949; stroke-width: 1.2; stroke-dasharray: 4 3; }
+.product-workflow--parameter-alarm .product-workflow__diagram-current-dot { fill: #65e0c5; stroke: #d9fff7; stroke-width: .8; }
+.product-workflow--parameter-alarm .product-workflow__diagram-labels text { fill: #e2eaf2 !important; font-size: 8.5px !important; font-weight: 700; }
+.product-workflow--parameter-alarm .product-workflow__diagram-binding { fill: #afc1d3 !important; font-size: 8.5px !important; }
+
+/* Standalone alarm-rule fields need their own fill instead of relying on a rect parent. */
+.product-workflow--parameter-alarm .product-workflow__field { fill: #252d40; stroke: #637089; stroke-width: .8; }
+.product-workflow--parameter-alarm .product-workflow__field-label { fill: #dfe7f1 !important; font-size: 10.5px !important; font-weight: 650; }
+.product-workflow--parameter-alarm .product-workflow__field-value { fill: #d3deeb !important; font-size: 10.5px !important; }
+.product-workflow--parameter-alarm .product-workflow__severity-label { fill: #ffe2e5 !important; font-size: 10.5px !important; font-weight: 700; }
+
 .product-workflow__sfc-toolbar text { fill: #eef2f8; font-size: 9px; font-weight: 650; }.product-workflow__sfc-toolbar path { stroke: #9da8bc; }.product-workflow__sfc-toolbar g rect { fill: #293246; stroke: #68758e; }.product-workflow__sfc-toolbar g circle { fill: #f15e66; }.product-workflow__sfc-canvas { fill: #22283a; }
 .product-workflow__sfc-palette > rect, .product-workflow__sfc-vars > rect, .product-workflow__sfc-validation rect, .product-workflow__sfc-debug rect { fill: #30384d; stroke: #5e6982; }.product-workflow__sfc-palette text, .product-workflow__sfc-vars text, .product-workflow__sfc-validation text, .product-workflow__sfc-debug text { fill: #e1e6f0; font-size: 8px; }.product-workflow__sfc-palette circle, .product-workflow__sfc-palette rect, .product-workflow__sfc-palette path { fill: none; stroke: #d160d8; }
 .product-workflow__sfc-link, .product-workflow__sfc-branch { fill: none; stroke: #7e899f; stroke-width: 1.5; stroke-dasharray: 480; stroke-dashoffset: 480; animation: workflow-sfc-draw var(--workflow-duration) ease-in-out infinite; animation-play-state: paused; }.product-workflow__sfc-node, .product-workflow__sfc-transition { opacity: 0; animation: workflow-sfc-node var(--workflow-duration) ease-in-out infinite; animation-play-state: paused; }.product-workflow__sfc-node--one { animation-delay: -1s; }.product-workflow__sfc-node--two { animation-delay: -2s; }.product-workflow__sfc-node--three, .product-workflow__sfc-node--four { animation-delay: -3s; }.product-workflow__sfc-transition { animation-delay: -2.5s; }
@@ -555,7 +642,7 @@ onBeforeUnmount(() => {
 .product-workflow__live-pulse circle { animation: workflow-live 1.7s ease-in-out infinite; animation-play-state: paused; }
 .product-workflow[data-static="true"] .product-workflow__stage { opacity: 0; animation: none; }.product-workflow[data-static="true"] .product-workflow__stage--4 { opacity: 1; }.product-workflow[data-static="true"] .product-workflow__parameter-tab-active { opacity: 0; animation: none; }.product-workflow[data-static="true"] .product-workflow__parameter-tab--4 .product-workflow__parameter-tab-active { opacity: 1; }.product-workflow[data-static="true"] .product-workflow__sfc-flow *, .product-workflow[data-static="true"] .product-workflow__sfc-validation, .product-workflow[data-static="true"] .product-workflow__sfc-debug { opacity: 1; animation: none; stroke-dashoffset: 0; }.product-workflow[data-static="true"] .product-workflow__sfc-runner { display: none; }.product-workflow[data-static="true"] .product-workflow__monitor-stage * { animation: none; stroke-dashoffset: 0; }
 @keyframes workflow-stage-one { 0%, 23.125% { opacity: 1; } 25%, 98.125% { opacity: 0; } 100% { opacity: 1; } } @keyframes workflow-stage-two { 0%, 23.125% { opacity: 0; } 25%, 45% { opacity: 1; } 46.875%, 100% { opacity: 0; } } @keyframes workflow-stage-three { 0%, 45% { opacity: 0; } 46.875%, 73.125% { opacity: 1; } 75%, 100% { opacity: 0; } } @keyframes workflow-stage-four { 0%, 73.125% { opacity: 0; } 75%, 98.125% { opacity: 1; } 100% { opacity: 0; } }
-@keyframes workflow-parameter-saved { 0%, 10% { opacity: 0; transform: translateY(6px); } 15%, 23% { opacity: 1; transform: translateY(0); } 25%, 100% { opacity: 0; } } @keyframes workflow-parameter-validated { 0%, 58% { opacity: 0; transform: translateY(6px); } 63%, 73% { opacity: 1; transform: translateY(0); } 75%, 100% { opacity: 0; } } @keyframes workflow-cursor { 0%, 27% { transform: translate(576px, 236px); } 34%, 43% { transform: translate(590px, 283px); } 47%, 100% { transform: translate(606px, 236px); } } @keyframes workflow-ack { 0%, 78% { opacity: 0; transform: scale(.7); } 84%, 94% { opacity: 1; transform: scale(1); } 100% { opacity: 0; } }
+@keyframes workflow-parameter-saved { 0%, 10% { opacity: 0; transform: translateY(6px); } 15%, 23% { opacity: 1; transform: translateY(0); } 25%, 100% { opacity: 0; } } @keyframes workflow-parameter-validated { 0%, 58% { opacity: 0; transform: translateY(6px); } 63%, 73% { opacity: 1; transform: translateY(0); } 75%, 100% { opacity: 0; } } @keyframes workflow-ack { 0%, 78% { opacity: 0; transform: scale(.7); } 84%, 94% { opacity: 1; transform: scale(1); } 100% { opacity: 0; } }
 @keyframes workflow-sfc-draw { 0%, 14% { stroke-dashoffset: 480; } 42%, 100% { stroke-dashoffset: 0; } } @keyframes workflow-sfc-node { 0%, 12% { opacity: 0; transform: translateY(8px); } 30%, 100% { opacity: 1; transform: translateY(0); } } @keyframes workflow-sfc-run { 0%, 50% { offset-distance: 0%; opacity: 0; } 55% { opacity: 1; } 92% { offset-distance: 100%; opacity: 1; } 100% { offset-distance: 100%; opacity: 0; } } @keyframes workflow-sfc-panel { 0%, 38% { opacity: 0; transform: translateY(8px); } 52%, 100% { opacity: 1; transform: translateY(0); } }
 @keyframes workflow-chart { 0%, 18% { stroke-dashoffset: 620; } 55%, 100% { stroke-dashoffset: 0; } } @keyframes workflow-video-scan { 0%, 100% { transform: translateY(0); opacity: .2; } 50% { transform: translateY(96px); opacity: .9; } } @keyframes workflow-live { 0%, 100% { opacity: .45; } 50% { opacity: 1; } }
 @media (max-width: 44rem) { .product-workflow--parameter-alarm svg { transform: scale(1.22) translateX(-5%); transform-origin: 57% center; }.product-workflow--sfc svg { transform: scale(1.17) translateX(-4%); transform-origin: 59% center; }.product-workflow--monitoring svg { transform: scale(1.13) translateX(-4%); transform-origin: 59% center; } }
