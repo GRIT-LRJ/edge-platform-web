@@ -7,6 +7,10 @@ describe('首页配置', () => {
     expect(homeHero.eyebrow).toBe('矿山装备数字化应用平台')
     expect(homeHero.description).toContain('设备模型')
     expect(homeHero.media.kind).toBe('image')
+    expect(homeHero.media).toMatchObject({
+      desktopPosition: 'center',
+      mobilePosition: 'center',
+    })
   })
 
   it('提供五段按左右交替排列的平台介绍正式内容', () => {
