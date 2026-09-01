@@ -394,60 +394,119 @@ onBeforeUnmount(() => {
       </template>
 
       <template v-else-if="kind === 'sfc'">
-        <g class="product-workflow__sidebar product-workflow__sfc-tree">
-          <rect x="0" y="44" width="208" height="490" />
-          <text class="product-workflow__panel-title" x="14" y="68">任务组</text>
-          <text x="16" y="105">▾ 00 主流程</text><text x="38" y="136">手动流程</text><text x="38" y="164">自动流程</text><text x="38" y="192">急停流程</text>
-          <text x="16" y="232">▾ 02 扫描</text><text x="38" y="263">巷道左侧扫描</text><text x="38" y="291">巷道右侧扫描</text>
-          <text x="16" y="331">▾ 03 规划</text><text x="38" y="362">路径规划</text><text x="38" y="390">目标孔规划</text>
-          <rect class="product-workflow__sidebar-active" x="24" y="119" width="170" height="27" rx="3" />
-        </g>
-        <g class="product-workflow__sfc-toolbar">
-          <rect x="208" y="44" width="752" height="47" />
-          <text x="230" y="73">主流程</text><path d="M320 57v19M343 57v19M366 57v19" />
-          <g transform="translate(690 54)"><rect width="74" height="27" rx="4" /><circle cx="14" cy="13.5" r="4" /><text x="26" y="18">调试模式</text></g>
-          <g transform="translate(774 54)"><rect width="70" height="27" rx="4" /><path d="M12 8l10 6-10 6z" /><text x="28" y="18">运行</text></g>
-          <g transform="translate(854 54)"><rect width="78" height="27" rx="4" /><text x="18" y="18">监控</text></g>
-        </g>
-        <rect class="product-workflow__sfc-canvas" x="208" y="91" width="752" height="443" />
-        <rect x="208" y="91" width="752" height="443" :fill="`url(#${idPrefix}-grid)`" />
-
-        <g class="product-workflow__sfc-palette">
-          <rect x="222" y="107" width="105" height="245" rx="4" />
-          <text class="product-workflow__heading" x="238" y="134">节点</text>
-          <g transform="translate(239 153)"><circle cx="10" cy="10" r="8" /><text x="28" y="14">开始</text></g>
-          <g transform="translate(239 190)"><rect x="1" y="1" width="20" height="18" /><text x="28" y="14">步骤</text></g>
-          <g transform="translate(239 227)"><path d="M1 10h20" /><text x="28" y="14">转换</text></g>
-          <g transform="translate(239 264)"><rect x="1" y="1" width="20" height="18" /><path d="M6 1v18M16 1v18" /><text x="28" y="14">并行</text></g>
-          <g transform="translate(239 301)"><rect x="1" y="1" width="20" height="18" /><text x="28" y="14">子流程</text></g>
+        <g class="product-workflow__sfc-tree" data-sfc-region="project-tree">
+          <rect x="0" y="44" width="126" height="490" />
+          <text class="product-workflow__panel-title" x="14" y="68">工程目录</text>
+          <path class="product-workflow__panel-close" d="M110 57l8 8m0-8-8 8" />
+          <rect class="product-workflow__sfc-tree-selection" x="8" y="92" width="110" height="30" rx="3" />
+          <g class="product-workflow__sfc-tree-item" data-sfc-tree-item="flow">
+            <path class="product-workflow__sfc-tree-chevron" d="M18 104l4 4 4-4" />
+            <path class="product-workflow__sfc-tree-folder" d="M33 99h6l2 2h8v9H33z" />
+            <text x="54" y="110">流程</text>
+          </g>
         </g>
 
-        <g class="product-workflow__sfc-flow">
-          <path class="product-workflow__sfc-link" d="M515 133v43M515 220v38M515 302v42M515 388v40M515 472v24" :marker-end="`url(#${idPrefix}-arrow)`" />
-          <path class="product-workflow__sfc-branch" d="M515 302v20H402v52M515 322h116v52M402 418v24h113M631 418v24H515" />
-          <g class="product-workflow__sfc-node product-workflow__sfc-node--start"><circle cx="515" cy="126" r="16" /><path d="M508 116l14 10-14 10z" /><text x="542" y="131">开始</text></g>
-          <g class="product-workflow__sfc-node product-workflow__sfc-node--one"><rect x="456" y="176" width="118" height="44" rx="3" /><text x="515" y="203">设备自检</text></g>
-          <g class="product-workflow__sfc-transition product-workflow__sfc-transition--one"><path d="M454 258h122" /><text x="515" y="250">自检完成 == true</text></g>
-          <g class="product-workflow__sfc-node product-workflow__sfc-node--two"><rect x="456" y="258" width="118" height="44" rx="3" /><text x="515" y="285">待机就绪</text></g>
-          <g class="product-workflow__sfc-node product-workflow__sfc-node--three"><rect x="343" y="374" width="118" height="44" rx="3" /><text x="402" y="401">手动流程</text></g>
-          <g class="product-workflow__sfc-node product-workflow__sfc-node--four"><rect x="572" y="374" width="118" height="44" rx="3" /><text x="631" y="401">自动流程</text></g>
-          <g class="product-workflow__sfc-transition product-workflow__sfc-transition--two"><path d="M454 450h122" /><text x="515" y="466">急停信号 == false</text></g>
-          <g class="product-workflow__sfc-breakpoint"><circle cx="574" cy="450" r="7" /><text x="588" y="454">断点 01</text></g>
-          <circle class="product-workflow__sfc-runner" cx="515" cy="126" r="7" :filter="`url(#${idPrefix}-glow)`" />
+        <g class="product-workflow__sfc-editor-tabs" data-sfc-region="editor-tabs">
+          <rect class="product-workflow__sfc-editor-tabs-base" x="126" y="44" width="664" height="28" />
+          <g class="product-workflow__sfc-editor-tab product-workflow__sfc-editor-tab--active" data-sfc-tab="manual-flow" transform="translate(126 44)">
+            <rect width="112" height="28" />
+            <path class="product-workflow__sfc-editor-tab-icon" d="M16 9h10v10H16zm3 0v10m4-10v10M16 14h10" />
+            <text x="34" y="19">手动流程</text>
+            <path class="product-workflow__sfc-editor-tab-close" d="M96 10l8 8m0-8-8 8" />
+          </g>
         </g>
 
-        <g class="product-workflow__sfc-vars">
-          <rect x="720" y="107" width="220" height="228" rx="5" />
-          <text class="product-workflow__heading" x="738" y="135">运行变量</text><text class="product-workflow__muted" x="867" y="135">当前周期</text>
-          <path d="M736 151h188" />
-          <text x="738" y="179">复位信号</text><text x="865" y="179">false</text>
-          <text x="738" y="211">急停信号</text><text x="865" y="211">false</text>
-          <text x="738" y="243">自动开关</text><text class="product-workflow__value" x="865" y="243">true</text>
-          <text x="738" y="275">流程模式</text><text x="865" y="275">AUTO</text>
-          <text x="738" y="307">模型联动</text><text class="product-workflow__value" x="842" y="307">双向</text>
+        <g class="product-workflow__sfc-toolbar" data-sfc-region="toolbar">
+          <rect x="126" y="72" width="664" height="44" />
+          <g class="product-workflow__sfc-tool" data-sfc-tool="save" transform="translate(146 72)"><path d="M-6 9h12v10H-6zM-3 9V6h6v3M-3 16h6" /><text x="0" y="35">保存</text></g>
+          <g class="product-workflow__sfc-tool" data-sfc-tool="undo" transform="translate(220 72)"><path d="M6 10H-4l4-4M-4 10a7 7 0 1 1 2 7" /><text x="0" y="35">撤销</text></g>
+          <g class="product-workflow__sfc-tool" data-sfc-tool="start" transform="translate(294 72)"><path d="M-5 7l10 6-10 6z" /><text x="0" y="35">开始</text></g>
+          <g class="product-workflow__sfc-tool" data-sfc-tool="function-block" transform="translate(368 72)"><rect x="-7" y="7" width="14" height="12" rx="1" /><path d="M-3 7v12M3 7v12" /><text x="0" y="35">功能块</text></g>
+          <g class="product-workflow__sfc-tool" data-sfc-tool="transition" transform="translate(442 72)"><path d="M-8 13h16" /><path d="M-5 9v8M5 9v8" /><text x="0" y="35">转换</text></g>
+          <g class="product-workflow__sfc-tool" data-sfc-tool="step" transform="translate(516 72)"><rect x="-7" y="7" width="14" height="12" rx="1" /><text x="0" y="35">普通步骤</text></g>
+          <g class="product-workflow__sfc-tool" data-sfc-tool="subflow" transform="translate(590 72)"><rect x="-7" y="7" width="14" height="12" rx="1" /><path d="M-3 7v12M3 7v12" /><text x="0" y="35">子流程</text></g>
+          <g class="product-workflow__sfc-tool" data-sfc-tool="end" transform="translate(664 72)"><path d="M-5 8l5 10 5-10z" /><text x="0" y="35">结束</text></g>
         </g>
-        <g class="product-workflow__sfc-validation" transform="translate(731 358)"><rect width="198" height="54" rx="5" /><circle cx="24" cy="27" r="10" /><path d="M19 27l4 4 8-9" /><text x="45" y="24">流程规则校验通过</text><text class="product-workflow__muted" x="45" y="41">0 错误 · 0 警告</text></g>
-        <g class="product-workflow__sfc-debug" transform="translate(731 430)"><rect width="198" height="58" rx="5" /><text x="16" y="23">已暂停在断点 01</text><rect x="16" y="32" width="72" height="19" rx="9.5" /><text x="28" y="46">单步执行</text><rect x="98" y="32" width="82" height="19" rx="9.5" /><text x="110" y="46">运行到下一步</text></g>
+
+        <rect class="product-workflow__sfc-canvas" data-sfc-region="canvas" x="126" y="116" width="664" height="418" />
+        <path class="product-workflow__sfc-guide" d="M126 238h664M126 404h664M430 116v418" />
+
+        <g class="product-workflow__sfc-flow" data-sfc-region="flow">
+          <path class="product-workflow__sfc-connector" d="M430 180v24" :marker-end="`url(#${idPrefix}-arrow)`" />
+          <path class="product-workflow__sfc-connector" d="M430 234v24" :marker-end="`url(#${idPrefix}-arrow)`" />
+          <path class="product-workflow__sfc-connector" d="M430 316v42" :marker-end="`url(#${idPrefix}-arrow)`" />
+          <path class="product-workflow__sfc-connector" d="M430 376v42" :marker-end="`url(#${idPrefix}-arrow)`" />
+          <g class="product-workflow__sfc-flow-block product-workflow__sfc-flow-block--start" data-sfc-block="start">
+            <path class="product-workflow__sfc-flow-shape" d="M408 142h44l-22 38z" />
+            <text x="430" y="165">开始</text>
+          </g>
+          <g class="product-workflow__sfc-flow-block product-workflow__sfc-flow-block--condition" data-sfc-block="condition">
+            <rect class="product-workflow__sfc-flow-shape" x="398" y="204" width="64" height="30" rx="2" />
+            <text x="430" y="224">true</text>
+          </g>
+          <g class="product-workflow__sfc-flow-block product-workflow__sfc-flow-block--state" data-sfc-block="state">
+            <rect class="product-workflow__sfc-flow-shape" x="370" y="258" width="120" height="58" />
+            <text x="430" y="293">待机状态</text>
+          </g>
+          <g class="product-workflow__sfc-flow-block product-workflow__sfc-flow-block--mode" data-sfc-block="auto-mode">
+            <path class="product-workflow__sfc-flow-shape" d="M372 358h116M372 376h116" />
+            <text x="430" y="370">自动模式开关</text>
+          </g>
+          <g class="product-workflow__sfc-flow-block product-workflow__sfc-flow-block--end" data-sfc-block="end">
+            <path class="product-workflow__sfc-flow-shape" d="M430 418l22 40h-44z" />
+            <text x="430" y="449">结束</text>
+          </g>
+          <circle class="product-workflow__sfc-runner" data-sfc-runner="true" cx="430" cy="162" r="6" :filter="`url(#${idPrefix}-glow)`" />
+        </g>
+
+        <g class="product-workflow__sfc-vars" data-sfc-region="variables">
+          <rect class="product-workflow__sfc-vars-panel" x="548" y="130" width="228" height="108" rx="4" />
+          <text class="product-workflow__sfc-vars-title" x="562" y="151">流程变量</text>
+          <path class="product-workflow__sfc-vars-rule" d="M558 160h208" />
+          <text class="product-workflow__sfc-table-head" x="562" y="177">名称</text>
+          <text class="product-workflow__sfc-table-head" x="656" y="177">描述</text>
+          <text class="product-workflow__sfc-table-head" x="698" y="177">数据类型</text>
+          <text class="product-workflow__sfc-table-head" x="754" y="177">默认</text>
+          <rect class="product-workflow__sfc-table-row" x="556" y="184" width="212" height="38" rx="2" />
+          <text x="562" y="207">自动模式开关</text><text x="656" y="207">—</text>
+          <rect class="product-workflow__sfc-bool" x="698" y="193" width="32" height="17" rx="3" /><text x="704" y="205">bool</text><text x="754" y="207">—</text>
+        </g>
+
+        <g class="product-workflow__sfc-properties" data-sfc-region="properties">
+          <rect class="product-workflow__sfc-properties-panel" x="790" y="44" width="170" height="490" />
+          <text class="product-workflow__panel-title" x="806" y="68">属性</text>
+          <path class="product-workflow__panel-close" d="M944 57l8 8m0-8-8 8" />
+          <g class="product-workflow__sfc-property-section" data-sfc-property-section="node">
+            <rect x="798" y="84" width="154" height="76" rx="4" />
+            <text class="product-workflow__sfc-section-title" x="808" y="105">节点属性</text>
+            <rect class="product-workflow__sfc-chip" x="866" y="91" width="76" height="18" rx="9" /><text x="874" y="104">Transition</text>
+            <path class="product-workflow__sfc-section-rule" d="M806 114h138" />
+            <text class="product-workflow__sfc-property-label" x="808" y="134">类型</text><text x="844" y="134">转换节点</text>
+            <text class="product-workflow__sfc-property-label" x="808" y="151">描述</text><text class="product-workflow__sfc-property-muted" x="844" y="151">流程条件</text>
+          </g>
+          <g class="product-workflow__sfc-property-section" data-sfc-property-section="condition">
+            <rect x="798" y="168" width="154" height="118" rx="4" />
+            <text class="product-workflow__sfc-section-title" x="808" y="189">条件配置</text>
+            <path class="product-workflow__sfc-section-rule" d="M806 198h138" />
+            <text class="product-workflow__sfc-property-label" x="808" y="216">条件类型</text>
+            <rect class="product-workflow__sfc-condition-option" x="808" y="224" width="42" height="20" rx="3" /><text x="817" y="238">表达式</text>
+            <rect class="product-workflow__sfc-condition-option" x="854" y="224" width="34" height="20" rx="3" /><text x="862" y="238">变量</text>
+            <rect class="product-workflow__sfc-condition-option product-workflow__sfc-condition-option--active" x="892" y="224" width="42" height="20" rx="3" /><text x="901" y="238">常量</text>
+            <text class="product-workflow__sfc-property-label" x="808" y="264">常量</text>
+            <circle class="product-workflow__sfc-radio product-workflow__sfc-radio--active" cx="844" cy="260" r="5" /><text x="854" y="264">TRUE</text>
+            <circle class="product-workflow__sfc-radio" cx="900" cy="260" r="5" /><text x="910" y="264">FALSE</text>
+          </g>
+          <g class="product-workflow__sfc-property-section" data-sfc-property-section="style">
+            <rect x="798" y="294" width="154" height="212" rx="4" />
+            <text class="product-workflow__sfc-section-title" x="808" y="315">样式设置</text>
+            <path class="product-workflow__sfc-section-rule" d="M806 324h138" />
+            <text class="product-workflow__sfc-property-label" x="808" y="346">填充色</text>
+            <rect class="product-workflow__sfc-color-swatch" x="808" y="354" width="20" height="20" rx="2" /><rect class="product-workflow__sfc-color-field" x="834" y="354" width="108" height="20" rx="3" /><text x="843" y="368">#252839</text>
+            <text class="product-workflow__sfc-property-label" x="808" y="396">文字色</text>
+            <rect class="product-workflow__sfc-color-swatch product-workflow__sfc-color-swatch--text" x="808" y="404" width="20" height="20" rx="2" /><rect class="product-workflow__sfc-color-field" x="834" y="404" width="108" height="20" rx="3" /><text x="843" y="418">#FFFFFF</text>
+            <text class="product-workflow__sfc-property-muted" x="808" y="454">选中状态</text><text class="product-workflow__sfc-property-value" x="808" y="474">蓝色虚线 · 固定</text>
+          </g>
+        </g>
       </template>
 
       <template v-else>
@@ -506,7 +565,7 @@ onBeforeUnmount(() => {
 .product-workflow__sidebar-active { fill: #43516b !important; stroke: #6b7893 !important; }.product-workflow__workspace { fill: #1d2435; }
 .product-workflow__sfc-toolbar > rect { fill: var(--drillmind-toolbar, #424b65); stroke: var(--drillmind-line, #56617b); stroke-width: .6; }
 .product-workflow__stage { opacity: 0; animation-duration: var(--workflow-duration); animation-timing-function: linear; animation-iteration-count: infinite; animation-play-state: paused; }.product-workflow__stage--1 { animation-name: workflow-stage-one; }.product-workflow__stage--2 { animation-name: workflow-stage-two; }.product-workflow__stage--3 { animation-name: workflow-stage-three; }.product-workflow__stage--4 { animation-name: workflow-stage-four; }
-.product-workflow[data-playing="true"] .product-workflow__stage, .product-workflow[data-playing="true"] .product-workflow__parameter-tab-active, .product-workflow[data-playing="true"] .product-workflow__saved, .product-workflow[data-playing="true"] .product-workflow__validated, .product-workflow[data-playing="true"] .product-workflow__sfc-flow *, .product-workflow[data-playing="true"] .product-workflow__sfc-validation, .product-workflow[data-playing="true"] .product-workflow__sfc-debug, .product-workflow[data-playing="true"] .product-workflow__monitor-stage * { animation-play-state: running; }
+.product-workflow[data-playing="true"] .product-workflow__stage, .product-workflow[data-playing="true"] .product-workflow__parameter-tab-active, .product-workflow[data-playing="true"] .product-workflow__saved, .product-workflow[data-playing="true"] .product-workflow__validated, .product-workflow[data-playing="true"] .product-workflow__sfc-flow *, .product-workflow[data-playing="true"] .product-workflow__monitor-stage * { animation-play-state: running; }
 .product-workflow__tree-panel, .product-workflow__form-panel { fill: #272f42; stroke: #55617a; }.product-workflow__search, .product-workflow__form-row rect, .product-workflow__form-panel > rect:not(.product-workflow__permission), .product-workflow__alarm-type-tabs rect { fill: #1e2637; stroke: #59667e; }
 .product-workflow__heading, .product-workflow__subheading { fill: #f1f4fa; font-size: 12px; font-weight: 700; }.product-workflow__subheading { font-size: 10px; }.product-workflow__muted { fill: #9aa6bd !important; font-size: 8px !important; }.product-workflow__selected { fill: #40506b; }
 .product-workflow__tree-panel text, .product-workflow__form-panel text, .product-workflow__form-row text, .product-workflow__permission text, .product-workflow__alarm-type-tabs text, .product-workflow__thresholds text { fill: #d6ddea; font-size: 8px; }.product-workflow__form-row > text:first-child { font-size: 9px; }
@@ -629,11 +688,68 @@ onBeforeUnmount(() => {
 .product-workflow--parameter-alarm .product-workflow__field-value { fill: #d3deeb !important; font-size: 10.5px !important; }
 .product-workflow--parameter-alarm .product-workflow__severity-label { fill: #ffe2e5 !important; font-size: 10.5px !important; font-weight: 700; }
 
-.product-workflow__sfc-toolbar text { fill: #eef2f8; font-size: 9px; font-weight: 650; }.product-workflow__sfc-toolbar path { stroke: #9da8bc; }.product-workflow__sfc-toolbar g rect { fill: #293246; stroke: #68758e; }.product-workflow__sfc-toolbar g circle { fill: #f15e66; }.product-workflow__sfc-canvas { fill: #22283a; }
-.product-workflow__sfc-palette > rect, .product-workflow__sfc-vars > rect, .product-workflow__sfc-validation rect, .product-workflow__sfc-debug rect { fill: #30384d; stroke: #5e6982; }.product-workflow__sfc-palette text, .product-workflow__sfc-vars text, .product-workflow__sfc-validation text, .product-workflow__sfc-debug text { fill: #e1e6f0; font-size: 8px; }.product-workflow__sfc-palette circle, .product-workflow__sfc-palette rect, .product-workflow__sfc-palette path { fill: none; stroke: #d160d8; }
-.product-workflow__sfc-link, .product-workflow__sfc-branch { fill: none; stroke: #7e899f; stroke-width: 1.5; stroke-dasharray: 480; stroke-dashoffset: 480; animation: workflow-sfc-draw var(--workflow-duration) ease-in-out infinite; animation-play-state: paused; }.product-workflow__sfc-node, .product-workflow__sfc-transition { opacity: 0; animation: workflow-sfc-node var(--workflow-duration) ease-in-out infinite; animation-play-state: paused; }.product-workflow__sfc-node--one { animation-delay: -1s; }.product-workflow__sfc-node--two { animation-delay: -2s; }.product-workflow__sfc-node--three, .product-workflow__sfc-node--four { animation-delay: -3s; }.product-workflow__sfc-transition { animation-delay: -2.5s; }
-.product-workflow__sfc-node rect { fill: #31394e; stroke: #abb4c6; stroke-width: 1.5; }.product-workflow__sfc-node circle { fill: #334965; stroke: #b9c4d6; }.product-workflow__sfc-node path { fill: #d9e3f0; }.product-workflow__sfc-node text, .product-workflow__sfc-transition text { fill: #f2f4f8; font-size: 10px; text-anchor: middle; }.product-workflow__sfc-transition path { stroke: #b9c2d2; stroke-width: 2; }
-.product-workflow__sfc-runner { fill: #72df4c; offset-path: path("M515 126v176m0 20h116v96m0 24H515v54"); animation: workflow-sfc-run var(--workflow-duration) linear infinite; animation-play-state: paused; }.product-workflow__sfc-breakpoint circle { fill: #f05c67; }.product-workflow__sfc-breakpoint text { fill: #ffbec3; font-size: 8px; }.product-workflow__sfc-vars path { stroke: #59657a; }.product-workflow__value { fill: #65e0c5 !important; }.product-workflow__sfc-validation, .product-workflow__sfc-debug { opacity: 0; animation: workflow-sfc-panel var(--workflow-duration) ease-in-out infinite; animation-play-state: paused; }.product-workflow__sfc-validation circle { fill: #2c6758; stroke: #65e2c8; }.product-workflow__sfc-validation path { fill: none; stroke: #dffef5; stroke-width: 2; }.product-workflow__sfc-debug { animation-delay: -4s; }.product-workflow__sfc-debug rect { stroke: #d75f69; }.product-workflow__sfc-debug > rect:not(:first-child) { fill: #3a4b5c; stroke: #69c9d3; }
+.product-workflow__sfc-tree > rect { fill: #252839; stroke: #4f5b72; stroke-width: .7; }
+.product-workflow__sfc-tree text { fill: #edf2fa; font-size: 11.5px; font-weight: 650; }
+.product-workflow__sfc-tree-selection { fill: #43516b; stroke: #6c7c97; stroke-width: .7; }
+.product-workflow__sfc-tree-chevron { fill: none; stroke: #9aa8bd; stroke-width: 1.4; stroke-linecap: round; stroke-linejoin: round; }
+.product-workflow__sfc-tree-folder { fill: #a5cf27; stroke: #a5cf27; stroke-width: .6; }
+.product-workflow__sfc-editor-tabs-base { fill: #252839; stroke: #4f5b72; stroke-width: .7; }
+.product-workflow__sfc-editor-tab > rect { fill: #3b455f; stroke: #596781; stroke-width: .7; }
+.product-workflow__sfc-editor-tab--active > rect { fill: #4b5a76; stroke: #6a7995; }
+.product-workflow__sfc-editor-tab text { fill: #f3f6fb; font-size: 11px; font-weight: 700; }
+.product-workflow__sfc-editor-tab-icon { fill: none; stroke: #66e2d0; stroke-width: 1.1; }
+.product-workflow__sfc-editor-tab-close { fill: none; stroke: #a4afc2; stroke-width: 1.1; stroke-linecap: round; }
+.product-workflow__sfc-toolbar > rect { fill: #343c53; stroke: #56637c; stroke-width: .7; }
+.product-workflow__sfc-tool { color: #eef3fb; }
+.product-workflow__sfc-tool text { fill: #eef3fb; font-size: 8.5px; font-weight: 700; text-anchor: middle; }
+.product-workflow__sfc-tool path, .product-workflow__sfc-tool rect { fill: none; stroke: #afbdd1; stroke-width: 1.1; stroke-linecap: round; stroke-linejoin: round; }
+.product-workflow__sfc-tool rect { fill: #2e3850; }
+.product-workflow__sfc-canvas { fill: #252839; stroke: #4f5b72; stroke-width: .7; }
+.product-workflow__sfc-guide { fill: none; stroke: #aab7ca; stroke-opacity: .055; stroke-width: .8; stroke-dasharray: 2 9; }
+
+.product-workflow__sfc-flow { isolation: isolate; }
+.product-workflow__sfc-connector { fill: none; stroke: #8995aa; stroke-width: 1.5; stroke-linecap: round; }
+.product-workflow__sfc-flow-block text { fill: #f7f9fd; font-size: 12.5px; font-weight: 700; text-anchor: middle; }
+.product-workflow__sfc-flow-shape { animation: workflow-sfc-shape-pulse var(--workflow-duration) ease-in-out infinite; animation-play-state: paused; }
+.product-workflow__sfc-flow-block--start .product-workflow__sfc-flow-shape { fill: #252839; stroke: #a7d522; stroke-width: 2; }
+.product-workflow__sfc-flow-block--condition .product-workflow__sfc-flow-shape { fill: #252839; stroke: #4aaeff; stroke-width: 1.8; stroke-dasharray: 5 3; }
+.product-workflow__sfc-flow-block--state .product-workflow__sfc-flow-shape { fill: #252839; stroke: #aab4c5; stroke-width: 1.8; }
+.product-workflow__sfc-flow-block--mode .product-workflow__sfc-flow-shape { fill: none; stroke: #aab4c5; stroke-width: 1.8; stroke-linecap: round; }
+.product-workflow__sfc-flow-block--end .product-workflow__sfc-flow-shape { fill: #252839; stroke: #9f72ff; stroke-width: 2; }
+.product-workflow__sfc-flow-block--start .product-workflow__sfc-flow-shape { animation-delay: 0s; }
+.product-workflow__sfc-flow-block--condition .product-workflow__sfc-flow-shape { animation-delay: -2.2s; }
+.product-workflow__sfc-flow-block--state .product-workflow__sfc-flow-shape { animation-delay: -4.6s; }
+.product-workflow__sfc-flow-block--mode .product-workflow__sfc-flow-shape { animation-delay: -7.3s; }
+.product-workflow__sfc-flow-block--end .product-workflow__sfc-flow-shape { animation-delay: -9.6s; }
+.product-workflow__sfc-runner { fill: #7de18c; offset-path: path("M430 162V204V258V338V418V458"); offset-distance: 0%; animation: workflow-sfc-run var(--workflow-duration) linear infinite; animation-play-state: paused; }
+
+.product-workflow__sfc-vars-panel, .product-workflow__sfc-properties-panel { fill: #343c53; stroke: #66738c; stroke-width: .8; }
+.product-workflow__sfc-vars-title, .product-workflow__sfc-section-title { fill: #f2f5fb; font-size: 11.5px; font-weight: 750; }
+.product-workflow__sfc-vars-rule, .product-workflow__sfc-section-rule { fill: none; stroke: #7d8aa1; stroke-opacity: .72; stroke-width: .7; }
+.product-workflow__sfc-table-head { fill: #b7c2d2; font-size: 8.5px; font-weight: 700; }
+.product-workflow__sfc-table-row { fill: #2a3349; stroke: #596780; stroke-width: .6; }
+.product-workflow__sfc-vars > text:not(.product-workflow__sfc-table-head):not(.product-workflow__sfc-vars-title) { fill: #edf2f8; font-size: 9.5px; }
+.product-workflow__sfc-bool { fill: #2f705a; stroke: #63d8a4; stroke-width: .6; }
+.product-workflow__sfc-bool + text { fill: #a4f3bd; font-family: ui-monospace, SFMono-Regular, Consolas, monospace; font-size: 8px; font-weight: 700; }
+
+.product-workflow__sfc-properties > .product-workflow__panel-close { fill: none; stroke: #a6b2c5; stroke-width: 1.1; stroke-linecap: round; }
+.product-workflow__sfc-property-section > rect { fill: #30394e; stroke: #65718a; stroke-width: .7; }
+.product-workflow__sfc-chip { fill: #3c8fd1; stroke: #64c7ed; stroke-width: .6; }
+.product-workflow__sfc-chip + text { fill: #f3fbff; font-size: 8.3px; font-weight: 750; }
+.product-workflow__sfc-property-label { fill: #c6d0df; font-size: 9px; font-weight: 650; }
+.product-workflow__sfc-property-section > text:not(.product-workflow__sfc-section-title):not(.product-workflow__sfc-property-label):not(.product-workflow__sfc-property-muted):not(.product-workflow__sfc-property-value) { fill: #edf2f8; font-size: 9px; }
+.product-workflow__sfc-property-muted { fill: #9daabd; font-size: 8.5px; }
+.product-workflow__sfc-property-value { fill: #76e1ca; font-size: 8.8px; font-weight: 700; }
+.product-workflow__sfc-condition-option { fill: #252d40; stroke: #64718a; stroke-width: .6; }
+.product-workflow__sfc-condition-option--active { fill: #4388b3; stroke: #75d8ef; }
+.product-workflow__sfc-condition-option + text { fill: #eef3fa; font-size: 7.8px; font-weight: 650; }
+.product-workflow__sfc-radio { fill: none; stroke: #9eaabd; stroke-width: 1; }
+.product-workflow__sfc-radio--active { fill: #ffc51f; stroke: #ffc51f; }
+.product-workflow__sfc-radio + text { fill: #f3f6fb; font-size: 8.5px; font-weight: 700; }
+.product-workflow__sfc-color-swatch { fill: #252839; stroke: #8491a8; stroke-width: .7; }
+.product-workflow__sfc-color-swatch--text { fill: #ffffff; }
+.product-workflow__sfc-color-field { fill: #252d40; stroke: #66738c; stroke-width: .6; }
+.product-workflow__sfc-color-field + text { fill: #eef2f7; font-family: ui-monospace, SFMono-Regular, Consolas, monospace; font-size: 8.5px; }
 .product-workflow__monitor-shell, .product-workflow__monitor-nav > rect:first-child { fill: #1f2637; }.product-workflow__monitor-nav circle { fill: #64dc49; }.product-workflow__monitor-stage > rect:first-child { stroke: #56627a; }.product-workflow__monitor-title { fill: #f4f6fb; font-size: 13px; font-weight: 750; }.product-workflow__monitor-status circle, .product-workflow__live-pulse circle { fill: #61dfc6; }.product-workflow__monitor-status text { fill: #dce3ee; font-size: 9px; }
 .product-workflow__gauges > rect, .product-workflow__monitor-metrics rect, .product-workflow__monitor-progress > rect:first-child, .product-workflow__monitor-chart > rect, .product-workflow__monitor-video > rect:first-child { fill: #222b3d; stroke: #5a6a82; }.product-workflow__gauges g > circle:first-child { fill: #1b2232; stroke: #49566d; stroke-width: 8; }.product-workflow__gauge-value { fill: none; stroke: #69dc4e; stroke-width: 5; stroke-dasharray: 190 95; transform: rotate(-90deg); }.product-workflow__gauge-value--two { stroke: #65dce0; stroke-dasharray: 145 140; }.product-workflow__gauge-value--three { stroke: #d7d85b; stroke-dasharray: 170 115; }.product-workflow__gauges g path { stroke: #f1f6fb; stroke-width: 2; }.product-workflow__gauge-needle { transform-box: fill-box; transform-origin: 0 100%; transition: transform 280ms ease-out; }.product-workflow__gauges g text { fill: #f5f8fc; font-size: 13px; font-weight: 700; text-anchor: middle; }.product-workflow__gauges g text:last-child { fill: #a7b2c5; font-size: 8px; }
 .product-workflow__monitor-metrics text, .product-workflow__monitor-progress text { fill: #aeb9ca; font-size: 8px; }.product-workflow__monitor-metrics text:nth-of-type(even) { fill: #f1f5fa; font-size: 13px; font-weight: 700; }.product-workflow__monitor-progress > rect:nth-of-type(2) { fill: #182131; stroke: none; }.product-workflow__progress-value { fill: #62d9c3 !important; stroke: none !important; }.product-workflow__monitor-progress circle { fill: #d8fcf5; }
@@ -644,10 +760,11 @@ onBeforeUnmount(() => {
 .product-workflow { -webkit-font-smoothing: antialiased; }
 .product-workflow text { font-kerning: normal; }
 .product-workflow__sidebar text, .product-workflow__monitor-nav text { font-size: 11px; }
-.product-workflow__sfc-toolbar text { font-size: 10px; }
-.product-workflow__sfc-palette text, .product-workflow__sfc-vars text, .product-workflow__sfc-validation text, .product-workflow__sfc-debug text { font-size: 9px; }
-.product-workflow__sfc-node text, .product-workflow__sfc-transition text { font-size: 11px; }
-.product-workflow__sfc-breakpoint text { font-size: 9px; }
+.product-workflow--sfc .product-workflow__sfc-editor-tab text { font-size: 11px; }
+.product-workflow--sfc .product-workflow__sfc-tool text { font-size: 8.5px; }
+.product-workflow--sfc .product-workflow__sfc-flow-block text { font-size: 12.5px; }
+.product-workflow--sfc .product-workflow__sfc-vars text { font-size: 9.5px; }
+.product-workflow--sfc .product-workflow__sfc-properties text { font-size: 9px; }
 .product-workflow__monitor-status text { font-size: 10px; }
 .product-workflow__gauges g text:last-child { font-size: 9px; }
 .product-workflow__monitor-metrics text, .product-workflow__monitor-progress text { font-size: 9px; }
@@ -669,11 +786,11 @@ onBeforeUnmount(() => {
 .product-workflow--parameter-alarm .product-workflow__diagram-labels text { font-size: 9.5px !important; }
 .product-workflow--parameter-alarm .product-workflow__diagram-binding { font-size: 9.5px !important; }
 .product-workflow--parameter-alarm .product-workflow__field-label, .product-workflow--parameter-alarm .product-workflow__field-value { font-size: 11.5px !important; }
-.product-workflow[data-static="true"] .product-workflow__stage { opacity: 0; animation: none; }.product-workflow[data-static="true"] .product-workflow__stage--4 { opacity: 1; }.product-workflow[data-static="true"] .product-workflow__parameter-tab-active { opacity: 0; animation: none; }.product-workflow[data-static="true"] .product-workflow__parameter-tab--4 .product-workflow__parameter-tab-active { opacity: 1; }.product-workflow[data-static="true"] .product-workflow__sfc-flow *, .product-workflow[data-static="true"] .product-workflow__sfc-validation, .product-workflow[data-static="true"] .product-workflow__sfc-debug { opacity: 1; animation: none; stroke-dashoffset: 0; }.product-workflow[data-static="true"] .product-workflow__sfc-runner { display: none; }.product-workflow[data-static="true"] .product-workflow__monitor-stage * { animation: none; stroke-dashoffset: 0; }
+.product-workflow[data-static="true"] .product-workflow__stage { opacity: 0; animation: none; }.product-workflow[data-static="true"] .product-workflow__stage--4 { opacity: 1; }.product-workflow[data-static="true"] .product-workflow__parameter-tab-active { opacity: 0; animation: none; }.product-workflow[data-static="true"] .product-workflow__parameter-tab--4 .product-workflow__parameter-tab-active { opacity: 1; }.product-workflow[data-static="true"] .product-workflow__sfc-flow * { opacity: 1; animation: none; stroke-dashoffset: 0; }.product-workflow[data-static="true"] .product-workflow__sfc-runner { display: none; }.product-workflow[data-static="true"] .product-workflow__monitor-stage * { animation: none; stroke-dashoffset: 0; }
 @keyframes workflow-stage-one { 0%, 23.125% { opacity: 1; } 25%, 98.125% { opacity: 0; } 100% { opacity: 1; } } @keyframes workflow-stage-two { 0%, 23.125% { opacity: 0; } 25%, 45% { opacity: 1; } 46.875%, 100% { opacity: 0; } } @keyframes workflow-stage-three { 0%, 45% { opacity: 0; } 46.875%, 73.125% { opacity: 1; } 75%, 100% { opacity: 0; } } @keyframes workflow-stage-four { 0%, 73.125% { opacity: 0; } 75%, 98.125% { opacity: 1; } 100% { opacity: 0; } }
 @keyframes workflow-parameter-saved { 0%, 10% { opacity: 0; transform: translateY(6px); } 15%, 23% { opacity: 1; transform: translateY(0); } 25%, 100% { opacity: 0; } } @keyframes workflow-parameter-validated { 0%, 58% { opacity: 0; transform: translateY(6px); } 63%, 73% { opacity: 1; transform: translateY(0); } 75%, 100% { opacity: 0; } } @keyframes workflow-ack { 0%, 78% { opacity: 0; transform: scale(.7); } 84%, 94% { opacity: 1; transform: scale(1); } 100% { opacity: 0; } }
-@keyframes workflow-sfc-draw { 0%, 14% { stroke-dashoffset: 480; } 42%, 100% { stroke-dashoffset: 0; } } @keyframes workflow-sfc-node { 0%, 12% { opacity: 0; transform: translateY(8px); } 30%, 100% { opacity: 1; transform: translateY(0); } } @keyframes workflow-sfc-run { 0%, 50% { offset-distance: 0%; opacity: 0; } 55% { opacity: 1; } 92% { offset-distance: 100%; opacity: 1; } 100% { offset-distance: 100%; opacity: 0; } } @keyframes workflow-sfc-panel { 0%, 38% { opacity: 0; transform: translateY(8px); } 52%, 100% { opacity: 1; transform: translateY(0); } }
+@keyframes workflow-sfc-shape-pulse { 0%, 100% { opacity: .84; } 9%, 20% { opacity: 1; } 28%, 100% { opacity: .84; } } @keyframes workflow-sfc-run { 0%, 7% { offset-distance: 0%; opacity: 0; } 12% { offset-distance: 0%; opacity: 1; } 88% { offset-distance: 100%; opacity: 1; } 94%, 100% { offset-distance: 100%; opacity: 0; } }
 @keyframes workflow-chart { 0%, 18% { stroke-dashoffset: 620; } 55%, 100% { stroke-dashoffset: 0; } } @keyframes workflow-video-scan { 0%, 100% { transform: translateY(0); opacity: .2; } 50% { transform: translateY(96px); opacity: .9; } } @keyframes workflow-live { 0%, 100% { opacity: .45; } 50% { opacity: 1; } }
-@media (max-width: 44rem) { .product-workflow--parameter-alarm svg { transform: scale(1.22) translateX(-5%); transform-origin: 57% center; }.product-workflow--sfc svg { transform: scale(1.17) translateX(-4%); transform-origin: 59% center; }.product-workflow--monitoring svg { transform: scale(1.13) translateX(-4%); transform-origin: 59% center; } }
+@media (max-width: 44rem) { .product-workflow--parameter-alarm svg { transform: scale(1.22) translateX(-5%); transform-origin: 57% center; }.product-workflow--sfc .product-workflow__sfc-vars, .product-workflow--sfc .product-workflow__sfc-properties { display: none; }.product-workflow--sfc svg { transform: scale(1.24) translateX(6%); transform-origin: 46% center; }.product-workflow--monitoring svg { transform: scale(1.13) translateX(-4%); transform-origin: 59% center; } }
 @media (prefers-reduced-motion: reduce) { .product-workflow svg * { animation-duration: .01ms !important; }.product-workflow[data-playing="true"] svg * { animation-duration: var(--workflow-duration) !important; } }
 </style>

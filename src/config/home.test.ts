@@ -1,4 +1,5 @@
 import { homeHero, homeSections } from './home'
+import { SFC_SHOWCASE_DURATION_MS } from './showcases'
 
 describe('首页配置', () => {
   it('提供两行主标题和平台能力摘要', () => {
@@ -36,6 +37,10 @@ describe('首页配置', () => {
     expect(homeSections[1]?.media).toMatchObject({
       kind: 'parameter-alarm-animation',
       durationMs: 16_000,
+    })
+    expect(homeSections[2]?.media).toMatchObject({
+      kind: 'sfc-animation',
+      durationMs: SFC_SHOWCASE_DURATION_MS,
     })
   })
 })

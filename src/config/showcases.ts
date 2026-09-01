@@ -11,6 +11,7 @@ export interface ShowcaseDefinition {
 }
 
 export const SHOWCASE_DURATION_MS = 18_000
+export const SFC_SHOWCASE_DURATION_MS = 12_000
 
 export const showcaseDefinitions: Readonly<Record<ShowcaseId, ShowcaseDefinition>> = {
   configuration: {
@@ -32,7 +33,7 @@ export const showcaseDefinitions: Readonly<Record<ShowcaseId, ShowcaseDefinition
     path: '/showcase/sfc',
     title: 'SFC 流程编排动态演示',
     description: '顺序功能图编排、校验、运行监控与断点调试工作流。',
-    durationMs: 22_000,
+    durationMs: SFC_SHOWCASE_DURATION_MS,
   },
   monitoring: {
     id: 'monitoring',

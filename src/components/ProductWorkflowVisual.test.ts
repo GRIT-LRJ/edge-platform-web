@@ -33,7 +33,7 @@ describe('产品工作流视觉', () => {
 
   it.each([
     ['parameter-alarm', '.product-workflow__parameter-project > rect', '490'],
-    ['sfc', '.product-workflow__sfc-canvas', '443'],
+    ['sfc', '.product-workflow__sfc-canvas', '418'],
     ['monitoring', '.product-workflow__monitor-shell', '490'],
   ] as const)('让 %s 的结构背景承接紧凑顶栏释放的空间', (kind, selector, height) => {
     const { container } = render(ProductWorkflowVisual, {
@@ -58,6 +58,64 @@ describe('产品工作流视觉', () => {
       'data-static',
       'true',
     )
+  })
+
+  it('SFC 编辑器按参考布局呈现精简流程、变量表与属性面板', () => {
+    const { container } = render(ProductWorkflowVisual, {
+      props: {
+        kind: 'sfc',
+        label: 'SFC 高保真编辑器动画',
+        controlled: true,
+        playing: true,
+        durationMs: 12_000,
+      },
+    })
+
+    expect(container.querySelector('[data-sfc-region="project-tree"]')).toBeInTheDocument()
+    expect(container.querySelectorAll('[data-sfc-tree-item]')).toHaveLength(1)
+    expect(container.querySelector('[data-sfc-tree-item]')).toHaveTextContent('流程')
+    expect(container).not.toHaveTextContent('任务组')
+    expect(container).not.toHaveTextContent('设备自检')
+    expect(container).not.toHaveTextContent('急停信号')
+
+    expect(container.querySelector('[data-sfc-tab="manual-flow"]')).toHaveTextContent('手动流程')
+    expect(container.querySelectorAll('[data-sfc-tool]')).toHaveLength(8)
+    expect(Array.from(container.querySelectorAll('[data-sfc-tool]'), (tool) => tool.textContent)).toEqual([
+      '保存',
+      '撤销',
+      '开始',
+      '功能块',
+      '转换',
+      '普通步骤',
+      '子流程',
+      '结束',
+    ])
+
+    expect(Array.from(container.querySelectorAll('[data-sfc-block]'), (block) => block.getAttribute('data-sfc-block'))).toEqual([
+      'start',
+      'condition',
+      'state',
+      'auto-mode',
+      'end',
+    ])
+    expect(container.querySelectorAll('.product-workflow__sfc-connector')).toHaveLength(4)
+    expect(container.querySelector('[data-sfc-block="condition"] rect')).toHaveAttribute('width', '64')
+    expect(container.querySelector('[data-sfc-block="state"] rect')).toHaveAttribute('width', '120')
+    expect(container.querySelector('[data-sfc-block="end"] path')).toHaveAttribute('d', 'M430 418l22 40h-44z')
+    expect(container.querySelector('[data-sfc-runner="true"]')).toBeInTheDocument()
+
+    expect(container.querySelector('[data-sfc-region="variables"]')).toHaveTextContent('流程变量')
+    expect(container.querySelectorAll('.product-workflow__sfc-table-row')).toHaveLength(1)
+    expect(container.querySelector('[data-sfc-region="variables"]')).toHaveTextContent('自动模式开关')
+    expect(container.querySelector('[data-sfc-region="variables"]')).toHaveTextContent('bool')
+    expect(container.querySelectorAll('[data-sfc-property-section]')).toHaveLength(3)
+    expect(container.querySelector('[data-sfc-property-section="node"]')).toHaveTextContent('Transition')
+    expect(container.querySelector('[data-sfc-property-section="condition"]')).toHaveTextContent('TRUE')
+    expect(container.querySelector('[data-sfc-property-section="style"]')).toHaveTextContent('#252839')
+    expect(container.querySelector('[data-sfc-property-section="style"]')).toHaveTextContent('#FFFFFF')
+    expect(container.querySelector('[data-workflow-visual="sfc"]')).toHaveStyle({
+      '--workflow-duration': '12000ms',
+    })
   })
 
   it('参数与报警动画提供四个编辑器页签和四个连续阶段', () => {

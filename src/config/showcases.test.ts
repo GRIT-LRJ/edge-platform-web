@@ -1,5 +1,6 @@
 import {
   SHOWCASE_DURATION_MS,
+  SFC_SHOWCASE_DURATION_MS,
   getShowcaseDefinition,
   isShowcaseId,
   showcaseDefinitions,
@@ -24,7 +25,7 @@ describe('动态演示配置', () => {
     expect(Object.values(showcaseDefinitions).map((item) => item.durationMs)).toEqual([
       SHOWCASE_DURATION_MS,
       16_000,
-      22_000,
+      SFC_SHOWCASE_DURATION_MS,
       SHOWCASE_DURATION_MS,
       SHOWCASE_DURATION_MS,
     ])

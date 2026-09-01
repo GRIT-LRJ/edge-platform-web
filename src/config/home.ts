@@ -1,6 +1,6 @@
 import editorHeroImage from '../assets/media/home/edge-drillmind-hero.webp'
 import editorHeroImageAvif from '../assets/media/home/edge-drillmind-hero.avif'
-import type { ShowcasePath } from './showcases'
+import { SFC_SHOWCASE_DURATION_MS, type ShowcasePath } from './showcases'
 
 export type HomeVisualVariant = 'configuration' | 'monitoring' | 'integration'
 
@@ -131,7 +131,7 @@ export const homeSections: readonly HomeSection[] = [
     media: {
       kind: 'sfc-animation',
       alt: 'DrillMind SFC 流程动画，展示步骤编排、规则校验、运行轨迹、变量与断点调试',
-      durationMs: 22_000,
+      durationMs: SFC_SHOWCASE_DURATION_MS,
     },
     textSide: 'left',
     showcase: {
